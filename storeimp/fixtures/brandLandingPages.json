@@ -1,0 +1,6 @@
+{ "brandLandingPages": [
+  { "row_id": 1, "brand_id": 1, "lp_id": 1},
+  { "row_id": 2, "brand_id": 2, "lp_id": 2},
+  { "row_id": 3, "brand_id": 3, "lp_id": 3}
+]
+}

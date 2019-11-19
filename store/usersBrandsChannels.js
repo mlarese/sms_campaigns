@@ -10,7 +10,7 @@ export const state = () => {
         addRecord: {},
         resetItem: {},
         grid: {pagination: {}},
-        mode: 'add',
+        mode: 'list',
     }
 }
 

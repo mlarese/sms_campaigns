@@ -1,10 +1,10 @@
 <template>
-  <layout>adds</layout>
+  <!--eslint-disable-->
 </template>
 <script>
     export default {
         created () {
-            this.$router.replace('/')
+            this.$router.replace('/role')
         }
     }
 </script>

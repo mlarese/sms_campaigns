@@ -24,10 +24,8 @@
 
 <script>
     import {mapState} from 'vuex'
-    import WPanel from '../WPanel'
     export default {
         name: 'RoleForm',
-        components: {WPanel},
         data () {
             return {
                 rules: {

@@ -1,5 +1,5 @@
 <template>
-  <!--eslint-disable-->
+  <layout>adds</layout>
 </template>
 <script>
     export default {

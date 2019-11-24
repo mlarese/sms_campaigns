@@ -3,7 +3,7 @@
     <v-card class="elevation-0">
         <v-toolbar dense class="elevation-0">
             <v-icon>list</v-icon>
-            <v-toolbar-title>{{$vuetify.t('Roles')}}</v-toolbar-title>
+            <v-toolbar-title>{{$vuetify.t('Landing Page')}}</v-toolbar-title>
 
             <v-spacer></v-spacer>
             <v-btn small dark top right fab class="elevation-0" color="red" @click="$emit('on-add')">
@@ -18,8 +18,12 @@
     >
     >
         <template slot="items" slot-scope="{item}">
-            <td>{{ item.role_id }}</td>
-            <td>{{ item.role_name }}</td>
+            <td>{{ item.lp_id }}</td>
+            <td>{{ item.background_rgb }}</td>
+            <td>{{ item.lp_banner_element }}</td>
+            <td>{{ item.text_rgb }}</td>
+            <td>{{ item.text }}</td>
+            <td>{{ item.button_element }}</td>
             <td  align="right" nowrap="nowrap">
                 <!-- da copiare -->
                 <v-btn small icon color="primary">
@@ -50,8 +54,12 @@
     export default {
         data () {
             const headers = [
-                { text: this.$vuetify.t('Role ID'), value: 'role_id' },
-                { text: this.$vuetify.t('Role Name'), value: 'role_name' },
+                { text: this.$vuetify.t('LP ID'), value: 'lp_id' },
+                { text: this.$vuetify.t('Background RGB'), value: 'background_rgb' },
+                { text: this.$vuetify.t('LP Banner Element'), value: 'lp_banner_element' },
+                { text: this.$vuetify.t('Text RGB'), value: 'text_rgb' },
+                { text: this.$vuetify.t('Text'), value: 'text' },
+                { text: this.$vuetify.t('Button Element'), value: 'button_element' },
                 { text: '', value: 'action', sortable: false }
             ]
             return {
@@ -60,7 +68,7 @@
             }
         },
         computed: {
-            ...mapState('roles', ['list', '$record'])
+            ...mapState('landingPages', ['list', '$record'])
         }
     }
 </script>

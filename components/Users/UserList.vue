@@ -3,7 +3,7 @@
     <v-card class="elevation-0">
         <v-toolbar dense class="elevation-0">
             <v-icon>list</v-icon>
-            <v-toolbar-title>{{$vuetify.t('Roles')}}</v-toolbar-title>
+            <v-toolbar-title>{{$vuetify.t('Users')}}</v-toolbar-title>
 
             <v-spacer></v-spacer>
             <v-btn small dark top right fab class="elevation-0" color="red" @click="$emit('on-add')">
@@ -18,8 +18,10 @@
     >
     >
         <template slot="items" slot-scope="{item}">
-            <td>{{ item.role_id }}</td>
-            <td>{{ item.role_name }}</td>
+            <td>{{ item.user_id }}</td>
+            <td>{{ item.company_name }}</td>
+            <td>{{ item.username }}</td>
+            <td>{{ item.password }}</td>
             <td  align="right" nowrap="nowrap">
                 <!-- da copiare -->
                 <v-btn small icon color="primary">
@@ -51,7 +53,9 @@
         data () {
             const headers = [
                 { text: this.$vuetify.t('Role ID'), value: 'role_id' },
-                { text: this.$vuetify.t('Role Name'), value: 'role_name' },
+                { text: this.$vuetify.t('Company Name'), value: 'company_name' },
+                { text: this.$vuetify.t('User Name'), value: 'username' },
+                { text: this.$vuetify.t('Password'), value: 'password' },
                 { text: '', value: 'action', sortable: false }
             ]
             return {
@@ -60,7 +64,7 @@
             }
         },
         computed: {
-            ...mapState('roles', ['list', '$record'])
+            ...mapState('users', ['list', '$record'])
         }
     }
 </script>

@@ -56,12 +56,6 @@ export const actions = {
                 commit('setAddMode')
             })
     },
-    selectItem({commit}, item) {
-        commit('set$Record', item)
-        commit('setEditMode')
-
-
-    },
     cancelItem({commit}) {
         commit('reset$Record')
         commit('setAddMode')

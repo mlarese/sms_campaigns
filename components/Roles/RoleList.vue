@@ -22,17 +22,17 @@
             <td>{{ item.role_name }}</td>
             <td  align="right" nowrap="nowrap">
                 <!-- da copiare -->
-                <v-btn small icon color="primary" @click="onEdit(item)">
+                <v-btn small icon color="primary">
                     <v-icon small>edit</v-icon>
                 </v-btn>
 
                 <!-- da copiare -->
-                <v-btn small icon color="info" @click="onView(item)">
+                <v-btn small icon color="info">
                     <v-icon small>visibility</v-icon>
                 </v-btn>
 
                 <!-- da copiare -->
-                <v-btn small icon color="error" class="mr-1" @click="onDelete(item, 'role_id')">
+                <v-btn small icon color="error" class="mr-1">
                     <v-icon small>delete</v-icon>
                 </v-btn>
             </td>
@@ -46,11 +46,8 @@
 </template>
 <script>
     import {mapState} from 'vuex'
-    import {editDialog} from '../../mixins/editDialog'
-    import RoleForm from './RoleForm'
-    import RoleView from './RoleView'
+
     export default {
-        mixins: [editDialog('role', 'role_id', RoleForm, RoleView)],
         data () {
             const headers = [
                 { text: this.$vuetify.t('Role ID'), value: 'role_id' },

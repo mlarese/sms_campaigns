@@ -8,28 +8,22 @@ import _has from 'lodash/has'
  *
  */
 const menuItems = {
-  roles: {to: 'role', label: 'Roles'},
-  operator: {to: 'operator', label: 'MNOs'},
-  country: {to: 'country', label: 'COUNTRIES'},
-  billing: {to: 'billing', label: 'BILLING PRICES'},
-  service: {to: 'service', label: 'CSP SERVICES'},
-  transaction: {to: 'transaction', label: 'TRANSACTIONS'},
-  reporting: {to: 'reporting', label: 'REPORTING'},
-  serviceprice: {to: 'serviceprice', label: 'WIND SERVICE PRICES'},
-  apisimulator: {to: 'apisimulator', label: 'APIs SIMULATOR'}
+    roles: {to: 'role', label: 'Roles'},
+    user: {to: 'user', label: 'Users'},
+    usersrole: {to: 'usersrole', label: 'Users Roles'},
+    usersbrandschannel: {to: 'usersbrandschannel', label: 'Users Brands Channels'},
+    landingpage: {to: 'landingpage', label: 'Landing Pages'},
+    brandlandingpage: {to: 'brandlandingpage', label: 'Brand Landing Page'},
 }
 
 const menus = {
   admin: [
     menuItems.roles,
-    menuItems.operator,
-    menuItems.country,
-    menuItems.billing,
-    menuItems.service,
-    menuItems.transaction,
-    menuItems.reporting,
-    menuItems.serviceprice,
-    menuItems.apisimulator
+    menuItems.user,
+    menuItems.usersrole,
+    menuItems.usersbrandschannel,
+    menuItems.landingpage,
+    menuItems.brandlandingpage,
   ],
   reporting_admin: [
     menuItems.transaction,
@@ -46,7 +40,7 @@ const menus = {
 
 export const state = () => ({
   locale: 'it',
-  title: 'Gateway',
+  title: 'Sms Compaigns',
   debugMode: true,
   ui: {currentMenuItem: 0},
   languages: [
@@ -56,15 +50,13 @@ export const state = () => ({
   ],
   menus,
   menuItems: [
-    {to: 'csp', label: 'Csp'},
-    {to: 'operator', label: 'MNOs'},
-    {to: 'country', label: 'Countries'},
-    {to: 'billing', label: 'Billing Prices'},
-    {to: 'service', label: 'CSP Services'},
-    {to: 'transaction', label: 'Transactions'},
-    {to: 'reporting', label: 'Reporting'},
-    {to: 'serviceprice', label: ' Wind Service Price'},
-    {to: 'apisimulator', label: 'Api Simulator'}
+    {to: 'role', label: 'Roles'},
+    {to: 'user', label: 'Users'},
+    {to: 'usersrole', label: 'Users Roles'},
+    {to: 'usersbrandschannel', label: 'Users Brands Channels'},
+    {to: 'landingpage', label: 'Landing Pages'},
+    {to: 'brandlandingpage', label: 'Brand Landing Page'},
+
   ]
 })
 

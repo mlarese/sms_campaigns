@@ -1,21 +1,20 @@
 <!--eslint-disable-->
 <template>
-    <v-card class="elevation-0">
-        <v-toolbar dense class="elevation-0">
-            <v-icon>list</v-icon>
-            <v-toolbar-title>{{$vuetify.t('Landing Page')}}</v-toolbar-title>
+    <GridContainer title="Landing Page">
 
-            <v-spacer></v-spacer>
-            <v-btn small dark top right fab class="elevation-0" color="red" @click="$emit('on-add')">
-                <v-icon>add</v-icon>
-            </v-btn>
-        </v-toolbar>
+            <CardPanel slot="container-top">
+
+            </CardPanel>
+
+            <div slot="header-right" class="pb-2">
+                <ButtonNew/>
+            </div>
     <v-data-table
             :headers="headers"
             :items="list"
             :hide-actions="false"
             class="elevation-0"
-    >
+            slot="body-center"
     >
         <template slot="items" slot-scope="{item}">
             <td>{{ item.lp_id }}</td>
@@ -24,21 +23,14 @@
             <td>{{ item.text_rgb }}</td>
             <td>{{ item.text }}</td>
             <td>{{ item.button_element }}</td>
-            <td  align="right" nowrap="nowrap">
-                <!-- da copiare -->
-                <v-btn small icon color="primary">
-                    <v-icon small>edit</v-icon>
-                </v-btn>
-
-                <!-- da copiare -->
-                <v-btn small icon color="info">
-                    <v-icon small>visibility</v-icon>
-                </v-btn>
-
-                <!-- da copiare -->
-                <v-btn small icon color="error" class="mr-1">
-                    <v-icon small>delete</v-icon>
-                </v-btn>
+            <td width="1" class="pa-0">
+                <GridButton icon="edit" color="green" @click="onClick"></GridButton>
+            </td>
+            <td width="1" class="pa-0">
+                <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
+            </td>
+            <td width="1" class="pa-0">
+                <GridButton icon="delete" color="error" @click="onClick"></GridButton>
             </td>
         </template>
         <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -46,12 +38,18 @@
         </template>
 
     </v-data-table>
-    </v-card>
+    </GridContainer>
 </template>
 <script>
     import {mapState} from 'vuex'
+    import GridButton from '../General/GridButton'
+    import GridContainer from '../General/GridContainer'
+    import CardPanel from "../General/CardPanel";
+    import ButtonNew from "../General/ButtonNew";
 
     export default {
+        components: {ButtonNew, CardPanel, GridButton, GridContainer},
+
         data () {
             const headers = [
                 { text: this.$vuetify.t('LP ID'), value: 'lp_id' },
@@ -69,6 +67,11 @@
         },
         computed: {
             ...mapState('landingPages', ['list', '$record'])
+        },
+        methods: {
+            onClick () {
+                alert('onClick')
+            }
         }
     }
 </script>

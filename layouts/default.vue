@@ -130,4 +130,14 @@
     .v-input__slot{
         background: white;
     }
+
+    .v-text-field {
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+
+    .mx-datepicker-range {
+        width: 100%;
+    }
+
 </style>

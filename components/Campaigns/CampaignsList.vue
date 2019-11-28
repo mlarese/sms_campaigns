@@ -3,15 +3,43 @@
     <GridContainer title="Campaigns">
 
         <CardPanel slot="container-top">
-            <v-layout>
-                <v-select class="mr-1"  :label="$vuetify.t('Brand')"  :itemscope="[]"  />
-                <v-select  :label="$vuetify.t('Channel')"  :itemscope="[]"  />
-            </v-layout>
+
+
+                <v-layout rows wrap>
+                    <v-flex sm4 xs6> <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="click_date" range></DatePicker>  </v-flex>
+                    <v-flex sm4 xs6> <DatePicker v-model="sms_mo_date" range></DatePicker>  </v-flex>
+                </v-layout>
+                <v-layout rows wrap>
+
+                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Brand')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Channel')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('ADV Format')"  :items="[]"  /></v-flex>
+
+
+
+                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Country')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Region')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('City')"  :items="[]"  /></v-flex>
+                </v-layout>
+
+                <v-layout rows wrap>
+                    <v-flex sm4 xs4><v-select hide-details :label="$vuetify.t('OS')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs4><v-select hide-details :label="$vuetify.t('OS Version')"  :items="[]"  /></v-flex>
+
+                    <v-flex sm4 xs4 class="text-xs-right pa-0">
+                        <div>
+                            <GridButton icon="search" color="blue" @click="onClick"></GridButton>
+                            <GridButton :dark="false" icon="cancel" color="white" @click="onClick"></GridButton>
+                        </div>
+
+                    </v-flex>
+                </v-layout>
+
         </CardPanel>
 
         <v-data-table fixed  :headers="headers"  :items="list"  :hide-actions="false"    class="elevation-0" slot="body-center">
             <template slot="items" slot-scope="{item}">
-                <td>{{ item.click_date }}</td>
+                <td>{{ item.click_date | dmy}}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
                 <td>{{ item.adv_format_name }}</td>
@@ -36,9 +64,10 @@
     import GridContainer from '../General/GridContainer'
     import CardPanel from "../General/CardPanel";
     import ButtonNew from "../General/ButtonNew";
+    import DatePicker from 'vue2-datepicker';
 
     export default {
-        components: {ButtonNew, CardPanel, GridButton, GridContainer},
+        components: {ButtonNew, CardPanel, GridButton, GridContainer, DatePicker},
         data () {
             const headers = [
                 { text: this.$vuetify.t('Click Date'), value: 'click_date' },
@@ -49,6 +78,8 @@
                 { text: 'View', value: 'action', sortable: false }
             ]
             return {
+                sms_mo_date: null,
+                click_date: null,
                 gridFilter: '',
                 headers
             }

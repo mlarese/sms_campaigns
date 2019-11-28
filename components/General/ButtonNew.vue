@@ -1,11 +1,14 @@
 <!--eslint-disable-->
 <template>
     <v-btn color="success" class="elevation-0">
-        New Role
+        {{$vuetify.t(title)}}
     </v-btn>
 </template>
 <script>
   export default {
-    name: 'ButtonNew'
+    name: 'ButtonNew',
+    props: {
+      title: {default: '', type: String}
+    }
   }
 </script>

@@ -5,32 +5,42 @@
 
         <v-toolbar  dark tabs class="elevation-1 app-toolbar ma-0" >
 
-            <v-tabs
-                    class="ma-0"
-                    slot="extension"
-                    v-model="ui.currentMenuItem"
-                    slider-color="yellow"
-                    show-arrows
-            >
-                <v-tabs-slider class="mb-2" color="yellow"></v-tabs-slider>
-                <v-tab v-for="(item, i) in menuItems" :key="i"  :to="'/'+item.to" >
-                    {{ item.label }}
-                </v-tab>
-            </v-tabs>
+            <v-layout slots="extension">
 
-            <a class="default-navbar-brand" href="/"><b>Compaigns</b></a>
+                <v-flex class="pt-3">
+                    <a class="default-navbar-brand" href="/"><b>Compaigns</b></a>
 
-            <v-spacer></v-spacer>
+                </v-flex>
+                <v-flex>
 
-            <span v-if="$vuetify.breakpoint.smAndUp">user</span>
+                    <v-tabs
+                        class="ma-0"
 
-            <v-btn  flat @click="onLogOut" class="py-2 pl-2 pr-0" :fab="$vuetify.breakpoint.xsOnly" :small="$vuetify.breakpoint.xsOnly">
-              <span v-if="$vuetify.breakpoint.smAndUp" class="mr-2">
-              {{$vuetify.t('Logout')}}
-              </span>
-                <v-icon class="ml-1" small>exit_to_app</v-icon>
-            </v-btn>
+                        v-model="ui.currentMenuItem"
+                        slider-color="yellow"
+                        show-arrows
+                >
+                    <v-tabs-slider class="mb-2" color="yellow"></v-tabs-slider>
+                    <v-tab v-for="(item, i) in menuItems" :key="i"  :to="'/'+item.to" >
+                        {{ $vuetify.t(item.label) }}
+                    </v-tab>
+                </v-tabs>
 
+                </v-flex>
+
+
+                <v-flex class="text-xs-right">
+                    <span v-if="$vuetify.breakpoint.smAndUp">user</span>
+
+                    <v-btn flat @click="onLogOut" class="py-2 pl-2 pr-0" :fab="$vuetify.breakpoint.xsOnly"
+                           :small="$vuetify.breakpoint.xsOnly">
+                      <span v-if="$vuetify.breakpoint.smAndUp" class="mr-2">
+                      {{$vuetify.t('Logout')}}
+                      </span>
+                        <v-icon class="ml-1" small>exit_to_app</v-icon>
+                    </v-btn>
+                </v-flex>
+            </v-layout>
         </v-toolbar>
             <v-container fluid  class="px-1">
                 <nuxt />
@@ -113,7 +123,7 @@
         color: rgba(0,0,0,1);
     }
 
-    .v-tabs__div{
+    .v-tabs__div, .v-btn{
         text-transform: none !important;
     }
 

@@ -8,6 +8,7 @@
 
         <div slot="header-right" class="pb-2">
             <ButtonNew />
+            <ButtonNew title="New Role"/>
         </div>
 
         <v-data-table  :headers="headers"  :items="list"  :hide-actions="false"    class="elevation-0" slot="body-center">

@@ -37,6 +37,15 @@
 
         </CardPanel>
 
+        <div class="text-xs-center">
+            <v-pagination
+                    v-model="page"
+                    :length="4"
+                    prev-icon="mdi-menu-left"
+                    next-icon="mdi-menu-right"
+            ></v-pagination>
+        </div>
+
         <v-data-table fixed  :headers="headers"  :items="list"  :hide-actions="false"    class="elevation-0" slot="body-center">
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.click_date | dmy}}</td>
@@ -78,6 +87,7 @@
                 { text: 'View', value: 'action', sortable: false }
             ]
             return {
+                page: 1,
                 sms_mo_date: null,
                 click_date: null,
                 gridFilter: '',

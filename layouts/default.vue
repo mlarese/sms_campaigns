@@ -137,7 +137,7 @@
     }
 
     .mx-datepicker-range {
-        width: 100%;
+        width: 100% !important;
     }
 
 </style>

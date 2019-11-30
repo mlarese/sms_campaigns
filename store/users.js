@@ -27,10 +27,12 @@ export const mutations = {
         state.$record = _cloneDeep(payload)
         state.loaded = true
     },
-    set$Record (state, payload) {
-        state.$record = _cloneDeep(payload)
-        state.loaded = true
-    },
+    set$Record (s, p) { s.$record = _cloneDeep(p) },
+    setFormValid (s, p) { s.form.valid = p },
+    setFormDirty (s, p) { s.form.dirty = p },
+    setListMode (s) { s.mode = 'list' },
+    setViewMode (s) { s.mode = 'view' },
+    setSearchMode (s) { s.mode = 'search' },
     updateItemList (state,  {data, index}) {
         Vue.set(state.list, index, data)
     },
@@ -108,7 +110,8 @@ export const actions = {
 }
 
 export const getters = {
-    isEditMode: state => state.mode === 'edit',
-    isAddMode: state => state.mode === 'add'
+    isEditMode: s => s.mode === 'edit',
+    isAddMode: s => s.mode === 'add',
+    isViewMode: s => s.mode === 'view'
 }
 

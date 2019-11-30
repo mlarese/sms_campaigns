@@ -1,7 +1,7 @@
 <!--eslint-disable-->
 <template>
     <v-btn color="success" class="elevation-0">
-        New Role
+        New Item
     </v-btn>
 </template>
 <script>

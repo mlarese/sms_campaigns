@@ -3,8 +3,7 @@ import _has from 'lodash/has'
 /**
  * ruoli:
  *    admin
- *    reporting_admin
- *    reporting_cp
+ *
  *
  */
 const menuItems = {

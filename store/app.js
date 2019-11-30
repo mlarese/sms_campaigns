@@ -7,29 +7,24 @@ import _has from 'lodash/has'
  *
  */
 const menuItems = {
-    roles: {to: 'role', label: 'Roles'},
-    user: {to: 'user', label: 'Users'},
-    usersrole: {to: 'usersrole', label: 'Users Roles'},
-    usersbrandschannel: {to: 'usersbrandschannel', label: 'Users Brands Channels'},
-    landingpage: {to: 'landingpage', label: 'Landing Pages'},
-    brandlandingpage: {to: 'brandlandingpage', label: 'Brand Landing Page'},
+    campaigns: {to: 'campaigns', label: 'Campaigns'},
+    reporting: {to: 'reporting', label: 'Reporting'},
+    unpaired: {to: 'unpaired', label: 'Unpaired Prospects'},
+    landing: {to: 'landing', label: 'Landing Pages'},
+    settings: {to: 'settings', label: 'Settings'}
 }
+
 
 const menus = {
   admin: [
-    menuItems.roles,
-    menuItems.user,
-    menuItems.usersrole,
-    menuItems.usersbrandschannel,
-    menuItems.landingpage,
-    menuItems.brandlandingpage,
-  ],
-  reporting_admin: [
-    menuItems.transaction,
-    menuItems.reporting
+    menuItems.campaigns,
+    menuItems.reporting,
+    menuItems.unpaired,
+    menuItems.landing,
+    menuItems.settings
   ],
   reporting_cp: [
-    menuItems.transaction,
+    menuItems.campaigns,
     menuItems.reporting
   ],
   guest: [
@@ -39,7 +34,7 @@ const menus = {
 
 export const state = () => ({
   locale: 'it',
-  title: 'Sms Compaigns',
+  title: 'Compaigns',
   debugMode: true,
   ui: {currentMenuItem: 0},
   languages: [

@@ -7,7 +7,6 @@
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew />
             <ButtonNew title="New Role"/>
         </div>
 

@@ -16,6 +16,7 @@
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.0.0",
     "axios-mock-adapter": "^1.17.0",
+    "browser-locale": "^1.0.3",
     "cross-env": "^5.2.0",
     "date-fns": "^2.8.1",
     "downloadjs": "^1.4.7",
@@ -34,6 +35,8 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.0.0",
     "nodemon": "^1.11.0",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.6",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }

@@ -1,3 +1,4 @@
+<!--eslint-disable-->
 <template>
   <v-app id="inspire" class="grey lighten-2">
     <notifications position="top right" style="margin-top:50px"/>
@@ -12,14 +13,14 @@
 <script>
   import {mapState} from 'vuex'
   export default {
+    computed: {
+      ...mapState('app', ['title']),
+      ...mapState('api', ['notification'])
+    },
     watch: {
       'notification.id' (val) {
         this.$notify(this.notification)
       }
-    },
-    computed: {
-      ...mapState('app', ['title']),
-      ...mapState('api', ['notification'])
     }
   }
 </script>

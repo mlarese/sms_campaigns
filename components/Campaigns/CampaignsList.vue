@@ -3,11 +3,9 @@
     <GridContainer title="Campaigns">
 
         <CardPanel slot="container-top">
-
-
                 <v-layout rows wrap>
-                    <v-flex sm4 xs6> <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="click_date" range></DatePicker>  </v-flex>
-                    <v-flex sm4 xs6> <DatePicker v-model="sms_mo_date" range></DatePicker>  </v-flex>
+                    <v-flex sm4 xs6> <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="filter.click_date" range></DatePicker>  </v-flex>
+                    <v-flex sm4 xs6> <DatePicker v-model="filter.sms_mo_date" range></DatePicker>  </v-flex>
                 </v-layout>
                 <v-layout rows wrap>
 
@@ -28,8 +26,8 @@
 
                     <v-flex sm4 xs4 class="text-xs-right pa-0">
                         <div>
-                            <GridButton icon="search" color="blue" @click="onClick"></GridButton>
-                            <GridButton :dark="false" icon="cancel" color="white" @click="onClick"></GridButton>
+                            <GridButton icon="search" color="blue" @click="onClick" v-if="!searchActive"></GridButton>
+                            <GridButton :dark="false" icon="cancel" color="white" @click="onClick" v-if="searchActive"></GridButton>
                         </div>
 
                     </v-flex>
@@ -68,7 +66,7 @@
     </GridContainer>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapMutations} from 'vuex'
     import GridButton from '../General/GridButton'
     import GridContainer from '../General/GridContainer'
     import CardPanel from "../General/CardPanel";
@@ -95,9 +93,10 @@
             }
         },
         computed: {
-            ...mapState('clicks', ['list', '$record'])
+            ...mapState('clicks', ['list', '$record', 'searchActive', 'filter'])
         },
         methods: {
+            ...mapMutations('clicks', 'setSearchActive'),
             onClick () {
                 alert('onClick')
             }

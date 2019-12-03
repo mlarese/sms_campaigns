@@ -7,14 +7,11 @@ import usersRoles from '../fixtures/usersRoles.json'
 import usersBrandsChannels from '../fixtures/usersBrandsChannels.json'
 import landingPages from '../fixtures/landingPages.json'
 import brandLandingPages from '../fixtures/brandLandingPages.json'
-import {login, user, logout} from '../fixtures/auth'
 
 const mock = new MockAdapter(axios, {delayResponse: 300})
 const success = {success: true}
 
 mock
-  .onPost('/api/auth/login').reply(() => [200, login])
-  .onPost('/api/auth/logout').reply(() => [200, logout])
   .onGet('/api/auth/user').reply(() => [200, user])
   .onGet('/profile').reply(() => [200, user])
   .onGet('/principal').reply(() => [200, user])

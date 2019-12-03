@@ -1,58 +1,50 @@
+<!--eslint-disable-->
 <template>
-  <!--eslint-disable-->
-    <v-layout align-center justify-center>
+    <v-layout align-center justify-center class="login">
         <v-flex xs12 sm8 md4>
-            <v-card class="elevation-6" rounded>
-                <v-toolbar dense flat dark color="black">
-                    <v-toolbar-title class="subheading">{{title}}</v-toolbar-title>
-                </v-toolbar>
-                    <v-form method="post" action="/monitor/j_security_check" target="iflogger" class="pa-2">
-                        <v-text-field prepend-icon="person" v-model="username" name="j_username" label="Login" type="text"></v-text-field>
-                        <v-text-field prepend-icon="lock" @keyup.enter="login" name="j_password" v-model="password" label="Password" id="password" type="password"></v-text-field>
-                        <v-layout>
-                            <v-spacer></v-spacer>
-                            <v-btn v-if="!mockApp" :loading="signingIn" type="submit" :disabled="!canLogin" color="info" @click="doLogin" @keyup.enter="doLogin">
-                                Login
-                            </v-btn>
+            <v-card class="elevation-3">
+                <v-card-text>
 
-                            <v-btn v-else :loading="signingIn" :disabled="!canLogin" color="info" @click="doLogin" @keyup.enter="doLogin">
-                                Login
-                            </v-btn>
-                        </v-layout>
-
+                    <v-form>
+                        <v-text-field box prepend-icon="person" v-model="username" label="Login" type="text"></v-text-field>
+                        <v-text-field box  prepend-icon="lock" @keyup.enter="login" v-model="password" label="Password" id="password" type="password"></v-text-field>
                     </v-form>
-                <iframe name="iflogger" style="display: none" @load="loaded"></iframe>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn  :loading="loading" :disabled="!canLogin" color="info" @click="login" @keyup.enter="login" small>
+                        Login
+                        <v-icon right>input</v-icon>
+                    </v-btn>
 
+                </v-card-actions>
             </v-card>
         </v-flex>
     </v-layout>
 
 </template>
 <script>
-  import VueRecaptcha from 'vue-recaptcha'
-  import {mapState, mapActions, mapMutations} from 'vuex'
-  import {baseURL, mockApp} from '../../storeimp/api/api-properties'
+  import {mapState, mapActions} from 'vuex'
+  import {notifyError} from '../../storeimp/api/actions'
+  import {getSchema} from '../../assets/helpers'
 
   export default {
     layout: 'empty',
-    components: {VueRecaptcha},
-      data () {
-          return {
-              error: null,
-              username: '',
-              password: '',
-              alert: null,
-              unverified: false,
-              baseURL,
-              loading: false
-          }
-      },
+    components: {},
+    data () {
+      return {
+        error: null,
+        username: '',
+        password: '',
+        alert: null,
+        unverified: false,
+        showReset: false,
+        loading: false
+      }
+    },
     computed: {
-      mockApp () {
-        return mockApp
-      },
       ...mapState('app', ['title']),
-      ...mapState('auth', ['signingIn']),
+      ...mapState('api', ['isAjax']),
       canLogin () {
         if (!this.username) {
           return false
@@ -64,27 +56,58 @@
         return true
       }
     },
+    mounted () {
+      // debugger // eslint-disable-line
+      // console.log('debug')
+    },
     methods: {
-      ...mapMutations('auth', ['setSigningIn']),
-      loaded () {
-        if (this.signingIn) {
-          this.loadProfile()
-            .then(() => this.$router.replace('/'))
-        }
+      ...mapActions('appauth', ['passwordReset']),
+      onResetPassword (user) {
+        this.showReset = false
+        this.$notify({
+          type: 'success',
+          text: this.$t('You will receive an email shortly')
+        })
+        return this.passwordReset(user)
       },
-      ...mapActions('auth', ['loadProfile']),
-      async doLogin () {
-        if (mockApp) {
-          console.log('----- test')
-          this.loadProfile()
-          return
-        }
+      async login () {
         if (!this.canLogin) {
           return
         }
         this.error = null
-        this.setSigningIn(true)
+        let schema = getSchema()
+        this.loading = true
+        return this.$auth
+          .loginWith(schema, {
+            data: {
+              username: this.username,
+              password: this.password
+            }
+          })
+          .then(() => {
+            this.loading = false
+            return this.$router.push('/campaigns')
+          })
+          .catch(e => {
+            this.loading = false
+            this.error = e + ''
+            this.$store.commit('api/notification', notifyError(e, this.$t), {root: true})
+          })
       }
     }
   }
 </script>
+<style lang="scss">
+    .login {
+        .icon {
+            align-items: center;
+            display: inline-flex;
+            font-size: 20px !important;
+            vertical-align: bottom;
+        }
+
+        .input-group--text-field input {
+            height: 40px !important ;
+        }
+    }
+</style>

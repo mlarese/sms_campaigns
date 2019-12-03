@@ -32,6 +32,28 @@ const instance = axios.create({
   withCredentials: true
 })
 
+const addToken = () => {
+  let options = {}
+
+  let token = null
+  if (localStorage.getItem('auth_token.prod'))
+    token = localStorage.getItem('auth_token.prod')
+
+  else if (localStorage.getItem('auth_token.dev'))
+    token = localStorage.getItem('auth_token.dev')
+
+  if (token) {
+    if (token !== instance.defaults.headers.common['Authorization']) {
+      instance.defaults.headers.common['Authorization'] = token
+    }
+  } else {
+    instance.defaults.headers.common['Authorization'] = ''
+    delete instance.defaults.headers.common['Authorization']
+  }
+
+  return instance
+}
+
 export const actions = {
   init ({commit}) {
     commit('error')
@@ -41,9 +63,9 @@ export const actions = {
     commit('isAjax', true)
     commit('error')
     commit('hasError')
-
+    addToken()
     if (!options.headers) {
-      options.headers = {}
+      //options.headers = {}
     }
 
     if (debug) {
@@ -68,7 +90,7 @@ export const actions = {
     commit('isAjax', true)
     commit('error')
     commit('hasError')
-
+    addToken()
     console.log('---- post', url, data, options)
 
     return instance.post(url, data, options)
@@ -91,6 +113,7 @@ export const actions = {
     commit('hasError')
 
     console.log(url)
+    addToken()
     return instance.put(url, data, options)
       .then(res => {
         commit('isAjax')
@@ -106,6 +129,7 @@ export const actions = {
       })
   },
   delete ({commit, getters}, {url, options = {}}) {
+    addToken
     commit('isAjax', true)
     commit('error')
     commit('hasError')

@@ -9,7 +9,7 @@
   export default {
     components: {CampaignsList},
     fetch ({store}) {
-      store.dispatch('clicks/load', {}, root)
+      store.dispatch('brands/load', {}, root)
     }
   }
 </script>

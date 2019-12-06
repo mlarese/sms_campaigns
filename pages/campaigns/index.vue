@@ -8,8 +8,14 @@
 
   export default {
     components: {CampaignsList},
-    fetch ({store}) {
-      store.dispatch('brands/load', {}, root)
+    async fetch ({store}) {
+      let all = [
+        store.dispatch('brands/load', {}, root),
+        store.dispatch('channels/load', {}, root),
+        store.dispatch('locations/load', {}, root)
+      ]
+
+      await Promise.all(all)
     }
   }
 </script>

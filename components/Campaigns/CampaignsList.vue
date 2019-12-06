@@ -7,27 +7,28 @@
                     <v-flex sm4 xs6> <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="filter.click_date" range></DatePicker>  </v-flex>
                     <v-flex sm4 xs6> <DatePicker v-model="filter.sms_mo_date" range></DatePicker>  </v-flex>
                 </v-layout>
-                <v-layout rows wrap>
+                <v-layout rows wrap class="xs-">
 
-                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Brand')"  :items="[]"  /></v-flex>
-                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Channel')"  :items="[]"  /></v-flex>
-                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('ADV Format')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs6><v-combobox :return-objects="false" hide-details :label="$vuetify.t('Brand')"  :items="brandsList" v-model="filter.brand_id" item-text="brand_name" item-value="brand_id" /></v-flex>
+                    <v-flex sm4 xs6><v-combobox :return-objects="false" hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" /></v-flex>
+                    <v-flex sm4 xs6><v-combobox :return-object="false" hide-details :label="$vuetify.t('ADV Format')"  :items="[]"  /></v-flex>
 
 
 
-                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Country')"  :items="[]"  /></v-flex>
-                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('Region')"  :items="[]"  /></v-flex>
-                    <v-flex sm4 xs6><v-select hide-details :label="$vuetify.t('City')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs6><v-combobox :return-object="false" hide-details :label="$vuetify.t('Country')"  :items="[{country: 'ITA'}]" item-text="country" item-value="country" v-model="filter.country" /></v-flex>
+                    <v-flex sm4 xs6><v-combobox :return-object="false" hide-details :label="$vuetify.t('Region')"  :items="[]"  v-model="filter.region"  /></v-flex>
+                    <!-- v-flex sm4 xs6><v-combobox hide-details :label="$vuetify.t('City')"  :items="[]"  /></v-flex-->
                 </v-layout>
 
                 <v-layout rows wrap>
-                    <v-flex sm4 xs4><v-select hide-details :label="$vuetify.t('OS')"  :items="[]"  /></v-flex>
-                    <v-flex sm4 xs4><v-select hide-details :label="$vuetify.t('OS Version')"  :items="[]"  /></v-flex>
+                    <v-flex sm4 xs4><v-combobox :return-object="false" hide-details :label="$vuetify.t('OS')"  :items="[]"   v-model="filter.os" /></v-flex>
+                    <v-flex sm4 xs4><v-combobox :return-object="false" hide-details :label="$vuetify.t('OS Version')"  :items="[]"  v-model="filter.osv"  /></v-flex>
+                    <v-flex sm4 xs4><v-combobox :return-object="false" hide-details :label="$vuetify.t('Msisdns')"  :items="[]"  v-model="filter.msisdns"  /></v-flex>
 
                     <v-flex sm4 xs4 class="text-xs-right pa-0">
                         <div>
-                            <GridButton icon="search" color="blue" @click="onClick" v-if="!searchActive"></GridButton>
-                            <GridButton :dark="false" icon="cancel" color="white" @click="onClick" v-if="searchActive"></GridButton>
+                            <GridButton icon="search" color="blue" @click="doSearch" ></GridButton>
+                            <GridButton :dark="false" icon="cancel" color="white" @click="doResetSearch" ></GridButton>
                         </div>
 
                     </v-flex>
@@ -44,18 +45,13 @@
             ></v-pagination>
         </div>
 
-        <v-data-table fixed  :headers="headers"  :items="list"  :hide-actions="false"    class="elevation-0" slot="body-center">
+        <v-data-table fixed  :headers="headers"  :items="clicksList"  :hide-actions="false"    class="elevation-0" slot="body-center">
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.click_date | dmy}}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
                 <td>{{ item.adv_format_name }}</td>
                 <td>{{ item.campaign_name }}</td>
-
-                <td width="1" class="pa-0">
-                    <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
-                </td>
-
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
                 {{$vuetify.t('From')}} {{ pageStart }} {{$vuetify.t('To')}} {{ pageStop }}  {{$vuetify.t('of')}} {{ itemsLength }}
@@ -66,7 +62,7 @@
     </GridContainer>
 </template>
 <script>
-    import {mapState, mapMutations} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     import GridButton from '../General/GridButton'
     import GridContainer from '../General/GridContainer'
     import CardPanel from "../General/CardPanel";
@@ -81,8 +77,7 @@
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Adv format'), value: 'adv_format_name' },
-                { text: this.$vuetify.t('Campaign Name'), value: 'campaign_name' },
-                { text: 'View', value: 'action', sortable: false }
+                { text: this.$vuetify.t('Campaign Name'), value: 'campaign_name' }
             ]
             return {
                 page: 1,
@@ -93,14 +88,20 @@
             }
         },
         computed: {
-            ...mapState('clicks', ['list', '$record', 'searchActive', 'filter'])
+            ...mapState('clicks', {'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
+            ...mapState('channels', {'channelList': 'list'}),
+            ...mapState('brands', {'brandsList': 'list'}),
+            ...mapState('locations', {'locationsList': 'list'})
         },
         methods: {
-            ...mapMutations('clicks', 'setSearchActive'),
-            onClick () {
-                alert('onClick')
+            ...mapActions('clicks', ['resetSearch', 'search']),
+            doSearch () {
+                this.search()
+            },
+            doResetSearch () {
+              this.resetSearch()
+
             }
         }
     }
 </script>
-

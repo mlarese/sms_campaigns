@@ -13,6 +13,7 @@ export const state = () => {
         grid: {pagination: {}},
         mode: 'list',
         searchActive: false,
+        loaded: false,
         filter: {click_date: [today, today]}
     }
 }
@@ -25,6 +26,7 @@ export const mutations = {
     setPagination (state, payload) { state.pagination = payload },
     setList (state, payload) {
         state.list = payload
+        state.loaded = true
     },
     setRecord (state, payload) {
         state.record = _cloneDeep(payload)
@@ -52,7 +54,7 @@ export const mutations = {
 }
 export const actions = {
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
-        if (!force && state.loaded) {
+        if (!force && state.list.length > 0) {
             return
         }
         if (id === null) {

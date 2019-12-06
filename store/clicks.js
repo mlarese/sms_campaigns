@@ -47,10 +47,28 @@ export const mutations = {
     setMode (state, payload) { state.mode = payload },
     setForm (state, payload) { state.form = payload },
     setEditMode (state) { state.mode = 'edit' },
-    setAddMode (state) { state.mode = 'add' }
+    setAddMode (state) { state.mode = 'add' },
+    resetFilter (state) {
+      state.filter = {click_date: [today, today]}
+    }
 
 }
 export const actions = {
+    search ({dispatch, commit, state}) {
+      let data = state.filter
+      commit('setList', [])
+      return dispatch('api/post', {url: `/campaigns/clicks`, data}, root)
+        .then(res => {
+          commit('setList', res.data)
+          commit('setSearchActive', true)
+          return res
+        })
+    },
+    resetSearch ({dispatch, commit, state}) {
+        commit('setSearchActive', false)
+        commit('resetFilter')
+        commit('setList', [])
+    },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
         if (!force && state.loaded) {
             return

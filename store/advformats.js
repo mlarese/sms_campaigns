@@ -2,10 +2,6 @@ import _cloneDeep from 'lodash/cloneDeep'
 import Vue from 'vue'
 
 let today = new Date()
-const newFilter = () => ({
-  click_date: [today, today],
-  country: 'ITA'
-})
 export const state = () => {
     return {
         list: [],
@@ -17,7 +13,7 @@ export const state = () => {
         grid: {pagination: {}},
         mode: 'list',
         searchActive: false,
-        filter: newFilter()
+        filter: {click_date: [today, today]}
     }
 }
 
@@ -51,40 +47,22 @@ export const mutations = {
     setMode (state, payload) { state.mode = payload },
     setForm (state, payload) { state.form = payload },
     setEditMode (state) { state.mode = 'edit' },
-    setAddMode (state) { state.mode = 'add' },
-    resetFilter (state) {
-      state.filter = newFilter()
-    }
+    setAddMode (state) { state.mode = 'add' }
 
 }
 export const actions = {
-    search ({dispatch, commit, state}) {
-      let data = state.filter
-      commit('setList', [])
-      return dispatch('api/post', {url: `/campaigns/clicks`, data}, root)
-        .then(res => {
-          commit('setList', res.data)
-          commit('setSearchActive', true)
-          return res
-        })
-    },
-    resetSearch ({dispatch, commit, state}) {
-        commit('setSearchActive', false)
-        commit('resetFilter')
-        commit('setList', [])
-    },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
-        if (!force && state.loaded) {
+        if (!force && state.list.length > 0) {
             return
         }
         if (id === null) {
-            return dispatch('api/post', {url: `/campaigns/clicks`, options, debug: false}, root)
+            return dispatch('api/post', {url: `/campaigns/advformat`, options, debug: false}, root)
                 .then(res => {
                     commit('setList', res.data)
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/clicks/{id}`, options}, root)
+            return dispatch('api/get', {url: `/advformat/{id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

@@ -4,34 +4,33 @@
 
         <CardPanel slot="container-top">
                 <v-layout rows wrap>
-                    <v-flex sm4 xs6> <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="filter.click_date" range></DatePicker>  </v-flex>
-                    <v-flex sm4 xs6> <DatePicker v-model="filter.sms_mo_date" range></DatePicker>  </v-flex>
+                    <v-flex sm3 xs12> <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="filter.click_date" range></DatePicker>  </v-flex>
+                    <v-flex sm3 xs12> <DatePicker v-model="filter.sms_mo_date" range></DatePicker>  </v-flex>
                 </v-layout>
                 <v-layout rows wrap class="xs-">
 
-                    <v-flex sm4 xs6><v-combobox :return-objects="false" hide-details :label="$vuetify.t('Brand')"  :items="brandsList" v-model="filter.brand_id" item-text="brand_name" item-value="brand_id" /></v-flex>
-                    <v-flex sm4 xs6><v-combobox :return-objects="false" hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" /></v-flex>
-                    <v-flex sm4 xs6><v-combobox :return-object="false" hide-details :label="$vuetify.t('ADV Format')"  :items="[]"  /></v-flex>
+                    <v-flex sm3 xs3><v-combobox dense  :return-objects="false" hide-details :label="$vuetify.t('Brand')"  :items="brandsList" v-model="filter.brand_id" item-text="brand_name" item-value="brand_id" /></v-flex>
+                    <v-flex sm3 xs3><v-combobox dense  :return-objects="false" hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" /></v-flex>
+                    <v-flex sm3 xs4><v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('ADV Format')"  :items="[]"  /></v-flex>
 
+                    <v-flex sm3 xs2 class="text-xs-right pa-0">
 
+                            <GridButton icon="search" color="blue" @click="doSearch" />
+                            <GridButton :dark="false" icon="cancel" color="white" @click="doResetSearch" />
 
-                    <v-flex sm4 xs6><v-combobox :return-object="false" hide-details :label="$vuetify.t('Country')"  :items="[{country: 'ITA'}]" item-text="country" item-value="country" v-model="filter.country" /></v-flex>
-                    <v-flex sm4 xs6><v-combobox :return-object="false" hide-details :label="$vuetify.t('Region')"  :items="[]"  v-model="filter.region"  /></v-flex>
-                    <!-- v-flex sm4 xs6><v-combobox hide-details :label="$vuetify.t('City')"  :items="[]"  /></v-flex-->
+                    </v-flex>
+
+                    <v-flex sm3 xs6><v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('Country')"  :items="[{country: 'ITA'}]" item-text="country" item-value="country" v-model="filter.country" /></v-flex>
+                    <v-flex sm3 xs6><v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('Region')"  :items="[]"  v-model="filter.region"  /></v-flex>
+                    <!-- v-flex sm4 xs6><v-combobox dense  hide-details :label="$vuetify.t('City')"  :items="[]"  /></v-flex-->
                 </v-layout>
 
                 <v-layout rows wrap>
-                    <v-flex sm4 xs4><v-combobox :return-object="false" hide-details :label="$vuetify.t('OS')"  :items="[]"   v-model="filter.os" /></v-flex>
-                    <v-flex sm4 xs4><v-combobox :return-object="false" hide-details :label="$vuetify.t('OS Version')"  :items="[]"  v-model="filter.osv"  /></v-flex>
-                    <v-flex sm4 xs4><v-combobox :return-object="false" hide-details :label="$vuetify.t('Msisdns')"  :items="[]"  v-model="filter.msisdns"  /></v-flex>
+                    <v-flex sm3 xs4><v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('OS')"  :items="[]"   v-model="filter.os" /></v-flex>
+                    <v-flex sm3 xs4><v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('OS Version')"  :items="[]"  v-model="filter.osv"  /></v-flex>
+                    <v-flex sm3 xs4><v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('Msisdns')"  :items="[]"  v-model="filter.msisdns"  /></v-flex>
 
-                    <v-flex sm4 xs4 class="text-xs-right pa-0">
-                        <div>
-                            <GridButton icon="search" color="blue" @click="doSearch" ></GridButton>
-                            <GridButton :dark="false" icon="cancel" color="white" @click="doResetSearch" ></GridButton>
-                        </div>
 
-                    </v-flex>
                 </v-layout>
 
         </CardPanel>

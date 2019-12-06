@@ -132,12 +132,21 @@
     }
 
     .v-text-field {
-        margin-top: 0px;
+        margin-top: 6px;
         padding-top: 0px;
     }
 
     .mx-datepicker-range {
         width: 100% !important;
+    }
+
+    .v-input, .v-label, .v-list__tile {
+        font-size:14px !important;
+    }
+
+    .v-text-field .v-label--active {
+        -webkit-transform: translateY(-20px) scale(0.75);
+        transform: translateY(-20px) scale(0.75);
     }
 
 </style>

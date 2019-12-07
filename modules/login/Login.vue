@@ -1,13 +1,13 @@
 <!--eslint-disable-->
 <template>
-    <v-layout align-center justify-center class="login">
+    <v-layout align-center justify-center class="login mt-5">
         <v-flex xs12 sm8 md4>
-            <v-card class="elevation-3">
+            <v-card class="elevation-3 pt-4">
                 <v-card-text>
 
                     <v-form>
-                        <v-text-field box prepend-icon="person" v-model="username" label="Login" type="text"></v-text-field>
-                        <v-text-field box  prepend-icon="lock" @keyup.enter="login" v-model="password" label="Password" id="password" type="password"></v-text-field>
+                        <v-text-field  prepend-icon="person" v-model="username" label="Login" type="text"></v-text-field>
+                        <v-text-field   prepend-icon="lock" @keyup.enter="login" v-model="password" label="Password" id="password" type="password"></v-text-field>
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -29,7 +29,7 @@
   import {getSchema} from '../../assets/helpers'
 
   export default {
-    layout: 'empty',
+    layout: 'blank',
     components: {},
     data () {
       return {

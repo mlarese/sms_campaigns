@@ -1,7 +1,7 @@
 {
   "name": "ADV_SW_Console",
   "version": "1.0.0",
-  "description": "sw adv console v6",
+  "description": "Click2SMS Tracker",
   "author": "mauro larese",
   "private": true,
   "scripts": {

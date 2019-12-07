@@ -1,8 +1,8 @@
 <!--eslint-disable-->
 <template>
-  <v-app id="inspire" class="grey lighten-2">
+  <v-app id="inspire" class="grey lighten-2" >
     <notifications position="top right" style="margin-top:50px"/>
-    <v-content>
+    <v-content style="background-image: url(sfondo.jpg)">
       <v-container fluid fill-height>
         <nuxt />
       </v-container>
@@ -13,6 +13,7 @@
 <script>
   import {mapState} from 'vuex'
   export default {
+    layout: 'empty',
     computed: {
       ...mapState('app', ['title']),
       ...mapState('api', ['notification'])

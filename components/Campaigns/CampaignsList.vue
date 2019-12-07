@@ -59,13 +59,29 @@
             ></v-pagination>
         </div>
 
-        <v-data-table fixed  :headers="headers"  :items="clicksList"  :hide-actions="false"    class="elevation-0" slot="body-center">
+
+        <v-data-table
+                :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"
+                :loading="isAjax" fixed  :headers="headers"  :items="clicksList"  :hide-actions="false"    class="elevation-0" slot="body-center">
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.click_date | dmy}}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
-                <td>{{ item.adv_format_name }}</td>
-                <td>{{ item.campaign_name }}</td>
+                <td style="white-space: nowrap">{{ item.adv_format_name }}</td>
+                <td style="white-space: nowrap">{{ item.campaign_name }}</td>
+                <td>{{ item.bid_price }}</td>
+                <td>{{ item.creative_id }}</td>
+                <td>{{ item.sms_template }}</td>
+                <td>{{ item.country }}</td>
+                <td>{{ item.region }}</td>
+                <td>{{ item.city }}</td>
+                <td>{{ item.os_only }} {{ item.os_version }}</td>
+                <td>{{ item.user_ip }}</td>
+                <td>{{ item.msisdns }}</td>
+                <td>{{ item.token_id }}</td>
+                <td>{{ item.sms_mo_date }}</td>
+                <td>{{ item.sms_mo_text }}</td>
+                <td>{{ item.conversion_status }}</td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
                 {{$vuetify.t('From')}} {{ pageStart }} {{$vuetify.t('To')}} {{ pageStop }}  {{$vuetify.t('of')}} {{ itemsLength }}
@@ -91,7 +107,20 @@
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Adv format'), value: 'adv_format_name' },
-                { text: this.$vuetify.t('Campaign Name'), value: 'campaign_name' }
+                { text: this.$vuetify.t('Campaign Name'), value: 'campaign_name' },
+                { text: this.$vuetify.t('Bid price'), value: 'bid_price' },
+                { text: this.$vuetify.t('Creative id'), value: 'creative_id' },
+                { text: this.$vuetify.t('sms_template'), value: 'sms_template' },
+                { text: this.$vuetify.t('country'), value: 'country' },
+                { text: this.$vuetify.t('region'), value: 'region' },
+                { text: this.$vuetify.t('city'), value: 'city' },
+                { text: this.$vuetify.t('Os only'), value: 'os_only' },
+                { text: this.$vuetify.t('User ip'), value: 'user_ip' },
+                { text: this.$vuetify.t('Msisdns'), value: 'msisdns' },
+                { text: this.$vuetify.t('Token id'), value: 'token_id' },
+                { text: this.$vuetify.t('Sms mo date'), value: 'sms_mo_date' },
+                { text: this.$vuetify.t('Sms mo text'), value: 'sms_mo_text' },
+                { text: this.$vuetify.t('Conv st.'), value: 'conversion_status' },
             ]
             return {
                 page: 1,
@@ -106,7 +135,8 @@
             ...mapState('channels', {'channelList': 'list'}),
             ...mapState('brands', {'brandsList': 'list'}),
             ...mapState('advformats', {'advformatsList': 'list'}),
-            ...mapState('locations', {'locationsList': 'list'})
+            ...mapState('locations', {'locationsList': 'list'}),
+            ...mapState('api', {'isAjax': 'isAjax'})
         },
         methods: {
             ...mapActions('clicks', ['resetSearch', 'search']),

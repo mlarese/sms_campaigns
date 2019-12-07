@@ -3,15 +3,17 @@
     <v-app>
         <notifications position="top right" style="margin-top:50px"/>
 
-        <v-toolbar  dark tabs class="elevation-1 app-toolbar ma-0" >
+        <v-toolbar  dark tabs class="elevation-1 app-toolbar ma-0"  v-if="$auth.loggedIn">
 
-            <v-layout slots="extension">
+            <v-layout slots="extension" rows wrap class="pl-0">
 
-                <v-flex class="pt-3">
-                    <a class="default-navbar-brand" href="/"><b>Compaigns</b></a>
+                <v-flex xs2 class="pl-0">
+                    <a class="default-navbar-brand" href="/">
+                        <img src="c2sms_logo.png" alt="logo c2sms" width="115">
+                    </a>
 
                 </v-flex>
-                <v-flex>
+                <v-flex xs8>
 
                     <v-tabs
                         class="ma-0"
@@ -29,15 +31,16 @@
                 </v-flex>
 
 
-                <v-flex class="text-xs-right">
-                    <span v-if="$vuetify.breakpoint.smAndUp">user</span>
+                <v-flex class="text-xs-right" xs2>
 
-                    <v-btn flat @click="onLogOut" class="py-2 pl-2 pr-0" :fab="$vuetify.breakpoint.xsOnly"
-                           :small="$vuetify.breakpoint.xsOnly">
-                      <span v-if="$vuetify.breakpoint.smAndUp" class="mr-2">
-                      {{$vuetify.t('Logout')}}
-                      </span>
-                        <v-icon class="ml-1" small>exit_to_app</v-icon>
+                    <v-btn flat @click="onLogOut" class="py-2 pl-2 pr-0" :fab="$vuetify.breakpoint.xsOnly" :small="$vuetify.breakpoint.xsOnly">
+                        <v-tooltip left>
+                            <span slot="activator">
+                                {{userName}}
+                                <v-icon class="ml-1" small>exit_to_app</v-icon>
+                            </span>
+                            {{$vuetify.t('Logout')}}
+                        </v-tooltip>
                     </v-btn>
                 </v-flex>
             </v-layout>
@@ -52,10 +55,15 @@
 <script>
   import {mapState, mapGetters} from 'vuex'
   export default {
+    head () {
+      return {
+        title: 'Click2SMS Tracker',
+      }
+    },
     computed: {
       ...mapState('app', ['title', 'ui']),
       ...mapState('api', ['notification']),
-      ...mapGetters('app', ['menuItems', 'role'])
+      ...mapGetters('app', ['menuItems', 'role', 'userName'])
     },
     watch: {
       'notification.id'(val) {
@@ -64,7 +72,7 @@
     },
     methods: {
       onLogOut () {
-
+        this.$auth.logout()
       }
     }
   }
@@ -85,12 +93,12 @@
     .v-table td{
         border: 1px #dddddd solid;
         color:#333 !important;
-        font-size:14px !important;
+        font-size:12px !important;
         text-align: center;
     }
 
     table.v-table thead tr {
-        height: 40px;
+        height: 35px;
     }
 
     .v-text-field > .v-input__control > .v-input__slot:before {
@@ -108,7 +116,7 @@
         text-align: center !important;
         font-weight: bold !important;
         color:#333 !important;
-        font-size:14px !important;
+        font-size:12px !important;
     }
     .theme--light.v-table thead tr:first-child{
         border: 0;
@@ -123,6 +131,9 @@
         color: rgba(0,0,0,1);
     }
 
+    .v-tabs__div {
+        font-size: 16px !important;
+    }
     .v-tabs__div, .v-btn{
         text-transform: none !important;
     }
@@ -149,4 +160,7 @@
         transform: translateY(-20px) scale(0.75);
     }
 
+    table.v-table thead td:not(:nth-child(1)), table.v-table tbody td:not(:nth-child(1)), table.v-table thead th:not(:nth-child(1)), table.v-table tbody th:not(:nth-child(1)), table.v-table thead td:first-child, table.v-table tbody td:first-child, table.v-table thead th:first-child, table.v-table tbody th:first-child {
+        padding: 0 4px 0 4px;
+    }
 </style>

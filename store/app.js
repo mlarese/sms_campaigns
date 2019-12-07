@@ -16,14 +16,14 @@ const menuItems = {
 
 
 const menus = {
-  admin: [
+  Admin: [
     menuItems.campaigns,
     menuItems.reporting,
     menuItems.unpaired,
     menuItems.landing,
     menuItems.settings
   ],
-  reporting_cp: [
+  'Third Party Agency': [
     menuItems.campaigns,
     menuItems.reporting
   ],
@@ -73,7 +73,8 @@ export const actions = {
 }
 
 export const getters = {
-  role: (s, g, rs) => !_has(rs, 'auth.role') ? 'guest' : rs.auth.role,
+  role: (s, g, rs) => !_has(rs, 'auth.user.role') ? 'guest' : rs.auth.user.role,
   user: (s, g, rs) => !_has(rs, 'auth.user') ? '' : rs.auth.user,
+  userName: (s, g, rs) => !_has(rs, 'auth.user.userName') ? '' : rs.auth.user.userName,
   menuItems: (s, g) => s.menus[g.role]
 }

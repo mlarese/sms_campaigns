@@ -1,24 +1,17 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Campaigns">
+    <GridContainer title="Reporting">
         <CardPanel slot="container-top">
-            <div class="text-xs-right">
                 <v-layout rows wrap>
 
-                    <v-flex sm3 offset-sm1 xs12>
-                        <div class="ml-2">
-                        <span v-if="filter.click_date && filter.click_date[0]" class="active-label-size" >Click date</span>&nbsp;
-                        </div>
+                    <v-flex sm3 xs12>
+                        <div class="ml-2"><label class="v-label v-label--active theme--light active-label-size">
+                           <span v-if="filter.click_date && filter.click_date[0]" >Click date</span>&nbsp;
+                        </label></div>
                         <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="filter.click_date" range></DatePicker>
                     </v-flex>
-                    <v-flex sm3 xs12>
-                        <div class="ml-2">
-                            <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">SMS MO Date</span>&nbsp;
-                        </div>
-                        <DatePicker :placeholder="$vuetify.t('SMS MO date')" v-model="filter.sms_mo_date" range></DatePicker>
-                    </v-flex>
 
-                    <v-flex sm4 xs3>
+                    <v-flex sm3 xs3>
                         <div class="ml-2" style="margin-top: 21px !important;"></div>
                         <v-combobox dense   hide-details :label="$vuetify.t('Brand')"  :items="brandsList" v-model="filter.brand_id" item-text="brand_name" item-value="brand_id" />
 
@@ -26,14 +19,19 @@
 
                 </v-layout>
                 <v-layout rows wrap class="xs-">
-                    <v-flex sm2 offset-sm1 xs3><v-combobox dense    hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" /></v-flex>
+
+
+
+                    <v-flex sm2 xs3><v-combobox dense    hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" /></v-flex>
                     <v-flex sm2 xs4><v-combobox dense  hide-details :label="$vuetify.t('ADV Format')"  :items="advformatsList"  v-model="filter.adv_format_id" item-text="adv_format_name" item-value="adv_format_id" /></v-flex>
+
+
 
                     <v-flex sm2 xs6>
                         <v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('Country')"  :items="[{country: 'ITA'}]" item-text="country" item-value="country" v-model="filter.country" />
                     </v-flex>
 
-                    <v-flex sm3 xs6>
+                    <v-flex sm2 xs6>
                         <v-text-field dense  hide-details :label="$vuetify.t('Location')"    v-model="filter.region" />
                     </v-flex>
 
@@ -44,18 +42,16 @@
 
                     </v-flex>
                 </v-layout>
+
                 <v-layout rows wrap>
-                    <v-flex sm3 offset-sm1 xs4>
+                    <v-flex sm3 xs4>
                         <v-combobox dense  class="" style="width: 60%;float:left" hide-details :label="$vuetify.t('OS')"  :items="['Android', 'iOS', 'Other']"   v-model="filter.os_only" />
                         <v-combobox dense  class="ml-2"  style="width: 30%; min-width:100px;" hide-details :label="$vuetify.t('OS Version')"  :items="[3,4,5,6,7,8,9,10,11,12,13]"  v-model="filter.os_version"  />
                     </v-flex>
-                    <v-flex sm3 xs4><v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdns"  /></v-flex>
-                    <v-flex sm4 xs4>
-                        <v-combobox dense  hide-details :label="$vuetify.t('Conversion status')"  :items="statusList"  v-model="filter.conversion_status_id" item-text="text" item-value="conversion_status_id" />
-                    </v-flex>
+
 
                 </v-layout>
-            </div>
+
         </CardPanel>
 
         <!-- v-card class="text-xs-right elevation-0 mb-2" slot="body-top" v-if="grid.pagination.pages > 1">

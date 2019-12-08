@@ -168,4 +168,16 @@
     .v-tooltip__content{
         max-width:400px;
     }
+    .active-label-size {
+        color: rgba(0,0,0,0.54);
+        font-size: 11px !important;
+        line-height:10px;
+        position: relative;
+        top: 5px;
+    }
+
+    .v-progress-linear {
+        position: relative !important;
+        top: -20px !important;
+    }
 </style>

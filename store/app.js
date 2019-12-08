@@ -10,7 +10,7 @@ const menuItems = {
     campaigns: {to: 'campaigns', label: 'Campaigns'},
     reporting: {to: 'reporting', label: 'Reporting'},
     unpaired: {to: 'unpaired', label: 'Unpaired Prospects'},
-    landing: {to: 'landing', label: 'Landing Pages'},
+    landing: {to: 'landingpage', label: 'Landing Pages'},
     settings: {to: 'settings', label: 'Settings'}
 }
 

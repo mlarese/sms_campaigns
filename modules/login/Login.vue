@@ -9,8 +9,8 @@
                         <img src="c2sms_logo.png" alt="logo c2sms" width="300" class="ml-4">
                     </div>
                     <v-form>
-                        <v-text-field dark prepend-icon="person" v-model="username" label="Login" type="text"></v-text-field>
-                        <v-text-field  dark prepend-icon="lock" @keyup.enter="login" v-model="password" label="Password" id="password" type="password"></v-text-field>
+                        <v-text-field  prepend-icon="person" v-model="username" label="Login" type="text"></v-text-field>
+                        <v-text-field   prepend-icon="lock" @keyup.enter="login" v-model="password" label="Password" id="password" type="password"></v-text-field>
                     </v-form>
                 </v-card-text>
                 <v-card-actions class="pb-4">

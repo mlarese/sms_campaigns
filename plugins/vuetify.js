@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import colors from 'vuetify/es5/util/colors'
 import Notifications from 'vue-notification'
-import {dmy, time} from '../assets/filters'
+import {dmy, time, truncate, statusIdToText} from '../assets/filters'
 import 'vue2-datepicker/index.css';
 // import '@fortawesome/fontawesome-free/css/all.css'
 
@@ -22,3 +22,5 @@ Vue.use(Vuetify, {
 Vue.use(Notifications)
 Vue.filter('dmy', dmy)
 Vue.filter('time', time)
+Vue.filter('truncate', truncate)
+Vue.filter('statusIdToText', statusIdToText)

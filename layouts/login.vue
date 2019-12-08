@@ -1,9 +1,9 @@
 <!--eslint-disable-->
 <template>
-  <v-app id="inspire" class="grey lighten-2" >
+  <v-app id="inspire" class="transparent">
     <notifications position="top right" style="margin-top:50px"/>
-    <v-content>
-      <v-container fluid fill-height>
+    <v-content class="back-city">
+      <v-container fluid fill-height class="transparent">
         <nuxt />
       </v-container>
     </v-content>
@@ -13,7 +13,11 @@
 <script>
   import {mapState} from 'vuex'
   export default {
-    layout: 'empty',
+    head () {
+      return {
+        title: 'Click2SMS Tracker',
+      }
+    },
     computed: {
       ...mapState('app', ['title']),
       ...mapState('api', ['notification'])
@@ -25,3 +29,10 @@
     }
   }
 </script>
+
+<style>
+  .back-city{
+    background-image: url(https://c2sms.xyz/img/sfondo.jpg) !important;
+    background-position: center;
+  }
+</style>

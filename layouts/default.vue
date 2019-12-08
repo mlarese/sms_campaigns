@@ -95,6 +95,7 @@
         color:#333 !important;
         font-size:12px !important;
         text-align: center;
+        cursor: default;
     }
 
     table.v-table thead tr {
@@ -112,7 +113,7 @@
     .v-table th.column {
         background: antiquewhite;
         border: 1px #dddddd solid;
-
+        cursor: default;
         text-align: center !important;
         font-weight: bold !important;
         color:#333 !important;
@@ -162,5 +163,9 @@
 
     table.v-table thead td:not(:nth-child(1)), table.v-table tbody td:not(:nth-child(1)), table.v-table thead th:not(:nth-child(1)), table.v-table tbody th:not(:nth-child(1)), table.v-table thead td:first-child, table.v-table tbody td:first-child, table.v-table thead th:first-child, table.v-table tbody th:first-child {
         padding: 0 4px 0 4px;
+    }
+
+    .v-tooltip__content{
+        max-width:400px;
     }
 </style>

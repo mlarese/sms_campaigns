@@ -1,9 +1,9 @@
 import _cloneDeep from 'lodash/cloneDeep'
 import Vue from 'vue'
-
+import addDays from 'date-fns/addDays'
 let today = new Date()
 const newFilter = () => ({
-  click_date: [today, today],
+  click_date: [addDays(today,-30), today],
   country: 'ITA'
 })
 export const state = () => {
@@ -14,7 +14,16 @@ export const state = () => {
         $record: {},
         addRecord: {},
         resetItem: {},
-        grid: {pagination: {}},
+        grid: {
+            pagination: {
+              search: '',
+              descending: true,
+              page: 1,
+              pages: 0,
+              rowsPerPage: 100,
+              totalItems: 0
+            }
+        },
         mode: 'list',
         searchActive: false,
         filter: newFilter()
@@ -24,9 +33,14 @@ export const state = () => {
 const root = {root: true}
 
 export const mutations = {
+    setPagination (state) {
+        state.grid.pagination.totalItems = state.list.length
+        state.grid.pagination.page = 1
+        state.grid.pagination.pages = Math.ceil(state.grid.pagination.totalItems / state.grid.pagination.rowsPerPage)
+      console.dir(state.grid)
+    },
     setSearchActive (state, payload) { state.searchActive = payload },
     setRecordList (state, payload) { state.recordList = payload },
-    setPagination (state, payload) { state.pagination = payload },
     setList (state, payload) {
         state.list = payload
     },
@@ -64,6 +78,7 @@ export const actions = {
       return dispatch('api/post', {url: `/campaigns/clicks`, data}, root)
         .then(res => {
           commit('setList', res.data)
+          commit('setPagination')
           commit('setSearchActive', true)
           return res
         })
@@ -81,6 +96,7 @@ export const actions = {
             return dispatch('api/post', {url: `/campaigns/clicks`, options, debug: false}, root)
                 .then(res => {
                     commit('setList', res.data)
+                    commit('setPagination')
                     return res
                 })
         } else {

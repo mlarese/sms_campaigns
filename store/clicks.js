@@ -83,6 +83,17 @@ export const actions = {
           return res
         })
     },
+    reporting ({dispatch, commit, state}) {
+      let data = state.filter
+      commit('setList', [])
+      return dispatch('api/post', {url: `/campaigns/reporting`, data}, root)
+        .then(res => {
+          commit('setList', res.data)
+          commit('setPagination')
+          commit('setSearchActive', true)
+          return res
+        })
+    },
     resetSearch ({dispatch, commit, state}) {
         commit('setSearchActive', false)
         commit('resetFilter')

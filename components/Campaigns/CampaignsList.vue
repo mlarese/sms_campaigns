@@ -2,12 +2,12 @@
 <template>
     <GridContainer title="Campaigns">
         <CardPanel slot="container-top">
-            <div class="text-xs-right">
+            <div class="">
                 <v-layout rows wrap>
 
                     <v-flex sm3 offset-sm1 xs12>
                         <div class="ml-2">
-                        <span v-if="filter.click_date && filter.click_date[0]" class="active-label-size" >Click date</span>&nbsp;
+                        <span v-if="filter.click_date && filter.click_date[0]" class="active-label-size" >Click Date</span>&nbsp;
                         </div>
                         <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="filter.click_date" range></DatePicker>
                     </v-flex>
@@ -15,7 +15,7 @@
                         <div class="ml-2">
                             <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">SMS MO Date</span>&nbsp;
                         </div>
-                        <DatePicker :placeholder="$vuetify.t('SMS MO date')" v-model="filter.sms_mo_date" range></DatePicker>
+                        <DatePicker :placeholder="$vuetify.t('SMS MO Date')" v-model="filter.sms_mo_date" range></DatePicker>
                     </v-flex>
 
                     <v-flex sm4 xs3>
@@ -51,7 +51,7 @@
                     </v-flex>
                     <v-flex sm3 xs4><v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdns"  /></v-flex>
                     <v-flex sm4 xs4>
-                        <v-combobox dense  hide-details :label="$vuetify.t('Conversion status')"  :items="statusList"  v-model="filter.conversion_status_id" item-text="text" item-value="conversion_status_id" />
+                        <v-combobox dense  hide-details :label="$vuetify.t('Conversion Status')"  :items="statusList"  v-model="filter.conversion_status_id" item-text="text" item-value="conversion_status_id" />
                     </v-flex>
 
                 </v-layout>
@@ -110,7 +110,7 @@
                 <td>{{ item.sms_mo_date  | dmy }} {{ item.sms_mo_date  | time }}</td>
                 <td>
                     <v-tooltip left v-if="item.sms_mo_final_text ">
-                        <span class="pa-3" slot="activator">{{ item.sms_mo_final_text | truncate(10) }}</span>
+                        <span class="pa-3" slot="activator">{{ item.sms_mo_final_text | truncate(8) }}</span>
                         {{ item.sms_mo_final_text }}
                     </v-tooltip>
                 </td>
@@ -175,6 +175,9 @@
             ...mapState('advformats', {'advformatsList': 'list'}),
             ...mapState('locations', {'locationsList': 'list'}),
             ...mapState('api', {'isAjax': 'isAjax'})
+        },
+        created () {
+          this.resetSearch()
         },
         methods: {
             ...mapActions('clicks', ['resetSearch', 'search']),

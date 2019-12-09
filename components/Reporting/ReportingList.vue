@@ -4,25 +4,31 @@
         <CardPanel slot="container-top">
                 <v-layout rows wrap>
 
-                    <v-flex sm3 xs12>
+                    <v-flex sm4 xs12>
                         <div class="ml-2"><label class="v-label v-label--active theme--light active-label-size">
-                           <span v-if="filter.click_date && filter.click_date[0]" >Click date</span>&nbsp;
+                           <span v-if="filter.click_date && filter.click_date[0]" >Click Date</span>&nbsp;
                         </label></div>
                         <DatePicker :placeholder="$vuetify.t('Click Date')" v-model="filter.click_date" range></DatePicker>
                     </v-flex>
 
-                    <v-flex sm3 xs3>
+                    <v-flex sm4 xs3>
                         <div class="ml-2" style="margin-top: 21px !important;"></div>
                         <v-combobox dense   hide-details :label="$vuetify.t('Brand')"  :items="brandsList" v-model="filter.brand_id" item-text="brand_name" item-value="brand_id" />
 
                     </v-flex>
+
+                    <v-flex sm4 xs3>
+                        <div class="ml-2" style="margin-top: 21px !important;"></div>
+                        <v-combobox dense    hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" />
+                    </v-flex>
+
 
                 </v-layout>
                 <v-layout rows wrap class="xs-">
 
 
 
-                    <v-flex sm2 xs3><v-combobox dense    hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" /></v-flex>
+
                     <v-flex sm2 xs4><v-combobox dense  hide-details :label="$vuetify.t('ADV Format')"  :items="advformatsList"  v-model="filter.adv_format_id" item-text="adv_format_name" item-value="adv_format_id" /></v-flex>
 
 
@@ -31,11 +37,14 @@
                         <v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('Country')"  :items="[{country: 'ITA'}]" item-text="country" item-value="country" v-model="filter.country" />
                     </v-flex>
 
-                    <v-flex sm2 xs6>
+                    <v-flex sm4 xs6>
                         <v-text-field dense  hide-details :label="$vuetify.t('Location')"    v-model="filter.region" />
                     </v-flex>
 
-                    <v-flex sm2 xs2 class="text-xs-left pa-0 pt-1">
+                    <v-flex sm2 xs6>
+                        <v-combobox dense  class="" style="width: 60%;float:left" hide-details :label="$vuetify.t('OS')"  :items="['Android', 'iOS', 'Other']"   v-model="filter.os_only" />
+                    </v-flex>
+                    <v-flex sm2 xs2 class="text-xs-right pa-0 pt-1">
 
                         <GridButton icon="search" color="blue" @click="doSearch" />
                         <GridButton :dark="false" icon="cancel" color="white" @click="doResetSearch" />
@@ -43,14 +52,7 @@
                     </v-flex>
                 </v-layout>
 
-                <v-layout rows wrap>
-                    <v-flex sm3 xs4>
-                        <v-combobox dense  class="" style="width: 60%;float:left" hide-details :label="$vuetify.t('OS')"  :items="['Android', 'iOS', 'Other']"   v-model="filter.os_only" />
-                        <v-combobox dense  class="ml-2"  style="width: 30%; min-width:100px;" hide-details :label="$vuetify.t('OS Version')"  :items="[3,4,5,6,7,8,9,10,11,12,13]"  v-model="filter.os_version"  />
-                    </v-flex>
 
-
-                </v-layout>
 
         </CardPanel>
 
@@ -70,8 +72,8 @@
                     :length="grid.pagination.pages"
                     class="elevation-0"
 
-            ></v-pagination -->
-        </v-card>
+            ></v-pagination>
+        </v-card -->
 
         <v-data-table
                 :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"
@@ -83,39 +85,24 @@
                 class="elevation-0 fixed-header"
                 slot="body-center">
             <template slot="items" slot-scope="{item}">
-                <td>{{ item.click_date | dmy}} {{ item.click_date  | time }}</td>
+                <td>{{ item.click_date | dmy}} </td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
                 <td style="white-space: nowrap">{{ item.adv_format_name }}</td>
-                <td style="white-space: nowrap">{{ item.campaign_name }}</td>
-                <td>{{ item.bid_price }}</td>
-                <td>{{ item.creative_id }}</td>
-                <td>
-                    <v-tooltip left v-if="item.sms_template_text">
-                        <span class="pa-3" slot="activator">{{ item.sms_template_text | truncate(10) }}</span>
-                        {{ item.sms_template_text }}
-                    </v-tooltip>
-                </td>
-                <td>{{ item.country }}</td>
-                <td>{{ item.region }}</td>
-                <td>{{ item.city }}</td>
+                <td>{{ item.country || 'ITA' }}</td>
                 <td>{{ item.os_only }} {{ item.os_version }}</td>
-                <td>{{ item.user_ip }}</td>
-                <td>{{ item.msisdns | truncate(5,'.....')}}</td>
-                <td>{{ item.token_id }}</td>
-                <td>{{ item.sms_mo_date  | dmy }} {{ item.sms_mo_date  | time }}</td>
-                <td>
-                    <v-tooltip left v-if="item.sms_mo_final_text ">
-                        <span class="pa-3" slot="activator">{{ item.sms_mo_final_text | truncate(10) }}</span>
-                        {{ item.sms_mo_final_text }}
-                    </v-tooltip>
-                </td>
-                <td>
-                    <v-tooltip left>
-                        <span class="pa-3" slot="activator">{{ item.conversion_status_id }}</span>
-                        {{statusIdToText(item.conversion_status_id)}}
-                    </v-tooltip>
-                </td>
+                <td>{{ item.clicks }}</td>
+                <td>{{ item.leads_a }}</td>
+                <td>{{ item.leads_b }}</td>
+                <td>{{ item.detractors }}</td>
+                <td>{{ item.leads_a / item.clicks *100 | numFormat('0.000')  }}%</td>
+                <td>{{ item.leads_b / item.clicks *100 | numFormat('0.000')  }}%</td>
+                <td>{{ item.detractors / item.clicks *100 | numFormat('0.000')  }}%</td>
+                <td>{{ item.bid_price | numFormat('0.000') }}</td>
+                <td>{{ item.clicks * item.bid_price | numFormat('0.000') }}</td>
+                <td>{{ item.leads_a * item.clicks * item.bid_price | numFormat('0.000')  }}</td>
+                <td>{{ item.leads_b * item.clicks * item.bid_price | numFormat('0.000')  }}</td>
+
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
                 {{$vuetify.t('From')}} {{ pageStart }} {{$vuetify.t('To')}} {{ pageStop }}  {{$vuetify.t('of')}} {{ itemsLength }}
@@ -141,20 +128,19 @@
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Adv Format'), value: 'adv_format_name' },
-                { text: this.$vuetify.t('Campaign Name'), value: 'campaign_name' },
-                { text: this.$vuetify.t('Bid Price'), value: 'bid_price' },
-                { text: this.$vuetify.t('Creative Id'), value: 'creative_id' },
-                { text: this.$vuetify.t('SMS Template'), value: 'sms_template_text' },
                 { text: this.$vuetify.t('Country'), value: 'country' },
-                { text: this.$vuetify.t('Region'), value: 'region' },
-                { text: this.$vuetify.t('City'), value: 'city' },
                 { text: this.$vuetify.t('Os Only'), value: 'os_only' },
-                { text: this.$vuetify.t('User Ip'), value: 'user_ip' },
-                { text: this.$vuetify.t('Msisdn'), value: 'msisdns' },
-                { text: this.$vuetify.t('Token Id'), value: 'token_id' },
-                { text: this.$vuetify.t('SMS MO Date'), value: 'sms_mo_date' },
-                { text: this.$vuetify.t('SMS MO Text'), value: 'sms_mo_final_text' },
-                { text: this.$vuetify.t('Status'), value: 'conversion_status_id' },
+                { text: this.$vuetify.t('Clicks'), value: 'clicks' },
+                { text: this.$vuetify.t('Leads A'), value: 'leads_a' },
+                { text: this.$vuetify.t('Leads B'), value: 'leads_b' },
+                { text: this.$vuetify.t('Detractors'), value: 'detractors' },
+                { text: this.$vuetify.t('CTL A'), value: 'ctla' },
+                { text: this.$vuetify.t('CTL B'), value: 'ctlb' },
+                { text: this.$vuetify.t('CTD'), value: 'ctd' },
+                { text: this.$vuetify.t('CPC'), value: 'bid_price' },
+                { text: this.$vuetify.t('Adv Spend'), value: 'adv_spend' },
+                { text: this.$vuetify.t('Cost Per Lead A'), value: 'cost_x_lead_a' },
+                { text: this.$vuetify.t('Cost Per Lead B'), value: 'cost_x_lead_b' }
             ]
             return {
                 sms_mo_date: null,
@@ -172,11 +158,14 @@
             ...mapState('locations', {'locationsList': 'list'}),
             ...mapState('api', {'isAjax': 'isAjax'})
         },
+          created () {
+            this.resetSearch()
+          },
         methods: {
-            ...mapActions('clicks', ['resetSearch', 'search']),
+            ...mapActions('clicks', ['resetSearch', 'search', 'reporting']),
             statusIdToText,
             doSearch () {
-                this.search()
+                this.reporting()
             },
             doResetSearch () {
               this.resetSearch()

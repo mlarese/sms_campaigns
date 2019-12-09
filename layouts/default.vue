@@ -9,7 +9,7 @@
 
                 <v-flex xs2 class="pl-0">
                     <a class="default-navbar-brand" href="/">
-                        <img src="c2sms_logo.png" alt="logo c2sms" width="115">
+                        <img src="c2sms_logo.png" alt="logo c2sms" width="100">
                     </a>
 
                 </v-flex>
@@ -173,7 +173,7 @@
         font-size: 11px !important;
         line-height:10px;
         position: relative;
-        top: 5px;
+        top: 4px;
     }
 
     .v-progress-linear {

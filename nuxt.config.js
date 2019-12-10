@@ -1,10 +1,12 @@
 const pkg = require('./package')
 
 let routerBase = '/'
+if (process.env.NODE_ENV === 'production') {
+  routerBase = '/campaigns/'
+}
 
 module.exports = {
   mode: 'spa',
-
   /*
   ** Headers of the page
   */

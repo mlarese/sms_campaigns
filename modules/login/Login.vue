@@ -1,23 +1,27 @@
 <!--eslint-disable-->
 <template>
-    <v-layout align-center justify-center class="login">
+    <v-layout align-center justify-center class="login mt-5" >
         <v-flex xs12 sm8 md4>
-            <v-card class="elevation-3">
+            <v-card class="elevation-6 pt-0 px-3 opacity70" style="border-radius: 8px">
                 <v-card-text>
 
+                    <div class="text-xs-center mb-4">
+                        <img src="c2sms_logo.png" alt="logo c2sms" width="240" class="ml-4">
+                    </div>
                     <v-form>
-                        <v-text-field box prepend-icon="person" v-model="username" label="Login" type="text"></v-text-field>
-                        <v-text-field box  prepend-icon="lock" @keyup.enter="login" v-model="password" label="Password" id="password" type="password"></v-text-field>
+                        <v-text-field  prepend-icon="person" v-model="username" label="Login" type="text"></v-text-field>
+                        <v-text-field   prepend-icon="lock" @keyup.enter="login" v-model="password" label="Password" id="password" type="password"></v-text-field>
                     </v-form>
                 </v-card-text>
-                <v-card-actions>
+                <v-card-actions class="pb-4">
                     <v-spacer></v-spacer>
-                    <v-btn  :loading="loading" :disabled="!canLogin" color="info" @click="login" @keyup.enter="login" small>
+                    <v-btn  :loading="loading" class="mr-2" :disabled="!canLogin" color="info" @click="login" @keyup.enter="login" small>
                         Login
                         <v-icon right>input</v-icon>
                     </v-btn>
 
                 </v-card-actions>
+
             </v-card>
         </v-flex>
     </v-layout>
@@ -29,7 +33,7 @@
   import {getSchema} from '../../assets/helpers'
 
   export default {
-    layout: 'empty',
+    layout: 'login',
     components: {},
     data () {
       return {
@@ -98,6 +102,8 @@
   }
 </script>
 <style lang="scss">
+    .opacity70{   background: rgba(46,44,44,.7) !important  }
+
     .login {
         .icon {
             align-items: center;
@@ -105,6 +111,7 @@
             font-size: 20px !important;
             vertical-align: bottom;
         }
+
 
         .input-group--text-field input {
             height: 40px !important ;

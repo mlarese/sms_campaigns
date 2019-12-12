@@ -7,7 +7,7 @@
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew/>
+            <ButtonNew name="Add Brand"/>
         </div>
         <v-data-table
                 :headers="headers"
@@ -17,6 +17,19 @@
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
+                <td>{{ item.brand_id }}</td>
+                <td>{{ item.brand }}</td>
+                <td>{{ item.sms_mo_recipient }}</td>
+                <td>{{ item.sms_mo_key_string }}</td>
+                <td width="1" class="pa-0">
+                    <GridButton icon="edit" color="green" @click="onClick"></GridButton>
+                </td>
+                <td width="1" class="pa-0">
+                    <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
+                </td>
+                <td width="1" class="pa-0">
+                    <GridButton icon="delete" color="error" @click="onClick"></GridButton>
+                </td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
                 {{$vuetify.t('From')}} {{ pageStart }} {{$vuetify.t('To')}} {{ pageStop }}  {{$vuetify.t('of')}} {{ itemsLength }}
@@ -34,16 +47,15 @@
 
     export default {
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
-
         data () {
             const headers = [
-                { text: this.$vuetify.t('LP ID'), value: 'lp_id' },
-                { text: this.$vuetify.t('Background RGB'), value: 'background_rgb' },
-                { text: this.$vuetify.t('LP Banner Element'), value: 'lp_banner_element' },
-                { text: this.$vuetify.t('Text RGB'), value: 'text_rgb' },
-                { text: this.$vuetify.t('Text'), value: 'text' },
-                { text: this.$vuetify.t('Button Element'), value: 'button_element' },
-                { text: '', value: 'action', sortable: false }
+                { text: this.$vuetify.t('Brand ID'), value: 'brand_id' },
+                { text: this.$vuetify.t('Brand'), value: 'brand' },
+                { text: this.$vuetify.t('SMS MO Recipient'), value: 'sms_mo_recipient' },
+                { text: this.$vuetify.t('SMS MO Key String'), value: 'sms_mo_key_string' },
+                { text: 'Edit', value: 'action', sortable: false },
+                { text: 'View', value: 'action', sortable: false },
+                { text: 'Delete', value: 'action', sortable: false }
             ]
             return {
                 gridFilter: '',
@@ -51,7 +63,7 @@
             }
         },
         computed: {
-            ...mapState('landingPages', ['list', '$record'])
+            ...mapState('usersBrandsChannels', ['list', '$record'])
         },
         methods: {
             onClick () {

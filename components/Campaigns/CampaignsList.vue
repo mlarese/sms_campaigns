@@ -74,8 +74,8 @@
                     :length="grid.pagination.pages"
                     class="elevation-0"
 
-            ></v-pagination -->
-        </v-card>
+            ></v-pagination
+        </v-card>-->
 
         <v-data-table
                 :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"

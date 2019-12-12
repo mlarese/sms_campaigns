@@ -7,7 +7,7 @@
             </CardPanel>
 
             <div slot="header-right" class="pb-2">
-                <ButtonNew/>
+                <ButtonNew title="add Landing Page"/>
             </div>
     <v-data-table
             :headers="headers"

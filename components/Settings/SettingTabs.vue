@@ -37,7 +37,6 @@
         data () {
             return {
                 gridFilter: '',
-                headers
             }
         },
         computed: {

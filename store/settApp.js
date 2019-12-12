@@ -7,28 +7,21 @@ import _has from 'lodash/has'
  *
  */
 const menuItems = {
-    campaigns: {to: 'campaigns', label: 'Campaigns'},
-    reporting: {to: 'reporting', label: 'Reporting'},
-    unpaired: {to: 'unpaired', label: 'Unpaired Prospects'},
-    landing: {to: 'landingpage', label: 'Landing Pages'},
-    settings: {to: 'settings', label: 'Settings'}
+    Brands: {to: 'brands', label: 'Brands'},
+    Channels: {to: 'channel', label: 'Channels'},
+    smsmotemplate: {to: 'smsmotemplate', label: 'SMS MO Templates'},
+    brandchannelcpa: {to: 'brandchannelcpa', label: 'Brand Channel CPA'},
+    badword: {to: 'badword', label: 'Bad Words'}
 }
 
 
 const menus = {
     Admin: [
-        menuItems.campaigns,
-        menuItems.reporting,
-        menuItems.unpaired,
-        menuItems.landing,
-        menuItems.settings
-    ],
-    'Third Party Agency': [
-        menuItems.campaigns,
-        menuItems.reporting
-    ],
-    guest: [
-
+        menuItems.brands,
+        menuItems.channel,
+        menuItems.smsmotemplate,
+        menuItems.brandchannelcpa,
+        menuItems.badword
     ]
 }
 
@@ -46,7 +39,7 @@ export const state = () => ({
     menuItems: [
         {to: 'role', label: 'Roles'},
         {to: 'user', label: 'Users'},
-        {to: 'usersrole', label: 'Users Roles'},
+        {to: 'smsmotemplate', label: 'SMS MO Templates'},
         {to: 'usersbrandschannel', label: 'Users Brands Channels'},
         {to: 'landingpage', label: 'Landing Pages'},
         {to: 'brandlandingpage', label: 'Brand Landing Page'},

@@ -11,7 +11,7 @@ const menuItems = {
     reporting: {to: 'reporting', label: 'Reporting'},
     unpaired: {to: 'unpaired', label: 'Unpaired Prospects'},
     landing: {to: 'landingpage', label: 'Landing Pages'},
-    settings: {to: 'settings', label: 'Settings'}
+    settings: {to: 'settings/brands', label: 'Settings'}
 }
 
 

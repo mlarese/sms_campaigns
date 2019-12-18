@@ -6,20 +6,21 @@
                 <v-layout rows wrap>
 
                     <v-flex sm3 xs12>
-                        <div class="ml-2">
+                        <div >
                             <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">SMS MO Date</span>&nbsp;
                         </div>
                         <DatePicker :placeholder="$vuetify.t('SMS MO Date')" v-model="filter.sms_mo_date" range></DatePicker>
                     </v-flex>
-
-                </v-layout>
-                <v-layout rows wrap>
-                    <v-flex sm3 xs4><v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdns"  /></v-flex>
+                    <v-flex sm3 xs4>
+                        <div class="ml-2" style="margin-top: 21px !important;"></div>
+                        <v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdns"  />
+                    </v-flex>
                     <v-flex sm4 xs4>
+                        <div class="ml-2" style="margin-top: 21px !important;"></div>
                         <v-combobox dense  hide-details :label="$vuetify.t('Conversion Status')"  :items="statusList"  v-model="filter.conversion_status_id" item-text="text" item-value="conversion_status_id" />
                     </v-flex>
                     <v-flex sm2 xs2 class="text-xs-left pa-0 pt-1">
-
+                        <div class="ml-2" style="margin-top: 15px !important;"></div>
                         <GridButton icon="search" color="blue" @click="doSearch" />
                         <GridButton :dark="false" icon="cancel" color="white" @click="doResetSearch" />
 

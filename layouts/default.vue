@@ -180,4 +180,7 @@
         position: relative !important;
         top: -20px !important;
     }
+    .sub-tabs .v-tabs__bar {
+        background: #f3f3f3f3;
+    }
 </style>

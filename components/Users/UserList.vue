@@ -7,7 +7,7 @@
             </CardPanel>
 
             <div slot="header-right" class="pb-2">
-                <ButtonNew/>
+                <ButtonNew title="Add User" @click.native="$router.push('/settings/users/add')"/>
             </div>
     <v-data-table
             :headers="headers"

@@ -1,7 +1,7 @@
 <!--eslint-disable-->
 <template>
     <div>
-Brands
+Bad Words
 
         <input type="file" id="image">
     </div>

@@ -1,7 +1,7 @@
 <!--eslint-disable-->
 <template>
     <div>
-Brands
+User Brand Channels
 
         <input type="file" id="image">
     </div>

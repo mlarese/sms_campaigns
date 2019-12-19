@@ -1,7 +1,7 @@
 <!--eslint-disable-->
 <template>
     <div>
-Brands
+SMS MO Templates
 
         <input type="file" id="image">
     </div>

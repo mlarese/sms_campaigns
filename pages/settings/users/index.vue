@@ -1,19 +1,16 @@
+<!--eslint-disable-->
 <template>
-  <user-list/>
+    <div>
+        Users
+        <input type="file" id="image">
+    </div>
 </template>
-
 <script>
-  import UserList from '../../../components/Users/UserList'
-  const root = {root: true}
-
-  export default {
-    components: {UserList},
-    fetch ({store}) {
-      store.dispatch('users/load', {}, root)
+    export default {
+        components: {},
+        mounted () {
+            let i = document.getElementById('image')
+            console.dir(i)
+        }
     }
-  }
 </script>
-
-<style>
-
-</style>

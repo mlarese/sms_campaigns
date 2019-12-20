@@ -7,7 +7,8 @@
             </CardPanel>
 
             <div slot="header-right" class="pb-2">
-                <ButtonNew title="Add User" @click.native="$router.push('/settings/users/add')"/>
+                <ButtonNew title="Add" @click.native="$router.push('/settings/users/add')"/>
+                <ButtonNew title="delete" @click.native="$router.push('/settings/users/add')"/>
             </div>
     <v-data-table
             :headers="headers"
@@ -36,7 +37,12 @@
         </template>
 
     </v-data-table>
+        <div>
+            <ButtonNew title="edit" @click.native="$router.push('/settings/users/add')"/>
+            <ButtonNew title="delete" @click.native="$router.push('/settings/users/add')"/>
+        </div>
     </GridContainer>
+
 </template>
 <script>
     import {mapState} from 'vuex'
@@ -50,7 +56,7 @@
 
         data () {
             const headers = [
-                { text: this.$vuetify.t('Role ID'), value: 'role_id' },
+                { text: this.$vuetify.t('User ID'), value: 'user_id' },
                 { text: this.$vuetify.t('Company Name'), value: 'company_name' },
                 { text: this.$vuetify.t('User Name'), value: 'username' },
                 { text: this.$vuetify.t('Password'), value: 'password' },

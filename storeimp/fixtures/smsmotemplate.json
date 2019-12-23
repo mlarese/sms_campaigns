@@ -1,0 +1,6 @@
+[
+  { "sms_mo_template_id": 1, "sms_template_text": " - Inviando questo messaggio autorizzo SKY a contattarmi	"},
+  { "sms_mo_template_id": 2, "sms_template_text": " - Inviando questo sms autorizzo SKY a contattarmi		"},
+  { "sms_mo_template_id": 3, "sms_template_text": " - Inviando questo messaggio autorizzo TIM a contattarmi per l'offerta TIM fibra riservata ai nuovi clienti		"},
+  { "sms_mo_template_id": 4, "sms_template_text": " - Inviando questo sms autorizzo TIM a contattarmi per l'offerta TIM fibra riservata ai nuovi clienti		"}
+]

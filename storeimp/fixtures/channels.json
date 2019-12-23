@@ -1,0 +1,6 @@
+[
+  { "channel_id": 1, "channel_name": "RichPush", "channel_currency": "$", "postback_url": "http://rtb.adx1.com/log?action=conversion&key=[CLICK_ID]&price=[CPA_VALUE]"},
+  { "channel_id": 2, "channel_name": "Google Ads", "channel_currency": "€", "postback_url": "http://rtb.adx1.com/log?action=conversion&key=[CLICK_ID]&price=[CPA_VALUE]"}
+
+]
+

@@ -1,7 +1,7 @@
 <!--eslint-disable-->
 <template>
     <div>
-Brands
+Brand Channel CPA
 
         <input type="file" id="image">
     </div>

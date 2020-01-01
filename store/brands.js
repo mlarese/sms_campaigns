@@ -56,13 +56,13 @@ export const actions = {
             return
         }
         if (id === null) {
-            return dispatch('api/get', {url: `/brands`, options, debug: false}, root)
+            return dispatch('api/post', {url: `/campaigns/brands`, options, debug: false}, root)
                 .then(res => {
                     commit('setList', res.data)
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/brands/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/brands/{id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

@@ -1,8 +1,8 @@
 export const state = () => ({
-  user: 'admin',
-  role: 'admin',
+  user: 'Admin',
+  role: 'Admin',
   signingIn: false,
-  loggedIn: false,
+  loggedIn: true,
   counter: 0
 })
 

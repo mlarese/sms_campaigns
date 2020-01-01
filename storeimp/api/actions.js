@@ -69,7 +69,7 @@ export const actions = {
     }
 
     if (debug) {
-      console.log(baseURL + url, options)
+      console.log( url, options)
     }
     return instance.get(url, options)
       .then(res => {
@@ -77,6 +77,7 @@ export const actions = {
         return res
       })
       .catch(err => {
+        console.log('get', url)
         console.dir(err)
 
         commit('isAjax')
@@ -91,7 +92,7 @@ export const actions = {
     commit('error')
     commit('hasError')
     addToken()
-    console.log('---- post', url, data, options)
+    //console.log('---- post', url, data, options)
 
     return instance.post(url, data, options)
       .then(res => {
@@ -99,6 +100,7 @@ export const actions = {
         return res
       })
       .catch(err => {
+        console.log('post',url)
         console.log(err)
         commit('isAjax')
         commit('error', err)

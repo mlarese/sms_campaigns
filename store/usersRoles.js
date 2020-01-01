@@ -87,7 +87,7 @@ export const actions = {
     },
     insert ({dispatch, commit}, {data}) {
         const url = `/usersRoles`
-        return dispatch('api/post', {url, data}, root)
+        return dispatch('api/get', {url, data}, root)
     },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
         if (!force && state.loaded) {

@@ -16,7 +16,14 @@ const menuItems = {
 
 
 const menus = {
-  Admin: [
+  admin: [
+    menuItems.campaigns,
+    menuItems.reporting,
+    menuItems.unpaired,
+    menuItems.landing,
+    menuItems.settings
+  ],
+  guest: [
     menuItems.campaigns,
     menuItems.reporting,
     menuItems.unpaired,
@@ -73,7 +80,7 @@ export const actions = {
 }
 
 export const getters = {
-  role: (s, g, rs) => !_has(rs, 'auth.user.role') ? 'guest' : rs.auth.user.role,
+  role: (s, g, rs) => !_has(rs, 'auth.user.role') ? 'admin' : rs.auth.user.role,
   user: (s, g, rs) => !_has(rs, 'auth.user') ? '' : rs.auth.user,
   userName: (s, g, rs) => !_has(rs, 'auth.user.userName') ? '' : rs.auth.user.userName,
   menuItems: (s, g) => s.menus[g.role]

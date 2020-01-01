@@ -15,6 +15,7 @@ const mock = new MockAdapter(axios, {delayResponse: 300})
 const success = {success: true}
 
 mock
+  .onPost('/api/auth/login').reply(() => [200, user])
   .onGet('/api/auth/user').reply(() => [200, user])
   .onGet('/profile').reply(() => [200, user])
   .onGet('/principal').reply(() => [200, user])
@@ -22,7 +23,7 @@ mock
   .onGet('/brandLandingPages').reply(() => [200, brandLandingPages])
   .onGet('/users').reply(() => [200, users])
   .onGet('/clicks').reply(() => [200, clicks])
-  .onGet('/brand').reply(() => [200, brand])
+  .onGet('/brands').reply(() => [200, brand])
   .onGet('/badwords').reply(() => [200, badwords])
   .onGet('/channels').reply(() => [200, channels])
   .onGet('/roles').reply(() => [200, roles])

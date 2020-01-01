@@ -1,7 +1,7 @@
 export const rowsPerPageItems = [20, 100]
 
-let doMock = false
-let url = 'https://c2sms.xyz/public/index.php'
+let doMock = true
+let url = 'http://138.197.11.140//public/index.php'
 // if (process.env.NODE_ENV === 'development') {
 if (window.location.host === 'localhost:3000') {
 }

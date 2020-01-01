@@ -3,7 +3,7 @@
     <div>
         Users
         <input type="file" id="image">
-    <user-list/></div>
+        <user-list/></div>
 </template>
 <script>
     import UserList from '../../../components/Users/UserList'

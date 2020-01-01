@@ -63,7 +63,7 @@
             }
         },
         computed: {
-            ...mapState('usersBrandsChannels', ['list', '$record'])
+            ...mapState('channels', ['list', '$record'])
         },
         methods: {
             onClick () {

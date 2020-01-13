@@ -4,6 +4,7 @@ import {getters} from './getters'
 
 export const state = () => {
   return {
+    token: '',
     notification: {title: '', type: '', text: '', id: 0},
     isAjax: false,
     error: {},
@@ -14,6 +15,9 @@ export const state = () => {
 let notificationsId = 0
 
 export const mutations = {
+  setToken (s,payload) {
+    s.token = payload
+  },
   notification (state, {title, type, text}) {
     if (Vue.i18n) {
       text = Vue.i18n.translate(text)

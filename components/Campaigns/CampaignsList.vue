@@ -68,7 +68,7 @@
         </v-card>
 
         <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="grid.pagination.pages > 1">
-
+            {{grid.sort}}
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
@@ -80,6 +80,7 @@
         </v-card>
 
         <v-data-table
+                :pagination.sync="grid.sort"
                 :loading="isAjax"
                 fixed
                 :headers="headers"
@@ -169,6 +170,7 @@
                 headers
             }
         },
+
         computed: {
             ...mapState('clicks', {'grid': 'grid', 'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
             ...mapState('channels', {'channelList': 'list'}),
@@ -177,7 +179,10 @@
             ...mapState('locations', {'locationsList': 'list'}),
             ...mapState('api', {'isAjax': 'isAjax'})
         },
-
+          watch: {
+            'grid.sort.sortBy' () { this.searchPage()},
+            'grid.sort.descending' () {this.searchPage()}
+          },
         created () {
           this.resetSearch()
         },

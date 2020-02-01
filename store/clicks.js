@@ -15,6 +15,7 @@ export const state = () => {
         addRecord: {},
         resetItem: {},
         grid: {
+            sort:{},
             pagination: {
               search: '',
               descending: true,

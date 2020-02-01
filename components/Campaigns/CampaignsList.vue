@@ -58,7 +58,7 @@
             </div>
         </CardPanel>
 
-        <!-- v-card class="text-xs-right elevation-0 mb-2" slot="body-top" v-if="grid.pagination.pages > 1">
+        <v-card class="text-xs-right elevation-0 mb-2" slot="body-top" v-if="false">
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
@@ -68,22 +68,24 @@
         </v-card>
 
         <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="grid.pagination.pages > 1">
-
+            {{grid.sort}}
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
                     class="elevation-0"
+                    @input="searchPage"
+                    total-visible="10"
 
-            ></v-pagination
-        </v-card>-->
+            ></v-pagination>
+        </v-card>
 
         <v-data-table
-                :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"
-                :loading="isAjax" fixed
+                :pagination.sync="grid.sort"
+                :loading="isAjax"
+                fixed
                 :headers="headers"
-                :search="grid.pagination.search"
-                :items="clicksList"  :hide-actions="false"
-                :pagination.sync="grid.pagination"
+                :items="clicksList"
+                :hide-actions="true"
                 class="elevation-0 fixed-header"
                 slot="body-center">
             <template slot="items" slot-scope="{item}">
@@ -169,10 +171,11 @@
                 sms_mo_date: null,
                 click_date: null,
                 gridFilter: '',
-              statusList,
+                statusList,
                 headers
             }
         },
+
         computed: {
             ...mapState('clicks', {'grid': 'grid', 'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
             ...mapState('channels', {'channelList': 'list'}),
@@ -181,11 +184,16 @@
             ...mapState('locations', {'locationsList': 'list'}),
             ...mapState('api', {'isAjax': 'isAjax'})
         },
+          watch: {
+            'grid.sort.sortBy' () { this.searchPage()},
+            'grid.sort.descending' () {this.searchPage()}
+          },
         created () {
           this.resetSearch()
         },
+
         methods: {
-            ...mapActions('clicks', ['resetSearch', 'search']),
+            ...mapActions('clicks', ['resetSearch', 'search', 'searchPage']),
             statusIdToText,
             doSearch () {
                 this.search()

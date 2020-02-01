@@ -21,6 +21,11 @@
       <slot name="body-bottom"></slot>
 
     </v-card>
+      <v-layout>
+          <slot name="left-buttons"></slot>
+          <v-spacer></v-spacer>
+          <slot name="right-buttons"></slot>
+      </v-layout>
   </div>
 
 </template>

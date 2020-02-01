@@ -126,6 +126,11 @@
             </template>
 
         </v-data-table>
+        <div slot="right-buttons">
+            <span>
+                <JsonExcelCsv />
+            </span>
+        </div>
 
     </GridContainer>
 </template>

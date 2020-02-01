@@ -58,7 +58,7 @@
             </div>
         </CardPanel>
 
-        <!-- v-card class="text-xs-right elevation-0 mb-2" slot="body-top" v-if="grid.pagination.pages > 1">
+        <v-card class="text-xs-right elevation-0 mb-2" slot="body-top" v-if="false">
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
@@ -73,17 +73,18 @@
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
                     class="elevation-0"
+                    @input="searchPage"
+                    total-visible="10"
 
-            ></v-pagination
-        </v-card>-->
+            ></v-pagination>
+        </v-card>
 
         <v-data-table
-                :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"
-                :loading="isAjax" fixed
+                :loading="isAjax"
+                fixed
                 :headers="headers"
-                :search="grid.pagination.search"
-                :items="clicksList"  :hide-actions="false"
-                :pagination.sync="grid.pagination"
+                :items="clicksList"
+                :hide-actions="true"
                 class="elevation-0 fixed-header"
                 slot="body-center">
             <template slot="items" slot-scope="{item}">
@@ -164,7 +165,7 @@
                 sms_mo_date: null,
                 click_date: null,
                 gridFilter: '',
-              statusList,
+                statusList,
                 headers
             }
         },
@@ -176,11 +177,13 @@
             ...mapState('locations', {'locationsList': 'list'}),
             ...mapState('api', {'isAjax': 'isAjax'})
         },
+
         created () {
           this.resetSearch()
         },
+
         methods: {
-            ...mapActions('clicks', ['resetSearch', 'search']),
+            ...mapActions('clicks', ['resetSearch', 'search', 'searchPage']),
             statusIdToText,
             doSearch () {
                 this.search()

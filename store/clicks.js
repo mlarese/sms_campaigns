@@ -33,11 +33,12 @@ export const state = () => {
 const root = {root: true}
 
 export const mutations = {
-    setPagination (state) {
-        state.grid.pagination.totalItems = state.list.length
-        state.grid.pagination.page = 1
+    setPagination (state, totalItems) {
+        state.grid.pagination.totalItems = totalItems
         state.grid.pagination.pages = Math.ceil(state.grid.pagination.totalItems / state.grid.pagination.rowsPerPage)
-      console.dir(state.grid)
+    },
+    setPage (state, page) {
+      state.grid.pagination.page = page
     },
     setSearchActive (state, payload) { state.searchActive = payload },
     setRecordList (state, payload) { state.recordList = payload },
@@ -73,13 +74,24 @@ export const mutations = {
 }
 export const actions = {
     search ({dispatch, commit, state}) {
-      let data = state.filter
+      let data = {...state.filter, ...state.grid}
       commit('setList', [])
+      commit('setPage', 1)
       return dispatch('api/post', {url: `/campaigns/clicks`, data}, root)
         .then(res => {
-          commit('setList', res.data)
-          commit('setPagination')
+          commit('setList', res.data.items)
+          commit('setPagination', res.data.total_items)
           commit('setSearchActive', true)
+          return res
+        })
+    },
+    searchPage ({dispatch, commit, state}) {
+      let data = {...state.filter, ...state.grid}
+      return dispatch('api/post', {url: `/campaigns/clicks`, data}, root)
+        .then(res => {
+          commit('setList', res.data.items)
+          commit('setPagination', res.data.total_items)
+
           return res
         })
     },

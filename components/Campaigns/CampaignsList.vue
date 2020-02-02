@@ -67,8 +67,8 @@
             ></v-pagination>
         </v-card>
 
-        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="grid.pagination.pages > 1">
-            {{grid.sort}}
+        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="clicksList.length>0 && grid.pagination.pages > 1">
+
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
@@ -80,6 +80,7 @@
         </v-card>
 
         <v-data-table
+                :rows-per-page-items="[100]"
                 :pagination.sync="grid.sort"
                 :loading="isAjax"
                 fixed
@@ -92,8 +93,8 @@
                 <td>{{ item.click_date | dmy}} {{ item.click_date  | time }}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
-                <td style="white-space: nowrap">{{ item.adv_format_name }}</td>
-                <td style="white-space: nowrap">{{ item.campaign_name }}</td>
+                <td :title="item.adv_format_name" style="white-space: nowrap">{{ item.adv_format_name|truncate(15) }}</td>
+                <td :title="item.campaign_name" style="white-space: nowrap">{{ item.campaign_name |truncate(15)}}</td>
                 <td>{{ item.bid_price }}</td>
                 <td>{{ item.creative_id }}</td>
                 <td>
@@ -106,9 +107,9 @@
                 <td>{{ item.region }}</td>
                 <td>{{ item.city }}</td>
                 <td>{{ item.os_only }} {{ item.os_version }}</td>
-                <td>{{ item.user_ip }}</td>
+                <td :title="item.user_ip">{{ item.user_ip | truncate(12)}}</td>
                 <td>{{ item.msisdns | truncate(5,'.....')}}</td>
-                <td>{{ item.token_id }}</td>
+                <td :title="item.token_id">{{ item.token_id | truncate(8)}}</td>
                 <td>{{ item.sms_mo_date  | dmy }} {{ item.sms_mo_date  | time }}</td>
                 <td>
                     <v-tooltip left v-if="item.sms_mo_final_text ">

@@ -2,8 +2,8 @@
 <template>
     <GridContainer title="Campaigns">
         <CardPanel slot="container-top">
-            <div class="container fluid">
-                <v-layout >
+            <div class="">
+                <v-layout rows wrap>
 
                     <v-flex sm3 offset-sm1 xs12>
                         <div class="ml-2">
@@ -67,7 +67,8 @@
             ></v-pagination>
         </v-card>
 
-        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="grid.pagination.pages > 1">
+        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="clicksList.length>0 && grid.pagination.pages > 1">
+
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
@@ -79,7 +80,9 @@
         </v-card>
 
         <v-data-table
-                :rows-per-page-items="[50]"
+                must-sort
+                :rows-per-page-items="[100]"
+                :pagination.sync="grid.sort"
                 :loading="isAjax"
                 fixed
                 :headers="headers"
@@ -91,22 +94,8 @@
                 <td>{{ item.click_date | dmy}} {{ item.click_date  | time }}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
-                <td style="white-space: nowrap">
-                    <v-tooltip right v-if="item.campaign_name ">
-                        <span class="pa-3" slot="activator">
-                            {{ item.campaign_name | truncate(15) }}
-                        </span>
-                        {{ item.campaign_name }}
-                    </v-tooltip>
-                </td>
-                <td style="white-space: nowrap ">
-                    <v-tooltip right v-if="item.adv_format_name ">
-                        <span class="pa-3" slot="activator">
-                            {{ item.adv_format_name | truncate(15)}}
-                        </span>
-                        {{ item.adv_format_name}}
-                    </v-tooltip>
-                </td>
+                <td :title="item.adv_format_name" style="white-space: nowrap">{{ item.adv_format_name|truncate(15) }}</td>
+                <td :title="item.campaign_name" style="white-space: nowrap">{{ item.campaign_name |truncate(15)}}</td>
                 <td>{{ item.bid_price }}</td>
                 <td>{{ item.creative_id }}</td>
                 <td>
@@ -119,16 +108,9 @@
                 <td>{{ item.region }}</td>
                 <td>{{ item.city }}</td>
                 <td>{{ item.os_only }} {{ item.os_version }}</td>
-                <td>{{ item.user_ip }}</td>
+                <td :title="item.user_ip">{{ item.user_ip | truncate(12)}}</td>
                 <td>{{ item.msisdns | truncate(5,'.....')}}</td>
-                <td>
-                    <v-tooltip right v-if="item.token_id ">
-                        <span class="pa-3" slot="activator">
-                            {{ item.token_id | truncate(12)}}
-                        </span>
-                        {{ item.token_id }}
-                    </v-tooltip>
-                </td>
+                <td :title="item.token_id">{{ item.token_id | truncate(8)}}</td>
                 <td>{{ item.sms_mo_date  | dmy }} {{ item.sms_mo_date  | time }}</td>
                 <td>
                     <v-tooltip left v-if="item.sms_mo_final_text ">
@@ -147,13 +129,13 @@
                 {{$vuetify.t('From')}} {{ pageStart }} {{$vuetify.t('To')}} {{ pageStop }}  {{$vuetify.t('of')}} {{ itemsLength }}
             </template>
 
-
         </v-data-table>
-        <div slot="right-buttons">
+
+        <!-- div slot="right-buttons">
             <span>
                 <JsonExcelCsv />
             </span>
-        </div>
+        </div-->
 
     </GridContainer>
 </template>
@@ -206,8 +188,7 @@
             ...mapState('api', {'isAjax': 'isAjax'})
         },
           watch: {
-            'grid.sort.sortBy' () { this.searchPage()},
-            'grid.sort.descending' () {this.searchPage()}
+            'grid.sort': { immediate: false, handler:'searchPage' }
           },
         created () {
           this.resetSearch()

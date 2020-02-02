@@ -6,6 +6,12 @@ const newFilter = () => ({
   click_date: [addDays(today,-30), today],
   country: 'ITA'
 })
+
+const newSort = () => ({
+  descending:true,
+  sortBy:"click_date"
+})
+
 export const state = () => {
     return {
         list: [],
@@ -15,7 +21,7 @@ export const state = () => {
         addRecord: {},
         resetItem: {},
         grid: {
-            sort:{},
+            sort:newSort(),
             pagination: {
               search: '',
               descending: true,
@@ -26,7 +32,7 @@ export const state = () => {
             }
         },
         gridReporting: {
-            sort:{},
+            sort:newSort(),
             pagination: {
               search: '',
               descending: true,
@@ -85,14 +91,20 @@ export const mutations = {
     setAddMode (state) { state.mode = 'add' },
     resetFilter (state) {
       state.filter = newFilter()
+    },
+    setSortDefault(state) {
+      state.grid.sort = newSort()
     }
 
 }
 export const actions = {
     search ({dispatch, commit, state}) {
+      console.log('---- search')
+      //commit('setSortDefault')
       let data = {...state.filter, ...state.grid}
       commit('setList', [])
       commit('setPage', 1)
+
       return dispatch('api/post', {url: `/campaigns/clicks`, data}, root)
         .then(res => {
           commit('setList', res.data.items)
@@ -102,6 +114,7 @@ export const actions = {
         })
     },
     searchPage ({dispatch, commit, state}) {
+      console.log('---- searchPage')
       let data = {...state.filter, ...state.grid}
       return dispatch('api/post', {url: `/campaigns/clicks`, data}, root)
         .then(res => {

@@ -47,9 +47,8 @@ export const actions = {
 
     options.headers['Authorization'] = state.token
 
-    if (debug) {
-      console.log('url', url, 'options', options)
-    }
+    //  console.log('url', url, 'options', options)
+
     return instance.get(url, options)
       .then(res => {
         commit('isAjax')
@@ -70,7 +69,7 @@ export const actions = {
     commit('isAjax', true)
     commit('error')
     commit('hasError')
-    console.log('---- post', url, data, options)
+    //console.log('---- post', url, data, options)
 
     if (!options.headers) {
       options.headers = {}
@@ -78,7 +77,7 @@ export const actions = {
 
     options.headers['Authorization'] = state.token
 
-    console.log(url,' ' , options)
+    //console.log(url,' ' , options)
 
     return instance.post(url, data, options)
       .then(res => {
@@ -106,7 +105,6 @@ export const actions = {
 
     options.headers['Authorization'] = state.token
 
-    console.log(url)
     return instance.put(url, data, options)
       .then(res => {
         commit('isAjax')

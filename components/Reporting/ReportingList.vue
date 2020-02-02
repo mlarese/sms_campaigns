@@ -56,31 +56,27 @@
 
         </CardPanel>
 
-        <!-- v-card class="text-xs-right elevation-0 mb-2" slot="body-top" v-if="grid.pagination.pages > 1">
-            <v-pagination
-                    v-model="grid.pagination.page"
-                    :length="grid.pagination.pages"
-                    class="elevation-0"
 
-            ></v-pagination>
-        </v-card>
 
         <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="grid.pagination.pages > 1">
 
+
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
                     class="elevation-0"
+                    total-visible="10"
 
             ></v-pagination>
-        </v-card -->
+        </v-card>
 
         <v-data-table
                 :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"
                 :loading="isAjax" fixed
                 :headers="headers"
                 :search="grid.pagination.search"
-                :items="clicksList"  :hide-actions="false"
+                :items="clicksList"
+                :hide-actions="true"
                 :pagination.sync="grid.pagination"
                 class="elevation-0 fixed-header"
                 slot="body-center">
@@ -124,7 +120,7 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer, DatePicker},
         data () {
             const headers = [
-                { text: this.$vuetify.t('Click Date'), value: 'click_date' },
+                { text: this.$vuetify.t('Click Date'), value: 'click_date.date' },
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Adv Format'), value: 'adv_format_name' },
@@ -151,7 +147,7 @@
             }
         },
         computed: {
-            ...mapState('clicks', {'grid': 'grid', 'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
+            ...mapState('clicks', {'grid': 'gridReporting', 'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
             ...mapState('channels', {'channelList': 'list'}),
             ...mapState('brands', {'brandsList': 'list'}),
             ...mapState('advformats', {'advformatsList': 'list'}),

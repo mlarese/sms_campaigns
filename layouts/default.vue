@@ -183,4 +183,12 @@
     .sub-tabs .v-tabs__bar {
         background: #f3f3f3f3;
     }
+
+    .v-pagination__navigation, .v-pagination__item {
+        box-shadow: none;
+    }
+
+    .v-datatable__progress th.column{
+        background: transparent;
+    }
 </style>

@@ -27,7 +27,7 @@
                 </v-layout>
                 <v-layout rows wrap class="xs-">
                     <v-flex sm2 offset-sm1 xs3><v-combobox dense    hide-details :label="$vuetify.t('Channel')"  :items="channelList"  v-model="filter.channel_id" item-text="channel_name" item-value="channel_id" /></v-flex>
-                    <v-flex sm2 xs4 ><v-combobox dense hide-details :label="$vuetify.t('ADV Format')"  :items="advformatsList"  v-model="filter.adv_format_id" item-text="adv_format_name" item-value="adv_format_id" /></v-flex>
+                    <v-flex sm2 xs4><v-combobox dense  hide-details :label="$vuetify.t('ADV Format')"  :items="advformatsList"  v-model="filter.adv_format_id" item-text="adv_format_name" item-value="adv_format_id" /></v-flex>
 
                     <v-flex sm2 xs6>
                         <v-combobox dense  :return-object="false" hide-details :label="$vuetify.t('Country')"  :items="[{country: 'ITA'}]" item-text="country" item-value="country" v-model="filter.country" />
@@ -67,8 +67,8 @@
             ></v-pagination>
         </v-card>
 
-        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="grid.pagination.pages > 1">
-            {{grid.sort}}
+        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="clicksList.length>0 && grid.pagination.pages > 1">
+
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
@@ -80,6 +80,7 @@
         </v-card>
 
         <v-data-table
+                :rows-per-page-items="[100]"
                 :pagination.sync="grid.sort"
                 :loading="isAjax"
                 fixed
@@ -89,26 +90,11 @@
                 class="elevation-0 fixed-header"
                 slot="body-center">
             <template slot="items" slot-scope="{item}">
-
                 <td>{{ item.click_date | dmy}} {{ item.click_date  | time }}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
-                <td style="white-space: nowrap">
-                    <v-tooltip right v-if="item.campaign_name ">
-                        <span class="pa-3" slot="activator">
-                            {{ item.campaign_name | truncate(15) }}
-                        </span>
-                        {{ item.campaign_name }}
-                    </v-tooltip>
-                </td>
-                <td style="white-space: nowrap ">
-                    <v-tooltip right v-if="item.adv_format_name ">
-                        <span class="pa-3" slot="activator">
-                            {{ item.adv_format_name | truncate(15)}}
-                        </span>
-                        {{ item.adv_format_name}}
-                    </v-tooltip>
-                </td>
+                <td style="white-space: nowrap">{{ item.adv_format_name }}</td>
+                <td style="white-space: nowrap">{{ item.campaign_name }}</td>
                 <td>{{ item.bid_price }}</td>
                 <td>{{ item.creative_id }}</td>
                 <td>
@@ -123,14 +109,7 @@
                 <td>{{ item.os_only }} {{ item.os_version }}</td>
                 <td>{{ item.user_ip }}</td>
                 <td>{{ item.msisdns | truncate(5,'.....')}}</td>
-                <td>
-                    <v-tooltip right v-if="item.token_id ">
-                        <span class="pa-3" slot="activator">
-                            {{ item.token_id | truncate(12)}}
-                        </span>
-                        {{ item.token_id}}
-                    </v-tooltip>
-                </td>
+                <td>{{ item.token_id }}</td>
                 <td>{{ item.sms_mo_date  | dmy }} {{ item.sms_mo_date  | time }}</td>
                 <td>
                     <v-tooltip left v-if="item.sms_mo_final_text ">

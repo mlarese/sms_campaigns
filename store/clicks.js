@@ -25,6 +25,17 @@ export const state = () => {
               totalItems: 0
             }
         },
+        gridReporting: {
+            sort:{},
+            pagination: {
+              search: '',
+              descending: true,
+              page: 1,
+              pages: 0,
+              rowsPerPage: 100,
+              totalItems: 0
+            }
+        },
         mode: 'list',
         searchActive: false,
         filter: newFilter()
@@ -34,6 +45,10 @@ export const state = () => {
 const root = {root: true}
 
 export const mutations = {
+    setRepPagination (state, totalItems) {
+      state.gridReporting.pagination.totalItems = totalItems
+      state.gridReporting.pagination.pages = Math.ceil(state.gridReporting.pagination.totalItems / state.gridReporting.pagination.rowsPerPage)
+    },
     setPagination (state, totalItems) {
         state.grid.pagination.totalItems = totalItems
         state.grid.pagination.pages = Math.ceil(state.grid.pagination.totalItems / state.grid.pagination.rowsPerPage)
@@ -102,7 +117,7 @@ export const actions = {
       return dispatch('api/post', {url: `/campaigns/reporting`, data}, root)
         .then(res => {
           commit('setList', res.data)
-          commit('setPagination')
+          commit('setRepPagination',res.data.length)
           commit('setSearchActive', true)
           return res
         })

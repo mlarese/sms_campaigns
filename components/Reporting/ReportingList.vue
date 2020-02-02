@@ -133,10 +133,10 @@
                 { text: this.$vuetify.t('CTL A'), value: 'ctla' },
                 { text: this.$vuetify.t('CTL B'), value: 'ctlb' },
                 { text: this.$vuetify.t('CTD'), value: 'ctd' },
-                { text: this.$vuetify.t('CPC'), value: 'bid_price' },
-                { text: this.$vuetify.t('Adv Spend'), value: 'adv_spend' },
-                { text: this.$vuetify.t('Cost Per Lead A'), value: 'cost_x_lead_a' },
-                { text: this.$vuetify.t('Cost Per Lead B'), value: 'cost_x_lead_b' }
+                { text: this.$vuetify.t('CPC €'), value: 'bid_price' },
+                { text: this.$vuetify.t('Adv Spend €'), value: 'adv_spend' },
+                { text: this.$vuetify.t('Cost Per Lead A €'), value: 'cost_x_lead_a' },
+                { text: this.$vuetify.t('Cost Per Lead B €'), value: 'cost_x_lead_b' }
             ]
             return {
                 sms_mo_date: null,

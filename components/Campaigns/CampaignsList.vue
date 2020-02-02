@@ -2,8 +2,8 @@
 <template>
     <GridContainer title="Campaigns">
         <CardPanel slot="container-top">
-            <div class="">
-                <v-layout rows wrap>
+            <div class="container fluid">
+                <v-layout >
 
                     <v-flex sm3 offset-sm1 xs12>
                         <div class="ml-2">
@@ -67,8 +67,7 @@
             ></v-pagination>
         </v-card>
 
-        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="clicksList.length>0 && grid.pagination.pages > 1">
-
+        <v-card class="text-xs-right elevation-0 mt-2" slot="body-bottom" v-if="grid.pagination.pages > 1">
             <v-pagination
                     v-model="grid.pagination.page"
                     :length="grid.pagination.pages"
@@ -80,8 +79,7 @@
         </v-card>
 
         <v-data-table
-                :rows-per-page-items="[100]"
-                :pagination.sync="grid.sort"
+                :rows-per-page-items="[50]"
                 :loading="isAjax"
                 fixed
                 :headers="headers"
@@ -93,8 +91,22 @@
                 <td>{{ item.click_date | dmy}} {{ item.click_date  | time }}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
-                <td style="white-space: nowrap">{{ item.adv_format_name }}</td>
-                <td style="white-space: nowrap">{{ item.campaign_name }}</td>
+                <td style="white-space: nowrap">
+                    <v-tooltip right v-if="item.campaign_name ">
+                        <span class="pa-3" slot="activator">
+                            {{ item.campaign_name | truncate(15) }}
+                        </span>
+                        {{ item.campaign_name }}
+                    </v-tooltip>
+                </td>
+                <td style="white-space: nowrap ">
+                    <v-tooltip right v-if="item.adv_format_name ">
+                        <span class="pa-3" slot="activator">
+                            {{ item.adv_format_name | truncate(15)}}
+                        </span>
+                        {{ item.adv_format_name}}
+                    </v-tooltip>
+                </td>
                 <td>{{ item.bid_price }}</td>
                 <td>{{ item.creative_id }}</td>
                 <td>
@@ -109,7 +121,14 @@
                 <td>{{ item.os_only }} {{ item.os_version }}</td>
                 <td>{{ item.user_ip }}</td>
                 <td>{{ item.msisdns | truncate(5,'.....')}}</td>
-                <td>{{ item.token_id }}</td>
+                <td>
+                    <v-tooltip right v-if="item.token_id ">
+                        <span class="pa-3" slot="activator">
+                            {{ item.token_id | truncate(12)}}
+                        </span>
+                        {{ item.token_id }}
+                    </v-tooltip>
+                </td>
                 <td>{{ item.sms_mo_date  | dmy }} {{ item.sms_mo_date  | time }}</td>
                 <td>
                     <v-tooltip left v-if="item.sms_mo_final_text ">
@@ -127,6 +146,7 @@
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
                 {{$vuetify.t('From')}} {{ pageStart }} {{$vuetify.t('To')}} {{ pageStop }}  {{$vuetify.t('of')}} {{ itemsLength }}
             </template>
+
 
         </v-data-table>
         <div slot="right-buttons">

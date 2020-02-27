@@ -25,9 +25,6 @@
                     <GridButton icon="edit" color="green" @click="onClick"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
-                </td>
-                <td width="1" class="pa-0">
                     <GridButton icon="delete" color="error" @click="onClick"></GridButton>
                 </td>
             </template>
@@ -54,7 +51,6 @@
                 { text: this.$vuetify.t('Channel Currency'), value: 'channel_currency' },
                 { text: this.$vuetify.t('Postback URL'), value: 'postback_url' },
                 { text: 'Edit', value: 'action', sortable: false },
-                { text: 'View', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
             return {

@@ -1,6 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Bad Words">
+    <GridContainer title=" Setting Bad Words">
 
         <CardPanel slot="container-top">
 
@@ -22,9 +22,6 @@
                 <td>{{ item.bad_word }}</td>
                 <td width="1" class="pa-0">
                     <GridButton icon="edit" color="green" @click="onClick"></GridButton>
-                </td>
-                <td width="1" class="pa-0">
-                    <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
                     <GridButton icon="delete" color="error" @click="onClick"></GridButton>
@@ -51,7 +48,6 @@
                 { text: this.$vuetify.t('Row ID'), value: 'row_id' },
                 { text: this.$vuetify.t('Bad Words'), value: 'bad_word' },
                 { text: 'Edit', value: 'action', sortable: false },
-                { text: 'View', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
             return {

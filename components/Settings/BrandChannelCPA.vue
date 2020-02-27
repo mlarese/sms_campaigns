@@ -51,7 +51,6 @@
                 { text: this.$vuetify.t('Channel Currency'), value: 'channel_currency' },
                 { text: this.$vuetify.t('CPA value'), value: 'cpa_value' },
                 { text: 'Edit', value: 'action', sortable: false },
-                { text: 'View', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
             return {

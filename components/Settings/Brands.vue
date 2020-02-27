@@ -7,7 +7,7 @@
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew name="Add Brand"/>
+            <ButtonNew title="Add Brand"/>
         </div>
         <v-data-table
                 :headers="headers"
@@ -23,9 +23,6 @@
                 <td>{{ item.sms_mo_key_string }}</td>
                 <td width="1" class="pa-0">
                     <GridButton icon="edit" color="green" @click="onClick"></GridButton>
-                </td>
-                <td width="1" class="pa-0">
-                    <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
                     <GridButton icon="delete" color="error" @click="onClick"></GridButton>

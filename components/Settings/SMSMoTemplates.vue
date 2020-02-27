@@ -1,13 +1,13 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Setting Brand">
+    <GridContainer title="Setting SMS Mo Templates">
 
         <CardPanel slot="container-top">
 
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew name="Add Brand"/>
+            <ButtonNew title="Add SMS Mo Templates"/>
         </div>
         <v-data-table
                 :headers="headers"
@@ -21,9 +21,6 @@
                 <td>{{ item.sms_mo_template }}</td>
                 <td width="1" class="pa-0">
                     <GridButton icon="edit" color="green" @click="onClick"></GridButton>
-                </td>
-                <td width="1" class="pa-0">
-                    <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
                     <GridButton icon="delete" color="error" @click="onClick"></GridButton>
@@ -50,7 +47,6 @@
                 { text: this.$vuetify.t('Brand'), value: 'brand' },
                 { text: this.$vuetify.t('SMS MO Template'), value: 'sms_mo_template' },
                 { text: 'Edit', value: 'action', sortable: false },
-                { text: 'View', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
             return {

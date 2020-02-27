@@ -1,16 +1,16 @@
 <template>
-  <div>add</div>
+  <user-manage/>
 </template>
 
 <script>
-  import RoleManagement from '../../../components/Roles/RoleManagement.vue'
+  import UserManage from '../../../components/Settings/Users/UserManage'
   export default {
     components: {
-        RoleManagement
+        UserManage
     },
     fetch ({store}) {
-      store.commit('roles/setRecord', {}, {root: true})
-      store.commit('roles/setAddMode', null, {root: true})
+      store.commit('users/setRecord', {}, {root: true})
+      store.commit('users/setAddMode', null, {root: true})
     }
   }
 </script>

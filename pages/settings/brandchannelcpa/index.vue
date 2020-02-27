@@ -3,7 +3,7 @@
     <BrandChannelCPA/>
 </template>
 <script>
-  import BrandChannelCPA from '../../../components/Settings/BrandChannelCPA'
+  import BrandChannelCPA from '../../../components/Settings/BrandChannelCPA/BrandChannelCPA'
   export default {
     components: {BrandChannelCPA},
     async fetch ({store}) {

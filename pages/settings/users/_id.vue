@@ -1,32 +1,19 @@
+<!--eslint-disable-->
 <template>
-  <role-factory/>
+    <user-form title="Edit User Form" />
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-  import RoleFactory from '../../../components/Roles/RoleFactory'
-  const module = 'roles'
-  const root = {root: true}
-
-  export default {
-    components: {RoleFactory},
-      computed: {
-          ...mapState(module, ['$record'])
-      },
-    fetch ({store, params, query}) {
-      const id = params.id
-      const mode = query.mode
-
-      if (!mode) {
-        store.commit('roles/setEditMode', null, root)
-      } else {
-        store.commit('roles/setMode', mode, root)
-      }
-      return store.dispatch('roles/load', {id}, root)
+    import {mapActions, mapState, mapGetters} from 'vuex'
+    import UserForm from '../../../components/Settings/Users/UserForm'
+    export default {
+        components: {
+            UserForm
+        },
+        async fetch({store, params}) {
+            store.commit('users/setRecord',{},{root: true})
+            store.commit('users/setEditMode',null,{root: true})
+            await store.dispatch('users/load', {id: params.id}, {root: true})
+        }
     }
-  }
 </script>
-
-<style>
-
-</style>

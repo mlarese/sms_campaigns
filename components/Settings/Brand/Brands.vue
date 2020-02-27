@@ -7,7 +7,7 @@
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew title="Add Brand"/>
+            <ButtonNew title="Add Brand" @click.native="$router.push('/settings/brands/add')"/>
         </div>
         <v-data-table
                 :headers="headers"
@@ -37,10 +37,10 @@
 </template>
 <script>
     import {mapState} from 'vuex'
-    import GridButton from '../General/GridButton'
-    import GridContainer from '../General/GridContainer'
-    import CardPanel from "../General/CardPanel";
-    import ButtonNew from "../General/ButtonNew";
+    import GridButton from '../../General/GridButton'
+    import GridContainer from '../../General/GridContainer'
+    import CardPanel from "../../General/CardPanel";
+    import ButtonNew from "../../General/ButtonNew";
 
     export default {
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
@@ -51,7 +51,6 @@
                 { text: this.$vuetify.t('SMS MO Recipient'), value: 'sms_mo_recipient' },
                 { text: this.$vuetify.t('SMS MO Key String'), value: 'sms_mo_key_string' },
                 { text: 'Edit', value: 'action', sortable: false },
-                { text: 'View', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
             return {

@@ -3,7 +3,7 @@
     <BadWords/>
 </template>
 <script>
-  import BadWords from '../../../components/Settings/BadWords'
+  import BadWords from '../../../components/Settings/BadWord/BadWords'
   const root = {root: true}
   export default {
     components: {BadWords},

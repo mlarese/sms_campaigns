@@ -3,7 +3,7 @@
     <Brands/>
 </template>
 <script>
-  import Brands from '../../../components/Settings/Brands'
+  import Brands from '../../../components/Settings/Brand/Brands'
   export default {
     components: {Brands}
   }

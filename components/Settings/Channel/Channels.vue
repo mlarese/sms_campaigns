@@ -1,13 +1,13 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Setting Brands Channel CPA">
+    <GridContainer title="Setting Channels">
 
         <CardPanel slot="container-top">
 
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew title="Add Brand"/>
+            <ButtonNew title="Add Channel" @click.native="$router.push('/settings/channels/add')"/>
         </div>
         <v-data-table
                 :headers="headers"
@@ -17,10 +17,10 @@
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
-                <td>{{ item.brand_name }}</td>
+                <td>{{ item.channel_id }}</td>
                 <td>{{ item.channel_name }}</td>
                 <td>{{ item.channel_currency }}</td>
-                <td>{{ item.cpa_value }}</td>
+                <td>{{ item.postback_url }}</td>
                 <td width="1" class="pa-0">
                     <GridButton icon="edit" color="green" @click="onClick"></GridButton>
                 </td>
@@ -37,19 +37,19 @@
 </template>
 <script>
     import {mapState} from 'vuex'
-    import GridButton from '../General/GridButton'
-    import GridContainer from '../General/GridContainer'
-    import CardPanel from "../General/CardPanel";
-    import ButtonNew from "../General/ButtonNew";
+    import GridButton from '../../General/GridButton'
+    import GridContainer from '../../General/GridContainer'
+    import CardPanel from "../../General/CardPanel";
+    import ButtonNew from "../../General/ButtonNew";
 
     export default {
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
         data () {
             const headers = [
-                { text: this.$vuetify.t('Brand'), value: 'brand_name' },
-                { text: this.$vuetify.t('Channel'), value: 'channel_name' },
+                { text: this.$vuetify.t('Channel ID'), value: 'channel_id' },
+                { text: this.$vuetify.t('Channel Name'), value: 'channel_name' },
                 { text: this.$vuetify.t('Channel Currency'), value: 'channel_currency' },
-                { text: this.$vuetify.t('CPA value'), value: 'cpa_value' },
+                { text: this.$vuetify.t('Postback URL'), value: 'postback_url' },
                 { text: 'Edit', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
@@ -59,7 +59,7 @@
             }
         },
         computed: {
-            ...mapState('brandChannelCPA', ['list', '$record'])
+            ...mapState('channels', ['list', '$record'])
         },
         methods: {
             onClick () {

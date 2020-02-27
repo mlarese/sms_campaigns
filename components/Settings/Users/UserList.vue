@@ -47,10 +47,10 @@
 </template>
 <script>
     import {mapState} from 'vuex'
-    import GridButton from '../General/GridButton'
-    import GridContainer from '../General/GridContainer'
-    import CardPanel from "../General/CardPanel";
-    import ButtonNew from "../General/ButtonNew";
+    import GridButton from '../../General/GridButton'
+    import GridContainer from '../../General/GridContainer'
+    import CardPanel from "../../General/CardPanel";
+    import ButtonNew from "../../General/ButtonNew";
 
     export default {
         components: {ButtonNew, CardPanel, GridButton, GridContainer},

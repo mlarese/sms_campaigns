@@ -3,7 +3,7 @@
     <Channels/>
 </template>
 <script>
-    import Channels from '../../../components/Settings/Channels.vue'
+    import Channels from '../../../components/Settings/Channel/Channels.vue'
     const root = {root: true}
     export default {
         components: {Channels},

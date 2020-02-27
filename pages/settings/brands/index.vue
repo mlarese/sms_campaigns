@@ -1,17 +1,10 @@
 <!--eslint-disable-->
 <template>
-    <div>
-Brands
-
-        <input type="file" id="image">
-    </div>
+    <Brands/>
 </template>
 <script>
+  import Brands from '../../../components/Settings/Brands'
   export default {
-    components: {},
-    mounted () {
-      let i = document.getElementById('image')
-      console.dir(i)
-    }
+    components: {Brands}
   }
 </script>

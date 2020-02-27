@@ -1,17 +1,10 @@
 <!--eslint-disable-->
 <template>
-    <div>
-SMS MO Templates
-
-        <input type="file" id="image">
-    </div>
+    <SMSMoTemplates/>
 </template>
 <script>
+  import SMSMoTemplates from '../../../components/Settings/SMSMoTemplates'
   export default {
-    components: {},
-    mounted () {
-      let i = document.getElementById('image')
-      console.dir(i)
-    }
+    components: {SMSMoTemplates}
   }
 </script>

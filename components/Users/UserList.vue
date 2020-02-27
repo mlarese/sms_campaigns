@@ -3,12 +3,17 @@
     <GridContainer title="Users">
 
             <CardPanel slot="container-top">
+                <v-text-field
+                        v-model="gridFilter"
+                        label="Search"
 
+                        hide-details
+                        append-icon="search"
+                />
             </CardPanel>
 
             <div slot="header-right" class="pb-2">
-                <ButtonNew title="Add" @click.native="$router.push('/settings/users/add')"/>
-                <ButtonNew title="delete" @click.native="$router.push('/settings/users/add')"/>
+                <ButtonNew title="Add User" @click.native="$router.push('/settings/users/add')"/>
             </div>
     <v-data-table
             :headers="headers"
@@ -21,12 +26,8 @@
             <td>{{ item.user_id }}</td>
             <td>{{ item.company_name }}</td>
             <td>{{ item.username }}</td>
-            <td>{{ item.password }}</td>
             <td width="1" class="pa-0">
                 <GridButton icon="edit" color="green" @click="onClick"></GridButton>
-            </td>
-            <td width="1" class="pa-0">
-                <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
             </td>
             <td width="1" class="pa-0">
                 <GridButton icon="delete" color="error" @click="onClick"></GridButton>
@@ -59,9 +60,7 @@
                 { text: this.$vuetify.t('User ID'), value: 'user_id' },
                 { text: this.$vuetify.t('Company Name'), value: 'company_name' },
                 { text: this.$vuetify.t('User Name'), value: 'username' },
-                { text: this.$vuetify.t('Password'), value: 'password' },
                 { text: 'Edit', value: 'action', sortable: false },
-                { text: 'View', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
             return {

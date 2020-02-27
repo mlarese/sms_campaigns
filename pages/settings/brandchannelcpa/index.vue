@@ -1,17 +1,13 @@
 <!--eslint-disable-->
 <template>
-    <div>
-Brand Channel CPA
-
-        <input type="file" id="image">
-    </div>
+    <BrandChannelCPA/>
 </template>
 <script>
+  import BrandChannelCPA from '../../../components/Settings/BrandChannelCPA'
   export default {
-    components: {},
-    mounted () {
-      let i = document.getElementById('image')
-      console.dir(i)
+    components: {BrandChannelCPA},
+    async fetch ({store}) {
+      store.dispatch('brandChannelCPA/load', {}, {root: true})
     }
   }
 </script>

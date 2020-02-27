@@ -1,11 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <div>
-        Channels
-
-        <input type="file" id="image">
-        <channels/>
-    </div>
+    <Channels/>
 </template>
 <script>
     import Channels from '../../../components/Settings/Channels.vue'

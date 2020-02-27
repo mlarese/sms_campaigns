@@ -17,15 +17,12 @@
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
-                <td>{{ item.brand }}</td>
-                <td>{{ item.channel }}</td>
+                <td>{{ item.brand_name }}</td>
+                <td>{{ item.channel_name }}</td>
                 <td>{{ item.channel_currency }}</td>
                 <td>{{ item.cpa_value }}</td>
                 <td width="1" class="pa-0">
                     <GridButton icon="edit" color="green" @click="onClick"></GridButton>
-                </td>
-                <td width="1" class="pa-0">
-                    <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
                     <GridButton icon="delete" color="error" @click="onClick"></GridButton>
@@ -49,8 +46,8 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
         data () {
             const headers = [
-                { text: this.$vuetify.t('Brand'), value: 'brand' },
-                { text: this.$vuetify.t('Channel'), value: 'channel' },
+                { text: this.$vuetify.t('Brand'), value: 'brand_name' },
+                { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Channel Currency'), value: 'channel_currency' },
                 { text: this.$vuetify.t('CPA value'), value: 'cpa_value' },
                 { text: 'Edit', value: 'action', sortable: false },
@@ -63,7 +60,7 @@
             }
         },
         computed: {
-            ...mapState('usersBrandsChannels', ['list', '$record'])
+            ...mapState('brandChannelCPA', ['list', '$record'])
         },
         methods: {
             onClick () {

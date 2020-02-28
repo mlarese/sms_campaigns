@@ -1,10 +1,8 @@
 <!--eslint-disable-->
 <template>
-    <v-flex container pa-0>
-        <v-card>
-            <bad-word-form/>
-        </v-card>
-    </v-flex>
+
+    <bad-word-form/>
+
 </template>
 
 <script>

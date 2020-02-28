@@ -1,10 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <v-flex container pa-0>
-        <v-card>
-            <brand-channel-c-p-a-form/>
-        </v-card>
-    </v-flex>
+    <brand-channel-c-p-a-form/>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <FormPanel v-bind="$attrs" >
+    <FormPanel v-bind="$attrs" class="text-xs-right brand-channel-cpa-form-panel">
         <div slot="header-right">
             <v-btn outline color="indigo"   @click="$router.go(-1)" >
                 {{$vuetify.t('Back')}}
@@ -15,6 +15,7 @@
         <v-form
                 ref="form"
                 lazy-validation
+                class="form-brand-channel"
         >
 
             <v-layout row wrap>

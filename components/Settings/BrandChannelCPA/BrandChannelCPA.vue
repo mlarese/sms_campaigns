@@ -17,7 +17,6 @@
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
-                <td>{{ item.id }}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.channel_name }}</td>
                 <td>{{ item.channel_currency }}</td>
@@ -47,7 +46,6 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
         data () {
             const headers = [
-                { text: this.$vuetify.t('ID'), value: 'id' },
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Channel Currency'), value: 'channel_currency' },

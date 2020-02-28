@@ -49,8 +49,7 @@ export const state = () => ({
     {to: 'usersrole', label: 'Users Roles'},
     {to: 'usersbrandschannel', label: 'Users Brands Channels'},
     {to: 'landingpage', label: 'Landing Pages'},
-    {to: 'brandlandingpage', label: 'Brand Landing Page'},
-
+    {to: 'brandlandingpage', label: 'Brand Landing Page'}
   ]
 })
 

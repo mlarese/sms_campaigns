@@ -1,11 +1,5 @@
 <template>
-  <v-flex
-    container
-    pa-0>
-    <v-card>
-      <role-form />
-    </v-card>
-  </v-flex>
+  <role-form />
 </template>
 
 <script>

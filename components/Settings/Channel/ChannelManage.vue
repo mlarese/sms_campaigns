@@ -1,10 +1,8 @@
 <!--eslint-disable-->
 <template>
-    <v-flex container pa-0>
-        <v-card>
-            <channel-form/>
-        </v-card>
-    </v-flex>
+
+    <channel-form/>
+
 </template>
 
 <script>

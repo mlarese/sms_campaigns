@@ -1,10 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <v-flex container pa-0>
-        <v-card>
-            <user-form/>
-        </v-card>
-    </v-flex>
+    <user-form/>
 </template>
 
 <script>

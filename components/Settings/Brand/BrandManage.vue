@@ -1,10 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <v-flex container pa-0>
-        <v-card>
-            <BrandForm/>
-        </v-card>
-    </v-flex>
+    <BrandForm/>
 </template>
 
 <script>

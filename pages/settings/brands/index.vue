@@ -5,6 +5,9 @@
 <script>
   import Brands from '../../../components/Settings/Brand/Brands'
   export default {
-    components: {Brands}
+      components: {Brands},
+      async fetch ({store}) {
+        store.dispatch('brands/load', {}, {root: true})
+      }
   }
 </script>

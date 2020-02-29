@@ -176,7 +176,7 @@
         top: 4px;
     }
 
-    .v-progress-linear {
+    .fixed-header .v-progress-linear {
         position: relative !important;
         top: -20px !important;
     }

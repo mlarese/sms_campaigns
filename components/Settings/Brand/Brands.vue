@@ -8,24 +8,33 @@
 
         <div slot="header-right" class="pb-2">
             <ButtonNew title="Add Brand" @click.native="$router.push('/settings/brands/add')"/>
+
         </div>
+
         <v-data-table
                 :headers="headers"
                 :items="list"
+                :loading="isAjax"
                 :hide-actions="false"
                 class="elevation-0"
                 slot="body-center"
         >
+
+
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.brand_id }}</td>
-                <td>{{ item.brand }}</td>
+                <td>{{ item.brand_name }}</td>
                 <td>{{ item.sms_mo_recipient }}</td>
                 <td>{{ item.sms_mo_key_string }}</td>
+                <td>{{ item.sms_mt_greeting }}</td>
+                <td>{{ item.sms_mt_sender }}</td>
+                <td>{{ item.grace_period }}</td>
+                <td>{{ item.landing_page_enabled }}</td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="edit" color="green" @click="onClick"></GridButton>
+                    <GridButton icon="edit" color="green" @click="onEdit(item)"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="delete" color="error" @click="onClick"></GridButton>
+                    <GridButton icon="delete" color="error" @click="onDelete(item)"></GridButton>
                 </td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -36,7 +45,7 @@
     </GridContainer>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     import GridButton from '../../General/GridButton'
     import GridContainer from '../../General/GridContainer'
     import CardPanel from "../../General/CardPanel";
@@ -44,12 +53,18 @@
 
     export default {
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
+
+
         data () {
             const headers = [
                 { text: this.$vuetify.t('Brand ID'), value: 'brand_id' },
-                { text: this.$vuetify.t('Brand'), value: 'brand' },
+                { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('SMS MO Recipient'), value: 'sms_mo_recipient' },
                 { text: this.$vuetify.t('SMS MO Key String'), value: 'sms_mo_key_string' },
+                { text: this.$vuetify.t('SMS MT Greeting'), value: 'sms_mt_greeting' },
+                { text: this.$vuetify.t('SMS MT Sender'), value: 'sms_mt_sender' },
+                { text: this.$vuetify.t('Grace Period'), value: 'grace_period' },
+                { text: this.$vuetify.t('Landing Page Enabled'), value: 'landing_page_enabled' },
                 { text: 'Edit', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
@@ -59,12 +74,19 @@
             }
         },
         computed: {
-            ...mapState('usersBrandsChannels', ['list', '$record'])
+            ...mapState('brands', ['list', '$record']),
+            ...mapState('api', ['isAjax'])
         },
         methods: {
-            onClick () {
-                alert('onClick')
-            }
+          ...mapActions('brands' ,['save', 'delete']),
+          onDelete (item) {
+            if(!confirm('Do you confirm?')) return
+            this.delete(item.brand_id)
+          },
+          onEdit (item) {
+            const url = `/settings/brands/${item.brand_id}`
+            this.$router.push(url)
+          }
         }
     }
 </script>

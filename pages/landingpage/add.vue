@@ -1,16 +1,16 @@
 <template>
-  <role-managements/>
+  <LandingPageForms/>
 </template>
 
 <script>
-  import RoleManagement from '../../components/Roles/RoleManagement.vue'
+  import LandingPageForms from '../../components/LandingPages/LandingPageForms'
   export default {
     components: {
-        RoleManagement
+      LandingPageForms
     },
     fetch ({store}) {
-      store.commit('roles/setRecord', {}, {root: true})
-      store.commit('roles/setAddMode', null, {root: true})
+      store.commit('landingPages/setRecord', {}, {root: true})
+      store.commit('landingPages/setAddMode', null, {root: true})
     }
   }
 </script>

@@ -1,6 +1,7 @@
 import _cloneDeep from 'lodash/cloneDeep'
 import Vue from 'vue'
 
+let today = new Date()
 export const state = () => {
     return {
         list: [],
@@ -11,12 +12,15 @@ export const state = () => {
         resetItem: {},
         grid: {pagination: {}},
         mode: 'list',
+        searchActive: false,
+        filter: {click_date: [today, today]}
     }
 }
 
 const root = {root: true}
 
 export const mutations = {
+    setSearchActive (state, payload) { state.searchActive = payload },
     setRecordList (state, payload) { state.recordList = payload },
     setPagination (state, payload) { state.pagination = payload },
     setList (state, payload) {
@@ -27,12 +31,10 @@ export const mutations = {
         state.$record = _cloneDeep(payload)
         state.loaded = true
     },
-    set$Record (s, p) { s.$record = _cloneDeep(p) },
-    setFormValid (s, p) { s.form.valid = p },
-    setFormDirty (s, p) { s.form.dirty = p },
-    setListMode (s) { s.mode = 'list' },
-    setViewMode (s) { s.mode = 'view' },
-    setSearchMode (s) { s.mode = 'search' },
+    set$Record (state, payload) {
+        state.$record = _cloneDeep(payload)
+        state.loaded = true
+    },
     updateItemList (state,  {data, index}) {
         Vue.set(state.list, index, data)
     },
@@ -42,6 +44,9 @@ export const mutations = {
     reset$Record (state) {
         state.$record = {}
     },
+  resetFilter (state) {
+    state.filter = {}
+  },
     setMode (state, payload) { state.mode = payload },
     setForm (state, payload) { state.form = payload },
     setEditMode (state) { state.mode = 'edit' },
@@ -49,57 +54,44 @@ export const mutations = {
 
 }
 export const actions = {
+  search ({dispatch, commit, state}) {
+    let data = state.filter
+    commit('setList', [])
+
+    return dispatch('api/post', {url: `/campaigns/unpaired`, data}, root)
+      .then(res => {
+        commit('setList', res.data)
+        commit('setSearchActive', true)
+        return res
+      })
+  },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
-        if (!force && state.loaded) {
+        if (!force && state.list.length > 0) {
             return
         }
         if (id === null) {
-            return dispatch('api/get', {url: `/campaigns/landing_pages`, options, debug: false}, root)
+            return dispatch('api/post', {url: `/campaigns/unpaired`, options, debug: false}, root)
                 .then(res => {
                     commit('setList', res.data)
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/landing_pages/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/unpaired/${id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res
                 })
         }
     },
-  delete ({dispatch, commit, state}, id) {
-    const url = `/campaigns/landing_pages/${id}`
-    return dispatch('api/delete', {url}, root)
-      .then(res => dispatch('load', {}))
+  resetSearch ({dispatch, commit, state}) {
+    commit('setSearchActive', false)
+    commit('resetFilter')
+    commit('setList', [])
   },
-  save ({dispatch, commit, state, getters}) {
-    let data = state.$record
-
-    if (getters.isAddMode) {
-      return dispatch('api/post', {url: `/campaigns/landing_pages`, data}, root)
-        .then(r => {
-          commit('addRecord', data)
-          commit('set$Record', {})
-          return r
-        })
-    } else {
-      let id = data.brand_id
-      return dispatch('api/put', {url: `/campaigns/landing_pages/${id}`, data}, root)
-        .then(r => {
-          commit('addRecord', data)
-          commit('set$Record', {})
-          return r
-        })
-
-
-
-    }
-  }
 }
 
 export const getters = {
-    isEditMode: s => s.mode === 'edit',
-    isAddMode: s => s.mode === 'add',
-    isViewMode: s => s.mode === 'view'
+    isEditMode: state => state.mode === 'edit',
+    isAddMode: state => state.mode === 'add'
 }
 

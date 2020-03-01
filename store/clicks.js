@@ -99,8 +99,6 @@ export const mutations = {
 }
 export const actions = {
     search ({dispatch, commit, state}) {
-      console.log('---- search')
-      //commit('setSortDefault')
       let data = {...state.filter, ...state.grid}
       commit('setList', [])
       commit('setPage', 1)

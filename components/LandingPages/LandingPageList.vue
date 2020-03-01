@@ -7,7 +7,7 @@
             </CardPanel>
 
             <div slot="header-right" class="pb-2">
-                <ButtonNew title="add Landing Page"/>
+                <ButtonNew title="add Landing Page"  @click.native="$router.push('/landingpage/add')"/>
             </div>
     <v-data-table  :rows-per-page-items="[30,50]"
             :headers="headers"
@@ -26,9 +26,7 @@
             <td width="1" class="pa-0">
                 <GridButton icon="edit" color="green" @click="onClick"></GridButton>
             </td>
-            <td width="1" class="pa-0">
-                <GridButton icon="visibility" color="blue" @click="onClick"></GridButton>
-            </td>
+
             <td width="1" class="pa-0">
                 <GridButton icon="delete" color="error" @click="onClick"></GridButton>
             </td>
@@ -41,7 +39,7 @@
     </GridContainer>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     import GridButton from '../General/GridButton'
     import GridContainer from '../General/GridContainer'
     import CardPanel from "../General/CardPanel";
@@ -69,9 +67,15 @@
             ...mapState('landingPages', ['list', '$record'])
         },
         methods: {
-            onClick () {
-                alert('onClick')
-            }
+          ...mapActions('landingPages' ,['save', 'delete']),
+          onDelete (item) {
+            if(!confirm('Do you confirm?')) return
+            this.delete(item.lp_id)
+          },
+          onEdit (item) {
+            const url = `/landingPages/${item.brand_id}`
+            this.$router.push(url)
+          }
         }
     }
 </script>

@@ -13,11 +13,11 @@
                     </v-flex>
                     <v-flex sm3 xs4>
                         <div class="ml-2" style="margin-top: 21px !important;"></div>
-                        <v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdns"  />
+                        <v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdn"  />
                     </v-flex>
                     <v-flex sm4 xs4>
                         <div class="ml-2" style="margin-top: 21px !important;"></div>
-                        <v-combobox dense  hide-details :label="$vuetify.t('Conversion Status')"  :items="statusList"  v-model="filter.conversion_status_id" item-text="text" item-value="conversion_status_id" />
+                        <v-autocomplete dense  hide-details :label="$vuetify.t('Conversion Status')"  :items="statusList"  v-model="filter.status_id" item-text="text" item-value="status_id" />
                     </v-flex>
                     <v-flex sm2 xs2 class="text-xs-left pa-0 pt-1">
                         <div class="ml-2" style="margin-top: 15px !important;"></div>
@@ -53,13 +53,13 @@
                 :loading="isAjax" fixed
                 :headers="headers"
                 :search="grid.pagination.search"
-                :items="clicksList"  :hide-actions="false"
+                :items="list"  :hide-actions="false"
                 :pagination.sync="grid.pagination"
                 class="elevation-0 fixed-header"
                 slot="body-center">
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.sms_mo_date  | dmy }} {{ item.sms_mo_date  | time }}</td>
-                <td>{{ item.msisdns | truncate(5,'.....')}}</td>
+                <td>{{ item.msisdn | truncate(5,'.....')}}</td>
                 <td>
                     <v-tooltip left v-if="item.sms_mo_final_text ">
                         <span class="pa-3" slot="activator">{{ item.sms_mo_final_text | truncate(8) }}</span>
@@ -67,10 +67,8 @@
                     </v-tooltip>
                 </td>
                 <td>
-                    <v-tooltip left>
-                        <span class="pa-3" slot="activator">{{ item.conversion_status_id }}</span>
-                        {{statusIdToText(item.conversion_status_id)}}
-                    </v-tooltip>
+                     {{ item.status_name }}
+
                 </td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -94,9 +92,9 @@
         data () {
             const headers = [
                 { text: this.$vuetify.t('SMS MO Date'), value: 'sms_mo_date' },
-                { text: this.$vuetify.t('Msisdn'), value: 'msisdns' },
+                { text: this.$vuetify.t('Msisdn'), value: 'msisdn' },
                 { text: this.$vuetify.t('SMS MO Text'), value: 'sms_mo_final_text' },
-                { text: this.$vuetify.t('Status'), value: 'conversion_status_id' },
+                { text: this.$vuetify.t('Status'), value: 'status_name' },
             ]
             return {
                 sms_mo_date: null,
@@ -107,18 +105,14 @@
             }
         },
         computed: {
-            ...mapState('clicks', {'grid': 'grid', 'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
-            ...mapState('channels', {'channelList': 'list'}),
-            ...mapState('brands', {'brandsList': 'list'}),
-            ...mapState('advformats', {'advformatsList': 'list'}),
-            ...mapState('locations', {'locationsList': 'list'}),
+            ...mapState('unpaired', {'grid': 'grid', 'list': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
             ...mapState('api', {'isAjax': 'isAjax'})
         },
         created () {
           this.resetSearch()
         },
         methods: {
-            ...mapActions('clicks', ['resetSearch', 'search']),
+            ...mapActions('unpaired', ['resetSearch', 'search']),
             statusIdToText,
             doSearch () {
                 this.search()

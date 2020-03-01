@@ -3,7 +3,13 @@
     <GridContainer title=" Bad Words">
 
         <CardPanel slot="container-top">
+            <v-text-field
+                    v-model="gridFilter"
+                    label="Search"
 
+                    hide-details
+                    append-icon="search"
+            />
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
@@ -14,16 +20,17 @@
                 :items="list"
                 :hide-actions="false"
                 class="elevation-0"
+                :search="gridFilter"
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.row_id }}</td>
                 <td>{{ item.bad_word }}</td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="edit" color="green" @click="onClick"></GridButton>
+                    <GridButton icon="edit" color="green" @click="onEdit(item)"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="delete" color="error" @click="onClick"></GridButton>
+                    <GridButton icon="delete" color="error" @click="onDelete(item)"></GridButton>
                 </td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -34,7 +41,7 @@
     </GridContainer>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     import GridButton from '../../General/GridButton'
     import GridContainer from '../../General/GridContainer'
     import CardPanel from "../../General/CardPanel";
@@ -45,7 +52,7 @@
         data () {
             const headers = [
                 { text: this.$vuetify.t('Row ID'), value: 'row_id' },
-                { text: this.$vuetify.t('Bad Words'), value: 'bad_word' },
+                { text: this.$vuetify.t('Bad Word'), value: 'bad_word' },
                 { text: 'Edit', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
@@ -58,9 +65,15 @@
             ...mapState('badwords', ['list', '$record'])
         },
         methods: {
-            onClick () {
-                alert('onClick')
-            }
+          ...mapActions('badwords' ,['save', 'delete']),
+          onDelete (item) {
+            if(!confirm('Do you confirm?')) return
+            this.delete(item.row_id)
+          },
+          onEdit (item) {
+            const url = `/settings/badwords/${item.row_id}`
+            this.$router.push(url)
+          }
         }
     }
 </script>

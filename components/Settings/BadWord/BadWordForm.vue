@@ -18,7 +18,7 @@
         >
 
             <v-layout row wrap>
-                <v-flex sm3 xs12>
+                <v-flex offset-sm3 sm6 xs12>
                     <v-text-field append-icon="" label="Bad Word"   hide-details v-model="$record.bad_word" />
                 </v-flex>
 

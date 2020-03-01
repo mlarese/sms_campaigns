@@ -8,7 +8,7 @@
   export default {
     components: {BadWords},
     async fetch ({store}) {
-      store.dispatch('badwords/load', {}, {root: true})
+      await store.dispatch('badwords/load', {}, {root: true})
     }
   }
 </script>

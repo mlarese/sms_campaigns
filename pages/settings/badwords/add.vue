@@ -1,16 +1,16 @@
 <template>
-  <channel-manage/>
+  <BadWordForm/>
 </template>
 
 <script>
-  import ChannelManage from '../../../components/Settings/Channel/ChannelManage'
+  import BadWordForm from '../../../components/Settings/BadWord/BadWordForm'
   export default {
     components: {
-        ChannelManage
+      BadWordForm
     },
     fetch ({store}) {
-      store.commit('channels/setRecord', {}, {root: true})
-      store.commit('channels/setAddMode', null, {root: true})
+      store.commit('badwords/setRecord', {}, {root: true})
+      store.commit('badwords/setAddMode', null, {root: true})
     }
   }
 </script>

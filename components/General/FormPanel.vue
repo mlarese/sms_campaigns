@@ -21,13 +21,23 @@
             </slot>
             </v-container>
         </v-card>
+
+        <v-layout row wrap class="mt-2">
+            <v-flex xs12>
+                <v-progress-linear v-if="isAjax" :indeterminate="true"></v-progress-linear>
+            </v-flex>
+        </v-layout>
     </v-container>
 </template>
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: 'FormPanel',
     props: {
       title: {type: String, default: ''}
+    },
+    computed: {
+      ...mapState('api', ['isAjax'])
     }
   }
 </script>

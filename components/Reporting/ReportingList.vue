@@ -91,13 +91,14 @@
                 <td>{{ item.leads_a }}</td>
                 <td>{{ item.leads_b }}</td>
                 <td>{{ item.detractors }}</td>
-                <td>{{ item.leads_a / item.clicks *100 | numFormat('0.000')  }}%</td>
-                <td>{{ item.leads_b / item.clicks *100 | numFormat('0.000')  }}%</td>
-                <td>{{ item.detractors / item.clicks *100 | numFormat('0.000')  }}%</td>
-                <td>{{ item.bid_price | numFormat('0.000') }}</td>
-                <td>{{ item.clicks * item.bid_price | numFormat('0.000') }}</td>
-                <td>{{ item.leads_a * item.clicks * item.bid_price | numFormat('0.000')  }}</td>
-                <td>{{ item.leads_b * item.clicks * item.bid_price | numFormat('0.000')  }}</td>
+                <td>{{ item.ctclp }}</td>
+                <td>{{ item.leads_a / item.clicks *100  | numFormat('0.000')  }}%</td>
+                <td>{{ item.leads_b / item.clicks *100  | numFormat('0.000')  }}%</td>
+                <td>{{ item.detractors/item.clicks *100 | numFormat('0.000')  }}%</td>
+                <td>{{ item.bid_price | numFormat('0.000') }} €</td>
+                <td>{{ item.clicks * item.bid_price | numFormat('0,0.000') }} €</td>
+                <td>{{ item.leads_a * item.clicks * item.bid_price | numFormat('0,0.000')  }} €</td>
+                <td>{{ item.leads_b * item.clicks * item.bid_price | numFormat('0,0.000')  }} €</td>
 
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">

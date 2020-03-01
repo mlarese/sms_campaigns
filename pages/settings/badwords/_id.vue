@@ -1,19 +1,19 @@
 <!--eslint-disable-->
 <template>
-    <ChannelForm title="Edit Channel Form" />
+    <BadWordForm title="Bad Word" />
 </template>
 
 <script>
     import {mapActions, mapState, mapGetters} from 'vuex'
-    import ChannelForm from '../../../components/Settings/Channel/ChannelForm'
+    import BadWordForm from '../../../components/Settings/BadWord/BadWordForm'
     export default {
         components: {
-            ChannelForm
+          BadWordForm
         },
         async fetch({store, params}) {
-            store.commit('channels/setRecord',{},{root: true})
-            store.commit('channels/setEditMode',null,{root: true})
-            await store.dispatch('channels/load', {id: params.id}, {root: true})
+            store.commit('badwords/setRecord',{},{root: true})
+            store.commit('badwords/setEditMode',null,{root: true})
+            await store.dispatch('badwords/load', {id: params.id}, {root: true})
         }
     }
 </script>

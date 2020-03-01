@@ -50,7 +50,7 @@ export const mutations = {
 }
 export const actions = {
     update ({dispatch, commit, state}, {data, id}) {
-        const url = `/users_brands_channels/${id}`
+        const url = `/sms_mo_template/${id}`
         return dispatch('api/put', {url, data}, root)
             .then(() => {
                 const index = state.list.findIndex(o => o.code === id)
@@ -86,21 +86,21 @@ export const actions = {
         }
     },
     insert ({dispatch, commit}, {data}) {
-        const url = `/users_brands_channels`
-        return dispatch('api/get', {url, data}, root)
+        const url = `/sms_mo_template`
+        return dispatch('api/post', {url, data}, root)
     },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
         if (!force && state.loaded) {
             return
         }
         if (id === null) {
-            return dispatch('api/post', {url: `/campaigns/users_brands_channels`, options, debug: false}, root)
+            return dispatch('api/get', {url: `/campaigns/sms_mo_template`, options, debug: false}, root)
                 .then(res => {
                     commit('setList', res.data)
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/users_brands_channels/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/sms_mo_template/{id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

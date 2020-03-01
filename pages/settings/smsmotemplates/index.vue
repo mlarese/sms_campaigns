@@ -1,10 +1,13 @@
 <!--eslint-disable-->
 <template>
-    <SMSMoTemplates/>
+    <s-m-s-mo-template/>
 </template>
 <script>
-  import SMSMoTemplates from '../../../components/Settings/SMSMoTemplates'
-  export default {
-    components: {SMSMoTemplates}
-  }
+    import SMSMoTemplate from '../../../components/Settings/SMSMoTemplate/SMSMoTemplates'
+    export default {
+        components: {SMSMoTemplate},
+        async fetch ({store}) {
+            store.dispatch('smsmotemplate/load', {}, {root: true})
+        }
+    }
 </script>

@@ -1,3 +1,4 @@
+<!--eslint-disable-->
 import _cloneDeep from 'lodash/cloneDeep'
 import Vue from 'vue'
 

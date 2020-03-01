@@ -56,19 +56,47 @@ export const actions = {
             return
         }
         if (id === null) {
-            return dispatch('api/post', {url: `/campaigns/brands`, options, debug: false}, root)
+            return dispatch('api/get', {url: `/campaigns/brands`, options, debug: false}, root)
                 .then(res => {
                     commit('setList', res.data)
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/brands/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/brands/${id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res
                 })
         }
     },
+      delete ({dispatch, commit, state}, id) {
+        const url = `/campaigns/brands/${id}`
+        return dispatch('api/delete', {url}, root)
+          .then(res => dispatch('load', {}))
+      },
+      save ({dispatch, commit, state, getters}) {
+        let data = state.$record
+
+        if (getters.isAddMode) {
+          return dispatch('api/post', {url: `/campaigns/brands`, data}, root)
+            .then(r => {
+              commit('addRecord', data)
+              commit('set$Record', {})
+              return r
+            })
+        } else {
+          let id = data.brand_id
+          return dispatch('api/put', {url: `/campaigns/brands/${id}`, data}, root)
+            .then(r => {
+              commit('addRecord', data)
+              commit('set$Record', {})
+              return r
+            })
+
+
+
+        }
+      }
 }
 
 export const getters = {

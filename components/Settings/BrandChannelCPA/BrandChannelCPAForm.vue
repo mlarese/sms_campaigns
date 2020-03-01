@@ -8,7 +8,7 @@
 
         </div>
         <div slot="header-left">
-            <span>{{$vuetify.t('Brand Channel CPA Form')}}</span>
+            <span>{{$vuetify.t('Brand Channel CPA')}}</span>
 
         </div>
 
@@ -17,19 +17,15 @@
                 lazy-validation
                 class="form-brand-channel"
         >
-
             <v-layout row wrap>
-                <v-flex sm6 xs12>
-                    <v-text-field label="Brand"   hide-details v-model="$record.brand_name" />
+                <v-flex sm5 xs5>
+                    <v-autocomplete label="Brand"  :items="brandsList" hide-details v-model="$record.brand_id"  item-value="brand_id" item-text="brand_name" />
                 </v-flex>
-                <v-flex sm6 xs12>
-                    <v-text-field label="Channel Name"   hide-details v-model="$record.channel_name" />
+                <v-flex sm5 xs5>
+                    <v-autocomplete label="Channel Name"  :items="channelsList"  hide-details v-model="$record.channel_id" item-value="channel_id" item-text="channel_name" />
                 </v-flex>
-                <v-flex sm6 xs12>
-                    <v-text-field  label="Channel Currency"   hide-details v-model="$record.channel_currency" />
-                </v-flex>
-                <v-flex sm6 xs12>
-                    <v-text-field  label="CPA Value"   hide-details v-model="$record.cpa_value" />
+                <v-flex sm2 xs2>
+                    <v-text-field  label="CPA Value"  type="number"  hide-details v-model="$record.cpa_value" />
                 </v-flex>
 
             </v-layout>
@@ -59,10 +55,11 @@
         },
         computed: {
             ...mapState('brandChannelCPA', ['$record']),
+            ...mapState('brands', {'brandsList': 'list'}),
+            ...mapState('channels', {'channelsList': 'list'}),
             isValid () {
-                if(!this.$record.brand_name) return false
-                if(!this.$record.channel_name) return false
-                if(!this.$record.channel_currency) return false
+                if(!this.$record.brand_id) return false
+                if(!this.$record.channel_id) return false
                 if(!this.$record.cpa_value) return false
                 return true
             }

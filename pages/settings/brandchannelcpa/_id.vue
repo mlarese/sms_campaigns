@@ -13,6 +13,8 @@
         async fetch({store, params}) {
             store.commit('brandChannelCPA/setRecord',{},{root: true})
             store.commit('brandChannelCPA/setEditMode',null,{root: true})
+            store.dispatch('brands/load', {}, {root: true})
+            store.dispatch('channels/load', {}, {root: true})
             await store.dispatch('brandChannelCPA/load', {id: params.id}, {root: true})
         }
     }

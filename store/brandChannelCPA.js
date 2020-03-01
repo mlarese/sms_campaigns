@@ -62,13 +62,41 @@ export const actions = {
           return res
         })
     } else {
-      return dispatch('api/get', {url: `/campaigns/brandchannelcpa/{id}`, options}, root)
+      return dispatch('api/get', {url: `/campaigns/brandchannelcpa/${id}`, options}, root)
         .then(res => {
           commit('setRecord', res.data)
           return res
         })
     }
   },
+  delete ({dispatch, commit, state}, id) {
+    const url = `/campaigns/brandchannelcpa/${id}`
+    return dispatch('api/delete', {url}, root)
+      .then(res => dispatch('load', {}))
+  },
+  save ({dispatch, commit, state, getters}) {
+    let data = state.$record
+
+    if (getters.isAddMode) {
+      return dispatch('api/post', {url: `/campaigns/brandchannelcpa`, data}, root)
+        .then(r => {
+          commit('addRecord', data)
+          commit('set$Record', {})
+          return r
+        })
+    } else {
+      let id = data.row_id
+      return dispatch('api/put', {url: `/campaigns/brandchannelcpa/${id}`, data}, root)
+        .then(r => {
+          commit('addRecord', data)
+          commit('set$Record', {})
+          return r
+        })
+
+
+
+    }
+  }
 }
 
 export const getters = {

@@ -10,7 +10,7 @@
             <ButtonNew title="New Role"/>
         </div>
 
-        <v-data-table  :headers="headers"  :items="list"  :hide-actions="false"    class="elevation-0" slot="body-center">
+        <v-data-table  :rows-per-page-items="[30,50]"   :headers="headers"  :items="list"  :hide-actions="false"    class="elevation-0" slot="body-center">
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.role_id }}</td>
                 <td>{{ item.role_name }}</td>

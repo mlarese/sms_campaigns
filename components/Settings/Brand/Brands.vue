@@ -1,9 +1,15 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Setting Brands">
+    <GridContainer title="Brands">
 
         <CardPanel slot="container-top">
+            <v-text-field
+                    v-model="gridFilter"
+                    label="Search"
 
+                    hide-details
+                    append-icon="search"
+            />
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
@@ -11,10 +17,11 @@
 
         </div>
 
-        <v-data-table
+        <v-data-table  :rows-per-page-items="[30,50]"
                 :headers="headers"
                 :items="list"
                 :loading="isAjax"
+                :search="gridFilter"
                 :hide-actions="false"
                 class="elevation-0"
                 slot="body-center"

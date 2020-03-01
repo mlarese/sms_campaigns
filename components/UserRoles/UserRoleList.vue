@@ -9,7 +9,7 @@
             <div slot="header-right" class="pb-2">
                 <ButtonNew/>
             </div>
-    <v-data-table
+    <v-data-table  :rows-per-page-items="[30,50]"
             :headers="headers"
             :items="list"
             :hide-actions="false"

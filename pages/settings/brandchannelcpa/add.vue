@@ -11,6 +11,8 @@
     fetch ({store}) {
       store.commit('brandChannelCPA/setRecord', {}, {root: true})
       store.commit('brandChannelCPA/setAddMode', null, {root: true})
+      store.dispatch('brands/load', {}, {root: true})
+      store.dispatch('channels/load', {}, {root: true})
     }
   }
 </script>

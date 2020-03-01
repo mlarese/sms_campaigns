@@ -1,6 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title=" Setting Bad Words">
+    <GridContainer title=" Bad Words">
 
         <CardPanel slot="container-top">
 
@@ -9,7 +9,7 @@
         <div slot="header-right" class="pb-2">
             <ButtonNew title="Add Bad Word" @click.native="$router.push('/settings/badwords/add')"/>
         </div>
-        <v-data-table
+        <v-data-table  :rows-per-page-items="[30,50]"
                 :headers="headers"
                 :items="list"
                 :hide-actions="false"

@@ -21,10 +21,10 @@
                 <v-flex sm4 xs12>
                     <v-text-field label="Channel Name"   hide-details v-model="$record.channel_name" />
                 </v-flex>
-                <v-flex sm4 xs12>
-                    <v-text-field label="Channel Currency"   hide-details v-model="$record.channel_currency" />
+                <v-flex sm2 xs12>
+                    <v-combobox label="Channel Currency"  :items="['€','$']"  hide-details v-model="$record.channel_currency" />
                 </v-flex>
-                <v-flex sm4 xs12>
+                <v-flex sm6 xs12>
                     <v-text-field  label="PostBack URL"   hide-details v-model="$record.postback_url" />
                 </v-flex>
 
@@ -58,7 +58,7 @@
             isValid () {
                 if(!this.$record.channel_currency) return false
                 if(!this.$record.channel_name) return false
-                if(!this.$record.postback_url) return false
+                //if(!this.$record.postback_url) return false
                 return true
             }
         },
@@ -67,7 +67,7 @@
                 this.save()
                     .then(r => this.$router.go(-1))
             },
-            ...mapActions('channels', ['add', 'save']),
+            ...mapActions('channels', ['add', 'save'])
 
         }
     }

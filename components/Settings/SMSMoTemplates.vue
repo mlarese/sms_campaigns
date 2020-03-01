@@ -1,6 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Setting SMS Mo Templates">
+    <GridContainer title="SMS Mo Templates">
 
         <CardPanel slot="container-top">
 
@@ -9,7 +9,7 @@
         <div slot="header-right" class="pb-2">
             <ButtonNew title="Add SMS Mo Templates"/>
         </div>
-        <v-data-table
+        <v-data-table  :rows-per-page-items="[30,50]"
                 :headers="headers"
                 :items="list"
                 :hide-actions="false"

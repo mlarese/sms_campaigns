@@ -3,11 +3,8 @@
     <SMSMoTemplates/>
 </template>
 <script>
-  import SMSMoTemplates from '../../../components/Settings/SMSMoTemplates'
+  import SMSMoTemplates from '../../../components/Settings/SMSMOTemplate/SMSMoTemplates'
   export default {
-    components: {SMSMoTemplates},
-    async fetch ({store}) {
-      store.dispatch('smsmotemplate/load', {}, {root: true})
-    }
+    components: {SMSMoTemplates}
   }
 </script>

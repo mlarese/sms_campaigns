@@ -50,7 +50,7 @@ export const mutations = {
 }
 export const actions = {
     update ({dispatch, commit, state}, {data, id}) {
-        const url = `/usersBrandsChannels/${id}`
+        const url = `/users_brands_channels/${id}`
         return dispatch('api/put', {url, data}, root)
             .then(() => {
                 const index = state.list.findIndex(o => o.code === id)
@@ -86,7 +86,7 @@ export const actions = {
         }
     },
     insert ({dispatch, commit}, {data}) {
-        const url = `/usersBrandsChannels`
+        const url = `/users_brands_channels`
         return dispatch('api/get', {url, data}, root)
     },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
@@ -94,13 +94,13 @@ export const actions = {
             return
         }
         if (id === null) {
-            return dispatch('api/post', {url: `/campaigns/usersBrandsChannels`, options, debug: false}, root)
+            return dispatch('api/post', {url: `/campaigns/users_brands_channels`, options, debug: false}, root)
                 .then(res => {
                     commit('setList', res.data)
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/usersBrandsChannels/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/users_brands_channels/{id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

@@ -1,17 +1,13 @@
 <!--eslint-disable-->
 <template>
-    <div>
-User Brand Channels
-
-        <input type="file" id="image">
-    </div>
+    <user-brand-channel/>
 </template>
 <script>
-  export default {
-    components: {},
-    mounted () {
-      let i = document.getElementById('image')
-      console.dir(i)
+    import UserBrandChannel from '../../../components/Settings/UserBrandChannel/UserBrandChannel'
+    export default {
+        components: {UserBrandChannel},
+        async fetch ({store}) {
+            store.dispatch('usersBrandsChannels/load', {}, {root: true})
+        }
     }
-  }
 </script>

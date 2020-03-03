@@ -1,13 +1,13 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="SMS Mo Templates">
+    <GridContainer title="SMS MO Templates">
 
         <CardPanel slot="container-top">
 
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew title="Add SMS Mo Templates"/>
+            <ButtonNew title="Add SMS MO Templates" @click.native="$router.push('/settings/smsmotemplates/add')"/>
         </div>
         <v-data-table  :rows-per-page-items="[30,50]"
                 :headers="headers"
@@ -17,13 +17,13 @@
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
-                <td>{{ item.brand }}</td>
-                <td>{{ item.sms_mo_template }}</td>
+                <td>{{ item.brand_name }}</td>
+                <td>{{ item.sms_template_text }}</td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="edit" color="green" @click="onClick"></GridButton>
+                    <GridButton icon="edit" color="green" @click="onEdit(item)"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="delete" color="error" @click="onClick"></GridButton>
+                    <GridButton icon="delete" color="error" @click="onDelete(item)"></GridButton>
                 </td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -34,7 +34,7 @@
     </GridContainer>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     import GridButton from '../../General/GridButton'
     import GridContainer from '../../General/GridContainer'
     import CardPanel from "../../General/CardPanel";
@@ -44,8 +44,8 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
         data () {
             const headers = [
-                { text: this.$vuetify.t('Brand'), value: 'brand' },
-                { text: this.$vuetify.t('SMS MO Template'), value: 'sms_mo_template' },
+                { text: this.$vuetify.t('Brand'), value: 'brand_name' },
+                { text: this.$vuetify.t('SMS MO Template'), value: 'sms_template_text' },
                 { text: 'Edit', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
@@ -58,9 +58,15 @@
             ...mapState('smsmotemplate', ['list', '$record'])
         },
         methods: {
-            onClick () {
-                alert('onClick')
-            }
+          ...mapActions('smsmotemplate' ,['save', 'delete']),
+          onDelete (item) {
+            if(!confirm('Do you confirm?')) return
+            this.delete(item.row_id)
+          },
+          onEdit (item) {
+            const url = `/settings/smsmotemplates/${item.row_id}`
+            this.$router.push(url)
+          }
         }
     }
 </script>

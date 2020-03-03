@@ -4,6 +4,7 @@ import Vue from 'vue'
 let today = new Date()
 export const state = () => {
   return {
+    baseList: [],
     list: [],
     recordList: [],
     record: {},
@@ -23,9 +24,8 @@ export const mutations = {
   setSearchActive (state, payload) { state.searchActive = payload },
   setRecordList (state, payload) { state.recordList = payload },
   setPagination (state, payload) { state.pagination = payload },
-  setList (state, payload) {
-    state.list = payload
-  },
+  setList (state, payload) { state.list = payload },
+  setBaseList (state, payload) { state.baseList = payload },
   setRecord (state, payload) {
     state.record = _cloneDeep(payload)
     state.$record = _cloneDeep(payload)
@@ -52,6 +52,13 @@ export const mutations = {
 }
 
 export const actions = {
+  loadBase ({dispatch, commit, state}) {
+    return dispatch('api/get', {url: `/campaigns/smsmotemplates_base`, debug: false}, root)
+      .then(res => {
+        commit('setBaseList', res.data)
+        return res
+      })
+  },
   load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
     if (!force && state.list.length > 0) {
       return
@@ -75,6 +82,13 @@ export const actions = {
     return dispatch('api/delete', {url}, root)
       .then(res => dispatch('load', {}))
   },
+  addBase ({dispatch, commit, state, getters}, data) {
+      return dispatch('api/post', {url: `/campaigns/smsmotemplates_base`, data}, root)
+        .then(r => {
+          return r
+        })
+
+   },
   save ({dispatch, commit, state, getters}) {
     let data = state.$record
 
@@ -93,9 +107,6 @@ export const actions = {
           commit('set$Record', {})
           return r
         })
-
-
-
     }
   }
 }

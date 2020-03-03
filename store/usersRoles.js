@@ -100,7 +100,7 @@ export const actions = {
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/usersRoles/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/usersRoles/${id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

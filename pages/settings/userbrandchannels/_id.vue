@@ -13,6 +13,9 @@
         async fetch({store, params}) {
             store.commit('usersBrandsChannels/setRecord',{},{root: true})
             store.commit('usersBrandsChannels/setEditMode',null,{root: true})
+            store.dispatch('brands/load', {}, {root: true})
+            store.dispatch('channels/load', {}, {root: true})
+            store.dispatch('users/load', {}, {root: true})
             await store.dispatch('usersBrandsChannels/load', {id: params.id}, {root: true})
         }
     }

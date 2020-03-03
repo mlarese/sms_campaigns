@@ -100,7 +100,7 @@ export const actions = {
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/brandLandingPages/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/brandLandingPages/${id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

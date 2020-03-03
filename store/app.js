@@ -19,13 +19,14 @@ const menus = {
   Admin: [
     menuItems.campaigns,
     menuItems.reporting,
-    menuItems.unpaired,
+
     menuItems.landing,
     menuItems.settings
   ],
   'Third Party Agency': [
     menuItems.campaigns,
-    menuItems.reporting
+    menuItems.reporting,
+    menuItems.unpaired
   ],
   guest: [
 
@@ -75,5 +76,6 @@ export const getters = {
   role: (s, g, rs) => !_has(rs, 'auth.user.role') ? 'guest' : rs.auth.user.role,
   user: (s, g, rs) => !_has(rs, 'auth.user') ? '' : rs.auth.user,
   userName: (s, g, rs) => !_has(rs, 'auth.user.userName') ? '' : rs.auth.user.userName,
+  isAdmin: (s, g)=> g.role === 'Admin',
   menuItems: (s, g) => s.menus[g.role]
 }

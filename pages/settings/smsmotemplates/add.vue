@@ -1,16 +1,18 @@
 <template>
-  <s-m-s-mo-template-manage/>
+  <SMSMoTemplateForm/>
 </template>
 
 <script>
-  import SMSMoTemplateManage from '../../../components/Settings/SMSMOTemplate/SMSMoTemplateManage'
+  import SMSMoTemplateForm from '../../../components/Settings/SMSMOTemplate/SMSMoTemplateForm'
   export default {
     components: {
-        SMSMoTemplateManage
+      SMSMoTemplateForm
     },
     fetch ({store}) {
       store.commit('smsmotemplate/setRecord', {}, {root: true})
       store.commit('smsmotemplate/setAddMode', null, {root: true})
+      store.dispatch('brands/load', {}, {root: true})
+      store.dispatch('smsmotemplate/loadBase', {}, {root: true})
     }
   }
 </script>

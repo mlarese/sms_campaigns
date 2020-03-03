@@ -191,4 +191,5 @@
     .v-datatable__progress th.column{
         background: transparent;
     }
+
 </style>

@@ -8,7 +8,7 @@
 
         </div>
         <div slot="header-left">
-            <span>{{$vuetify.t('Brand Form')}}</span>
+            <span>{{$vuetify.t('Users Brands Channels')}}</span>
 
         </div>
 
@@ -19,13 +19,13 @@
 
             <v-layout row wrap>
                 <v-flex sm4 xs12>
-                    <v-text-field append-icon="" label="Company Name"   hide-details v-model="$record.company_name" />
+                    <v-autocomplete :items="usersList" label="Company Name"   hide-details v-model="$record.user_id" item-value="user_id" item-text="company_name" />
                 </v-flex>
                 <v-flex sm4 xs12>
-                    <v-text-field append-icon="" label="Brand"   hide-details v-model="$record.brand" />
+                    <v-autocomplete :items="brandsList" label="Brand"   hide-details v-model="$record.brand_id" item-value="brand_id" item-text="brand_name" />
                 </v-flex>
                 <v-flex sm4 xs12>
-                    <v-text-field append-icon="" label="Channel"   hide-details v-model="$record.channel" />
+                    <v-autocomplete :items="channelsList" label="Channel"   hide-details v-model="$record.channel_id" item-value="channel_id" item-text="channel_name" />
                 </v-flex>
 
             </v-layout>
@@ -56,10 +56,13 @@
         },
         computed: {
             ...mapState('usersBrandsChannels', ['$record']),
+            ...mapState('users', {usersList: 'list'}),
+            ...mapState('brands', {brandsList: 'list'}),
+            ...mapState('channels', {channelsList: 'list'}),
             isValid () {
-                if(!this.$record.brand) return false
-                if(!this.$record.company_name) return false
-                if(!this.$record.channel) return false
+                if(!this.$record.brand_id) return false
+                if(!this.$record.user_id) return false
+                if(!this.$record.channel_id) return false
                 return true
             }
         },

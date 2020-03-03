@@ -3,7 +3,7 @@ import Vue from 'vue'
 import addDays from 'date-fns/addDays'
 let today = new Date()
 const newFilter = () => ({
-  click_date: [addDays(today,-30), today],
+  click_date: [today, today],
   country: 'ITA'
 })
 
@@ -42,6 +42,7 @@ export const state = () => {
               totalItems: 0
             }
         },
+        totalLeads: 0,
         mode: 'list',
         searchActive: false,
         filter: newFilter()
@@ -62,6 +63,7 @@ export const mutations = {
     setPage (state, page) {
       state.grid.pagination.page = page
     },
+    setTotalLeads (state, payload) { state.totalLeads = payload },
     setSearchActive (state, payload) { state.searchActive = payload },
     setRecordList (state, payload) { state.recordList = payload },
     setList (state, payload) {
@@ -107,6 +109,7 @@ export const actions = {
         .then(res => {
           commit('setList', res.data.items)
           commit('setPagination', res.data.total_items)
+          commit('setTotalLeads', res.data.total_leads)
           commit('setSearchActive', true)
           return res
         })
@@ -118,6 +121,7 @@ export const actions = {
         .then(res => {
           commit('setList', res.data.items)
           commit('setPagination', res.data.total_items)
+          commit('setTotalLeads', res.data.total_leads)
 
           return res
         })
@@ -150,7 +154,7 @@ export const actions = {
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/clicks/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/clicks/${id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

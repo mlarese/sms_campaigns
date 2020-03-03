@@ -49,45 +49,34 @@ export const mutations = {
 
 }
 export const actions = {
-    update ({dispatch, commit, state}, {data, id}) {
-        const url = `/users/${id}`
-        return dispatch('api/put', {url, data}, root)
-            .then(() => {
-                const index = state.list.findIndex(o => o.code === id)
-                commit('updateItemList', {data, index})
-                commit('setAddMode')
-            })
-    },
-    selectItem({commit}, item) {
-        commit('set$Record', item)
-        commit('setEditMode')
+
+  delete ({dispatch, commit, state}, id) {
+      const url = `/campaigns/users/${id}`
+      return dispatch('api/delete', {url}, root)
+        .then(res => dispatch('load', {}))
+  },
+  save ({dispatch, commit, state, getters}) {
+      let data = state.$record
+
+      if (getters.isAddMode) {
+        return dispatch('api/post', {url: `/campaigns/users`, data}, root)
+          .then(r => {
+            commit('addRecord', data)
+            commit('set$Record', {})
+            return r
+          })
+      } else {
+        let id = data.user_id
+        return dispatch('api/put', {url: `/campaigns/users/${id}`, data}, root)
+          .then(r => {
+            commit('addRecord', data)
+            commit('set$Record', {})
+            return r
+          })
 
 
-    },
-    cancelItem({commit}) {
-        commit('reset$Record')
-        commit('setAddMode')
-    },
-    save ({dispatch, commit, state, getters}) {
-        let data = state.$record
 
-        if (getters.isAddMode) {
-            return dispatch('insert', {data})
-                .then(r => {
-                    commit('addRecord', data)
-                    commit('set$Record', {})
-                })
-        } else {
-            let id = data.code
-            return dispatch('update', {data, id})
-
-                .then(() => commit('set$Record', {}))
-                .then(() => commit('setAddMode'))
-        }
-    },
-    insert ({dispatch, commit}, {data}) {
-        const url = `/users`
-        return dispatch('api/post', {url, data}, root)
+      }
     },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
         if (!force && state.loaded) {
@@ -100,7 +89,7 @@ export const actions = {
                     return res
                 })
         } else {
-            return dispatch('api/get', {url: `/campaigns/users/{id}`, options}, root)
+            return dispatch('api/get', {url: `/campaigns/users/${id}`, options}, root)
                 .then(res => {
                     commit('setRecord', res.data)
                     return res

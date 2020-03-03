@@ -5,6 +5,9 @@
 <script>
   import SMSMoTemplates from '../../../components/Settings/SMSMOTemplate/SMSMoTemplates'
   export default {
-    components: {SMSMoTemplates}
+    components: {SMSMoTemplates},
+    fetch ({store}) {
+      store.dispatch('smsmotemplate/load', {}, {root: true})
+    }
   }
 </script>

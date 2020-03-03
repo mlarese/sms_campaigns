@@ -8,21 +8,30 @@
 
         </div>
         <div slot="header-left">
-            <span>{{$vuetify.t('SMS Mo Template Form')}}</span>
-
+            <span>{{$vuetify.t('SMS MO Template')}}</span>
         </div>
 
         <v-form
                 ref="form"
-                lazy-validation
-        >
+                lazy-validation>
 
             <v-layout row wrap>
-                <v-flex sm4 xs12>
-                    <v-text-field append-icon="" label="Brand"   hide-details v-model="$record.brand" />
+                <v-flex sm3 xs12>
+                    <v-autocomplete :items="brandsList" item-value="brand_id" item-text="brand_name" label="Brand"   hide-details v-model="$record.brand_id" />
                 </v-flex>
-                <v-flex sm4 xs12>
-                    <v-text-field append-icon="" label="SMS Mo Template"   hide-details v-model="$record.sms_mo_template" />
+
+                <v-flex sm9 xs12>
+                    <v-autocomplete :items="baseList" label="SMS MO Template" item-value="sms_mo_template_id" item-text="sms_template_text"  hide-details v-model="$record.sms_mo_template_id" >
+                        <template slot="append-outer">
+                              <v-tooltip left>
+                                    <v-icon
+                                            @click="onAddTemplate"
+                                            medium style="cursor:pointer" slot="activator" color="success"  >add_circle_outer</v-icon>
+
+                                Add Template
+                              </v-tooltip>
+                        </template>
+                    </v-autocomplete>
                 </v-flex>
             </v-layout>
 
@@ -39,7 +48,6 @@
 
 <script>
     import {mapState, mapActions} from 'vuex'
-    import {timePickerOptions, notBeforeToday} from '../../../assets/helpers'
     import FormPanel from '../../General/FormPanel'
     import GridButton from '../../General/GridButton'
 
@@ -51,20 +59,25 @@
             return {}
         },
         computed: {
-            ...mapState('smsmotemplate', ['$record']),
+            ...mapState('smsmotemplate', ['$record', 'baseList']),
+            ...mapState('brands', {'brandsList':'list'}),
             isValid () {
-                if(!this.$record.brand) return false
-                if(!this.$record.sms_mo_template) return false
-                if(!this.$record.channel) return false
+                if(!this.$record.brand_id) return false
+                if(!this.$record.sms_mo_template_id) return false
                 return true
             }
         },
         methods: {
+            onAddTemplate () {
+              const sms_template_text = prompt('Template text')
+              this.addBase({sms_template_text})
+                .then(r => this.loadBase())
+            },
             onAdd () {
                 this.save()
                     .then(r => this.$router.go(-1))
             },
-            ...mapActions('smsmotemplate', ['add', 'save']),
+            ...mapActions('smsmotemplate', ['add', 'addBase', 'loadBase', 'save']),
 
         }
     }

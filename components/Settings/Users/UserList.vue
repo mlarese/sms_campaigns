@@ -28,10 +28,10 @@
             <td>{{ item.company_name }}</td>
             <td>{{ item.username }}</td>
             <td width="1" class="pa-0">
-                <GridButton icon="edit" color="green" @click="onClick"></GridButton>
+                <GridButton icon="edit" color="green" @click="onEdit(item)"></GridButton>
             </td>
             <td width="1" class="pa-0">
-                <GridButton icon="delete" color="error" @click="onClick"></GridButton>
+                <GridButton icon="delete" color="error" @click="onDelete(item)"></GridButton>
             </td>
         </template>
         <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -39,15 +39,12 @@
         </template>
 
     </v-data-table>
-        <div>
-            <ButtonNew title="edit" @click.native="$router.push('/settings/users/add')"/>
-            <ButtonNew title="delete" @click.native="$router.push('/settings/users/add')"/>
-        </div>
+
     </GridContainer>
 
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     import GridButton from '../../General/GridButton'
     import GridContainer from '../../General/GridContainer'
     import CardPanel from "../../General/CardPanel";
@@ -73,9 +70,15 @@
             ...mapState('users', ['list', '$record'])
         },
         methods: {
-            onClick () {
-                alert('onClick')
-            }
+          ...mapActions('users' ,['save', 'delete']),
+          onDelete (item) {
+            if(!confirm('Do you confirm?')) return
+            this.delete(item.user_id)
+          },
+          onEdit (item) {
+            const url = `/settings/users/${item.user_id}`
+            this.$router.push(url)
+          }
         }
     }
 </script>

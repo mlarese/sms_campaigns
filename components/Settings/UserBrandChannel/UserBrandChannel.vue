@@ -1,30 +1,37 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Setting User Brand Channel">
+    <GridContainer title="User Brand Channel">
 
         <CardPanel slot="container-top">
+            <v-text-field
+                    v-model="gridFilter"
+                    label="Search"
 
+                    hide-details
+                    append-icon="search"
+            />
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
-            <ButtonNew title="Add SMS User Brand Channel"/>
+            <ButtonNew title="Add SMS User Brand Channel" @click.native="$router.push('/settings/userbrandchannels/add')"/>
         </div>
         <v-data-table
                 :headers="headers"
                 :items="list"
+                :search="gridFilter"
                 :hide-actions="false"
                 class="elevation-0"
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.company_name }}</td>
-                <td>{{ item.brand }}</td>
-                <td>{{ item.channel }}</td>
+                <td>{{ item.brand_name }}</td>
+                <td>{{ item.channel_name }}</td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="edit" color="green" @click="onClick"></GridButton>
+                    <GridButton icon="edit" color="green" @click="onEdit(item)"></GridButton>
                 </td>
                 <td width="1" class="pa-0">
-                    <GridButton icon="delete" color="error" @click="onClick"></GridButton>
+                    <GridButton icon="delete" color="error" @click="onDelete(item)"></GridButton>
                 </td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -35,7 +42,7 @@
     </GridContainer>
 </template>
 <script>
-    import {mapState} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     import GridButton from '../../General/GridButton'
     import GridContainer from '../../General/GridContainer'
     import CardPanel from "../../General/CardPanel";
@@ -46,8 +53,8 @@
         data () {
             const headers = [
                 { text: this.$vuetify.t('Company Name'), value: 'company_name' },
-                { text: this.$vuetify.t('Brand'), value: 'brand' },
-                { text: this.$vuetify.t('Channel'), value: 'channel' },
+                { text: this.$vuetify.t('Brand'), value: 'brand_name' },
+                { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: 'Edit', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]
@@ -60,9 +67,15 @@
             ...mapState('usersBrandsChannels', ['list', '$record'])
         },
         methods: {
-            onClick () {
-                alert('onClick')
-            }
+          ...mapActions('usersBrandsChannels' ,['save', 'delete']),
+          onDelete (item) {
+            if(!confirm('Do you confirm?')) return
+            this.delete(item.row_id)
+          },
+          onEdit (item) {
+            const url = `/settings/userbrandchannels/${item.row_id}`
+            this.$router.push(url)
+          }
         }
     }
 </script>

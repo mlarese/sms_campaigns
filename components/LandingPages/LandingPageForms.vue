@@ -134,7 +134,6 @@
 
 <script>
     import {mapState, mapActions} from 'vuex'
-    import {timePickerOptions, notBeforeToday} from '../../assets/helpers'
     import FormPanel from '../General/FormPanel'
     import GridButton from '../General/GridButton'
     import DatePicker from 'vue2-datepicker';
@@ -149,7 +148,6 @@
         },
         data () {
           return {
-            timePickerOptions: timePickerOptions(),
             requiredRule: [v => !!v || 'Required'],
             baseURL,
             noImageLpPlaceholder,

@@ -8,7 +8,7 @@
 
         </div>
         <div slot="header-left">
-            <span>{{$vuetify.t('Channel Form')}}</span>
+            <span>{{$vuetify.t('User')}}</span>
 
         </div>
 
@@ -17,15 +17,40 @@
                 lazy-validation
         >
 
+
+
             <v-layout row wrap>
-                <v-flex sm6 xs12>
-                    <v-text-field label="Company Name"   hide-details v-model="$record.company_name" />
-                </v-flex>
-                <v-flex sm6 xs12>
-                    <v-text-field label="User Name"   hide-details v-model="$record.username" />
+                <v-flex sm2 xs12 v-if="!isAdmin"></v-flex>
+                <v-flex sm3 xs12>
+                    <v-text-field append-icon="" label="Company Name"   hide-details v-model="$record.company_name" />
                 </v-flex>
 
+                <v-flex sm3 xs12>
+                    <v-text-field append-icon="" label="User Name"   hide-details v-model="$record.username" />
+                </v-flex>
+
+
+
+                <v-flex sm3 xs12 v-if="isAdmin">
+                    <v-select
+                            :items="rolesList"
+                            v-model="$record.role_id"
+                            label="Role"
+                            item-text="role_name"
+                            item-value="role_id"
+
+                            search-input
+                            bottom
+                    ></v-select>
+                </v-flex>
+
+                <v-flex sm3 xs12>
+                    <v-text-field class="bold" label="Password"   hide-details v-model="$record.password" />
+                </v-flex>
+
+
             </v-layout>
+
 
             <v-layout row wrap>
                 <v-flex xs2 offset-xs5>
@@ -39,7 +64,7 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from 'vuex'
+    import {mapState, mapActions, mapGetters} from 'vuex'
     import FormPanel from '../../General/FormPanel'
     import GridButton from '../../General/GridButton'
 
@@ -52,6 +77,8 @@
         },
         computed: {
             ...mapState('users', ['$record']),
+            ...mapGetters('app', ['isAdmin']),
+            ...mapState('roles', {'rolesList': 'list'}),
             isValid () {
                 if(!this.$record.company_name) return false
                 if(!this.$record.username) return false

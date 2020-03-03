@@ -13,7 +13,9 @@
         async fetch({store, params}) {
             store.commit('users/setRecord',{},{root: true})
             store.commit('users/setEditMode',null,{root: true})
+            store.dispatch('roles/load', {}, {root: true})
             await store.dispatch('users/load', {id: params.id}, {root: true})
+
         }
     }
 </script>

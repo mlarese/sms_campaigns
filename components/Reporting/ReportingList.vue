@@ -95,10 +95,10 @@
                 <td>{{ item.leads_a / item.clicks *100  | numFormat('0.000')  }}%</td>
                 <td>{{ item.leads_b / item.clicks *100  | numFormat('0.000')  }}%</td>
                 <td>{{ item.detractors/item.clicks *100 | numFormat('0.000')  }}%</td>
-                <td>{{ item.bid_price | numFormat('0.000') }} €</td>
-                <td>{{ item.clicks * item.bid_price | numFormat('0,0.000') }} €</td>
-                <td>{{ item.leads_a * item.clicks * item.bid_price | numFormat('0,0.000')  }} €</td>
-                <td>{{ item.leads_b * item.clicks * item.bid_price | numFormat('0,0.000')  }} €</td>
+                <td>{{ item.bid_price | numFormat('0.000') }} $</td>
+                <td>{{ item.clicks * item.bid_price | numFormat('0,0.000') }} $</td>
+                <td>{{ item.clicks * item.bid_price/ item.leads_a  | numFormat('0,0.000')  }} $</td>
+                <td>{{ item.clicks * item.bid_price/item.leads_b  | numFormat('0,0.000')  }} $</td>
 
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop, itemsLength }">
@@ -121,23 +121,25 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer, DatePicker},
         data () {
             const headers = [
-                { text: this.$vuetify.t('Click Date'), value: 'click_date.date' },
-                { text: this.$vuetify.t('Brand'), value: 'brand_name' },
-                { text: this.$vuetify.t('Channel'), value: 'channel_name' },
-                { text: this.$vuetify.t('Adv Format'), value: 'adv_format_name' },
-                { text: this.$vuetify.t('Country'), value: 'country' },
-                { text: this.$vuetify.t('Os Only'), value: 'os_only' },
-                { text: this.$vuetify.t('Clicks'), value: 'clicks' },
-                { text: this.$vuetify.t('Leads A'), value: 'leads_a' },
-                { text: this.$vuetify.t('Leads B'), value: 'leads_b' },
-                { text: this.$vuetify.t('Detractors'), value: 'detractors' },
-                { text: this.$vuetify.t('CTL A'), value: 'ctla' },
-                { text: this.$vuetify.t('CTL B'), value: 'ctlb' },
-                { text: this.$vuetify.t('CTD'), value: 'ctd' },
-                { text: this.$vuetify.t('CPC €'), value: 'bid_price' },
-                { text: this.$vuetify.t('Adv Spend €'), value: 'adv_spend' },
-                { text: this.$vuetify.t('Cost Per Lead A €'), value: 'cost_x_lead_a' },
-                { text: this.$vuetify.t('Cost Per Lead B €'), value: 'cost_x_lead_b' }
+                { tooltip: null,text: this.$vuetify.t('Click Date'), value: 'click_date.date' },
+                { tooltip: null,text: this.$vuetify.t('Brand'), value: 'brand_name' },
+                { tooltip: null,text: this.$vuetify.t('Channel'), value: 'channel_name' },
+                { tooltip: null,text: this.$vuetify.t('Adv Format'), value: 'adv_format_name' },
+                { tooltip: null,text: this.$vuetify.t('Country'), value: 'country' },
+                { tooltip: null,text: this.$vuetify.t('Os Only'), value: 'os_only' },
+                { tooltip: null,text: this.$vuetify.t('Clicks'), value: 'clicks' },
+                { tooltip: null,text: this.$vuetify.t('Clicks Lp'), value: 'clicks_lp' },
+                { tooltip: 'Leads : Full',text: this.$vuetify.t('Leads A'), value: 'leads_a' },
+                { tooltip: 'Leads : Full + Likely',text: this.$vuetify.t('Leads B'), value: 'leads_b' },
+                { tooltip: null,text: this.$vuetify.t('Detractors'), value: 'detractors' },
+                { tooltip: null,text: this.$vuetify.t('CTCLP'), value: 'ctclp' },
+                { tooltip: 'Click to Lead : Full',text: this.$vuetify.t('CTL A'), value: 'ctla' },
+                { tooltip: 'Click to Lead : Full + Likely',text: this.$vuetify.t('CTL B'), value: 'ctlb' },
+                { tooltip: 'Click to Detractor',text: this.$vuetify.t('CTD'), value: 'ctd' },
+                { tooltip: 'Cost Per Click',text: this.$vuetify.t('CPC $'), value: 'bid_price' },
+                { tooltip: null,text: this.$vuetify.t('Adv Spend $'), value: 'adv_spend' },
+                { tooltip: 'Cost per Lead : Full',text: this.$vuetify.t('Cost Per Lead A $'), value: 'cost_x_lead_a' },
+                { tooltip: 'Cost per Lead : Full + Likely',text: this.$vuetify.t('Cost Per Lead B $'), value: 'cost_x_lead_b' }
             ]
             return {
                 sms_mo_date: null,

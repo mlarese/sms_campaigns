@@ -32,7 +32,7 @@
             </v-layout>
 
             <v-layout row wrap>
-                <v-flex sm4 xs12>
+                <v-flex sm6 xs12>
                     <v-text-field append-icon="" label="SMS MT Greeting"   hide-details v-model="$record.sms_mt_greeting" />
                 </v-flex>
                 <v-flex sm2 xs12>
@@ -46,9 +46,6 @@
                     <v-text-field append-icon="" type="number" label="Grace Period Conversion"   hide-details v-model="$record.grace_period_conversion" />
                 </v-flex>
 
-                <v-flex sm2 xs12>
-                    <v-combobox label="Landing Page Enabled" :items="['iOS','Android','All']" hide-details v-model="$record.landing_page_enabled" />
-                </v-flex>
             </v-layout>
 
 
@@ -85,7 +82,6 @@
                 if(!this.$record.grace_period_conversion) return false
                 if(!this.$record.sms_mt_greeting) return false
                 if(!this.$record.sms_mo_key_string) return false
-                if(!this.$record.landing_page_enabled) return false
                 return true
             }
         },

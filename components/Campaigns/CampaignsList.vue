@@ -156,11 +156,10 @@
                 { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Adv Format'), value: 'adv_format_name' },
                 { text: this.$vuetify.t('Campaign Name'), value: 'campaign_name' },
-                { text: this.$vuetify.t('Bid Price'), value: 'bid_price' },
-                { text: this.$vuetify.t('Creative Id'), value: 'creative_id' },
+                { text: this.$vuetify.t('Lp Id'), value: 'lp_id' },
+                { text: this.$vuetify.t('Lp Click'), value: 'lp_click_date' },
+                { text: this.$vuetify.t('Bid Price $'), value: 'bid_price' },
                 { text: this.$vuetify.t('SMS Template'), value: 'sms_template_text' },
-                { text: this.$vuetify.t('Country'), value: 'country' },
-                { text: this.$vuetify.t('Region'), value: 'region' },
                 { text: this.$vuetify.t('City'), value: 'city' },
                 { text: this.$vuetify.t('Os Only'), value: 'os_only' },
                 { text: this.$vuetify.t('User Ip'), value: 'user_ip' },
@@ -180,7 +179,7 @@
         },
 
         computed: {
-            ...mapState('clicks', {'grid': 'grid', 'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive'}),
+            ...mapState('clicks', {'grid': 'grid', 'clicksList': 'list', 'filter': 'filter', 'searchActive': 'searchActive', 'totalLeads':'totalLeads'}),
             ...mapState('channels', {'channelList': 'list'}),
             ...mapState('brands', {'brandsList': 'list'}),
             ...mapState('advformats', {'advformatsList': 'list'}),

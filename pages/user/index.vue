@@ -9,6 +9,7 @@
   export default {
     components: {UserList},
     fetch ({store}) {
+
       store.dispatch('users/load', {}, root)
     }
   }

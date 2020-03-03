@@ -11,6 +11,7 @@
     fetch ({store}) {
       store.commit('users/setRecord', {}, {root: true})
       store.commit('users/setAddMode', null, {root: true})
+      store.dispatch('roles/load', {}, {root: true})
     }
   }
 </script>

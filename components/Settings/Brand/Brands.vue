@@ -36,7 +36,6 @@
                 <td>{{ item.sms_mt_greeting }}</td>
                 <td>{{ item.sms_mt_sender }}</td>
                 <td>{{ item.grace_period }}</td>
-                <td>{{ item.landing_page_enabled }}</td>
                 <td width="1" class="pa-0">
                     <GridButton icon="edit" color="green" @click="onEdit(item)"></GridButton>
                 </td>
@@ -71,7 +70,6 @@
                 { text: this.$vuetify.t('SMS MT Greeting'), value: 'sms_mt_greeting' },
                 { text: this.$vuetify.t('SMS MT Sender'), value: 'sms_mt_sender' },
                 { text: this.$vuetify.t('Grace Period'), value: 'grace_period' },
-                { text: this.$vuetify.t('Landing Page Enabled'), value: 'landing_page_enabled' },
                 { text: 'Edit', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]

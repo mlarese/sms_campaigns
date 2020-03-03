@@ -7,4 +7,7 @@ if (window.location.host === 'localhost:3000') {
 }
 
 export const baseURL = url
+export const wwwUrl = 'https://c2sms.xyz'
+export const uploadUrl = wwwUrl + '/uploads'
+
 export const mockApp = doMock

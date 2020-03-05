@@ -11,6 +11,7 @@ const menuItems = {
     reporting: {to: 'reporting', label: 'Reporting'},
     unpaired: {to: 'unpaired', label: 'Unpaired Prospects'},
     landing: {to: 'landingpage', label: 'Landing Pages'},
+    leads: {to: 'leads', label: 'Leads'},
     settings: {to: 'settings/brands', label: 'Settings'}
 }
 
@@ -26,6 +27,7 @@ const menus = {
   'Third Party Agency': [
     menuItems.campaigns,
     menuItems.reporting,
+    menuItems.leads,
     menuItems.unpaired
   ],
   guest: [

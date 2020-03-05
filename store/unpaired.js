@@ -65,6 +65,15 @@ export const actions = {
         return res
       })
   },
+  downloadCsv ({dispatch, commit, state}) {
+    const url = `/campaigns/unpairedcsv`
+    let data = state.filter
+    return dispatch('api/post', {url, data}, root)
+      .then(res => {
+        window.location='https://c2sms.xyz'+res.data.file
+        return res
+      })
+  },
     load ({dispatch, commit, state}, {id = null, force = true, options = {}}) {
         if (!force && state.list.length > 0) {
             return

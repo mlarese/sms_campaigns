@@ -9,6 +9,7 @@
   export default {
     components: {UnpairedList},
     async fetch ({store}) {
+      store.dispatch('brands/load', {}, {root: true})
     }
   }
 </script>

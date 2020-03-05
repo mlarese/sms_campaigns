@@ -3,7 +3,13 @@
     <GridContainer title="SMS MO Templates">
 
         <CardPanel slot="container-top">
+            <v-text-field
+                    v-model="gridFilter"
+                    label="Search"
 
+                    hide-details
+                    append-icon="search"
+            />
         </CardPanel>
 
         <div slot="header-right" class="pb-2">
@@ -11,6 +17,7 @@
         </div>
         <v-data-table  :rows-per-page-items="[30,50]"
                 :headers="headers"
+                :search="gridFilter"
                 :items="list"
                 :hide-actions="false"
                 class="elevation-0"

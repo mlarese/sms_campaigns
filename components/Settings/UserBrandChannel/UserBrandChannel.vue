@@ -1,6 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="User Brand Channel">
+    <GridContainer title="Users Brands Channels">
 
         <CardPanel slot="container-top">
             <v-text-field

@@ -1,6 +1,6 @@
 <!--eslint-disable-->
 <template>
-    <GridContainer title="Users Brands Channels">
+    <GridContainer title="Users Brands">
 
         <CardPanel slot="container-top">
             <v-text-field
@@ -26,7 +26,6 @@
             <template slot="items" slot-scope="{item}">
                 <td>{{ item.company_name }}</td>
                 <td>{{ item.brand_name }}</td>
-                <td>{{ item.channel_name }}</td>
                 <td width="1" class="pa-0">
                     <GridButton icon="edit" color="green" @click="onEdit(item)"></GridButton>
                 </td>
@@ -54,7 +53,6 @@
             const headers = [
                 { text: this.$vuetify.t('Company Name'), value: 'company_name' },
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
-                { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: 'Edit', value: 'action', sortable: false },
                 { text: 'Delete', value: 'action', sortable: false }
             ]

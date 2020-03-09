@@ -13,20 +13,19 @@
             lazy-validation
         >
             <v-layout row wrap>
-                <v-flex xs3>
+                <v-flex xs4>
                     <v-text-field append-icon="" label="LP Name"   hide-details v-model="$record.lp_name" />
                 </v-flex>
 
                 <v-flex xs3>
-                    <v-select :items="[{text: 'Click 2 SMS', value:1},{text: 'MSISDN Entry', value:2}]" label="Type" hide-details v-model="$record.lp_type" />
+                    <v-select :items="[{text: 'One click', value:1},{text: 'Two click', value:2}]" label="Type" hide-details v-model="$record.lp_type" />
                 </v-flex>
-                <v-flex sm3 xs12>
-                    <v-autocomplete :items="brandsList" item-value="brand_id" item-text="brand_name" label="Brand"   hide-details v-model="$record.brand_id" />
-                </v-flex>
-                <v-flex xs3>
+                <v-flex xs4>
                     <v-text-field append-icon="" label="Background Color" hide-details v-model="$record.background_rgb" />
                 </v-flex>
-
+                <v-flex xs1>
+                    <v-select append-icon="" label="Port-Out" hide-details v-model="$record.portout_flag" :items="['Y','N']" />
+                </v-flex>
             </v-layout>
 
 
@@ -54,7 +53,7 @@
                 <file-upload
                         input-id="file1"
                         class="btn btn-primary"
-                        :post-action="baseURL+'/campaigns/upload/button/'+$record.guid"
+                        :post-action="baseURL+'/api/upload/button/'+$record.guid"
                         extensions="gif,jpg,jpeg,png,webp"
                         accept="image/png,image/gif,image/jpeg,image/webp"
                         :multiple="false"
@@ -92,7 +91,7 @@
                 <file-upload
                         input-id="file2"
                         class="btn btn-primary"
-                        :post-action="baseURL+'/campaigns/upload/banner/'+$record.guid"
+                        :post-action="baseURL+'/api/upload/banner/'+$record.guid"
                         extensions="gif,jpg,jpeg,png,webp"
                         accept="image/png,image/gif,image/jpeg,image/webp"
                         :multiple="false"
@@ -122,9 +121,9 @@
             </v-card>
 
             <v-layout row wrap>
-                <v-flex xs12 class="text-xs-center pl-0">
+                <v-flex xs2 offset-xs5>
 
-                    <v-btn  style="width:160px"  color="primary"  @click="onAdd" :disabled="!isValid">
+                    <v-btn  style="width:100%"  color="primary"  @click="onAdd" :disabled="!isValid">
                         {{$vuetify.t('Save') }}
                     </v-btn>
                 </v-flex>
@@ -135,7 +134,6 @@
 
 <script>
     import {mapState, mapActions} from 'vuex'
-    import {timePickerOptions, notBeforeToday} from '../../assets/helpers'
     import FormPanel from '../General/FormPanel'
     import GridButton from '../General/GridButton'
     import DatePicker from 'vue2-datepicker';
@@ -150,7 +148,6 @@
         },
         data () {
           return {
-            timePickerOptions: timePickerOptions(),
             requiredRule: [v => !!v || 'Required'],
             baseURL,
             noImageLpPlaceholder,
@@ -160,7 +157,6 @@
         },
         computed: {
           ...mapState('landingPages', ['$record']),
-          ...mapState('brands', {'brandsList': 'list'}),
           btnImg () {
             if(this.$record.button_element)
               return this.$record.button_element
@@ -175,12 +171,13 @@
           },
           isValid () {
             if(!this.$record.lp_name) return false
-            if(!this.$record.brand_id) return false
             if(!this.$record.lp_type) return false
             if(!this.$record.background_rgb) return false
             if(!this.$record.lp_banner_element) return false
+            if(!this.$record.text_rgb) return false
             if(!this.$record.text_welcome) return false
             if(!this.$record.text_greeting) return false
+            if(!this.$record.button_element) return false
             return true
           }
         },

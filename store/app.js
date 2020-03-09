@@ -25,8 +25,6 @@ const menus = {
     menuItems.settings
   ],
   'Third Party Agency': [
-    menuItems.campaigns,
-    menuItems.reporting,
     menuItems.leads,
     menuItems.unpaired
   ],
@@ -46,11 +44,15 @@ export const state = () => ({
     {id: 'de', label: 'DEU'}
   ],
   menus,
+  loginPath: {
+    'Admin': '/campaigns',
+    'Third Party Agency': '/leads'
+  },
   menuItems: [
     {to: 'role', label: 'Roles'},
     {to: 'user', label: 'Users'},
     {to: 'usersrole', label: 'Users Roles'},
-    {to: 'usersbrandschannel', label: 'Users Brands Channels'},
+    {to: 'usersbrandschannel', label: 'Users Brands'},
     {to: 'landingpage', label: 'Landing Pages'},
     {to: 'brandlandingpage', label: 'Brand Landing Page'}
   ]
@@ -79,5 +81,6 @@ export const getters = {
   user: (s, g, rs) => !_has(rs, 'auth.user') ? '' : rs.auth.user,
   userName: (s, g, rs) => !_has(rs, 'auth.user.userName') ? '' : rs.auth.user.userName,
   isAdmin: (s, g)=> g.role === 'Admin',
+  rolePath: (s, g) => s.loginPath[g.role],
   menuItems: (s, g) => s.menus[g.role]
 }

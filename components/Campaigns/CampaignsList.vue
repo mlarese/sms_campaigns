@@ -49,11 +49,14 @@
                         <v-combobox dense  class="" style="width: 60%;float:left" hide-details :label="$vuetify.t('OS')"  :items="['Android', 'iOS', 'Other']"   v-model="filter.os_only" />
                         <v-combobox dense  class="ml-2"  style="width: 30%; min-width:100px;" hide-details :label="$vuetify.t('OS Version')"  :items="[3,4,5,6,7,8,9,10,11,12,13]"  v-model="filter.os_version"  />
                     </v-flex>
-                    <v-flex sm3 xs4><v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdns"  /></v-flex>
-                    <v-flex sm4 xs4>
+                    <v-flex sm2 xs4><v-text-field dense   hide-details :label="$vuetify.t('Msisdn')"  v-model="filter.msisdns"  /></v-flex>
+                    <v-flex sm3 xs4>
                         <v-combobox dense  hide-details :label="$vuetify.t('Conversion Status')"  :items="statusList"  v-model="filter.conversion_status_id" item-text="text" item-value="conversion_status_id" />
                     </v-flex>
 
+                    <v-flex xs2>
+                        <v-select :items="[{text: 'Click 2 SMS', value:1},{text: 'MSISDN Entry', value:2}]" label="Lp Type" hide-details v-model="filter.lp_type" />
+                    </v-flex>
                 </v-layout>
             </div>
         </CardPanel>
@@ -146,7 +149,7 @@
     import CardPanel from "../General/CardPanel";
     import ButtonNew from "../General/ButtonNew";
     import DatePicker from 'vue2-datepicker';
-    import {statusIdToText, statusList} from '../../assets/filters'
+    import {statusIdToText, statusList, lpType} from '../../assets/filters'
     export default {
         components: {ButtonNew, CardPanel, GridButton, GridContainer, DatePicker},
         data () {
@@ -156,8 +159,8 @@
                 { text: this.$vuetify.t('Channel'), value: 'channel_name' },
                 { text: this.$vuetify.t('Adv Format'), value: 'adv_format_name' },
                 { text: this.$vuetify.t('Campaign Name'), value: 'campaign_name' },
-                { text: this.$vuetify.t('Lp Id'), value: 'lp_id' },
                 { text: this.$vuetify.t('Lp Click'), value: 'lp_click_date' },
+                { text: this.$vuetify.t('Lp Type'), value: 'lp_type' },
                 { text: this.$vuetify.t('Bid Price $'), value: 'bid_price' },
                 { text: this.$vuetify.t('SMS Template'), value: 'sms_template_text' },
                 { text: this.$vuetify.t('City'), value: 'city' },

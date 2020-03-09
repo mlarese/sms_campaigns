@@ -46,3 +46,32 @@ export const parseDate = (date) => {
   const [month, day, year] = date.split('/')
   return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
 }
+
+export const timePickerOptions = (start='08:30', step='00:15', end='23:30') => {
+  return {
+    start,
+    step,
+    end
+  }
+}
+
+
+export const getToday = () => {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  return today
+}
+
+export const notBeforeToday = (date) => {
+  return date < today;
+}
+
+export const today = getToday()
+
+export const timeList = () => {
+  let res = []
+
+  for(let i = 0; i<20; i++) {
+    res.push
+  }
+}

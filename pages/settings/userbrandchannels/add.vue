@@ -12,7 +12,6 @@
       store.commit('usersBrandsChannels/setRecord', {}, {root: true})
       store.commit('usersBrandsChannels/setAddMode', null, {root: true})
       store.dispatch('brands/load', {}, {root: true})
-      store.dispatch('channels/load', {}, {root: true})
       store.dispatch('users/load', {}, {root: true})
     }
   }

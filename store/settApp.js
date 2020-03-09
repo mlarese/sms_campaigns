@@ -10,7 +10,7 @@ const settingTabs = [
   {to: 'settings/brands', label: 'Brands'},
   {to: 'settings/channels', label: 'Channels'},
   {to: 'settings/users', label: 'Users'},
-  {to: 'settings/userbrandchannels', label: 'Users Brands Channels'},
+  {to: 'settings/userbrandchannels', label: 'Users Brands'},
   {to: 'settings/smsmotemplates', label: 'SMS MO Templates'},
   {to: 'settings/brandchannelcpa', label: 'Brand Channel CPA'},
   {to: 'settings/badwords', label: 'Bad Words'}

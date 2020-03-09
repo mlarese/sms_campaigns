@@ -1,24 +1,20 @@
+<!--eslint-disable-->
 <template>
-  <role-factory/>
+    <LandingPageForms title="Edit Landing Page" />
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapActions, mapState, mapGetters} from 'vuex'
   import LandingPageForms from '../../components/LandingPages/LandingPageForms'
-
   export default {
-    components: {LandingPageForms},
-    async fetch ({store, params, query}) {
-      const id = params.id
-
+    components: {
+      LandingPageForms
+    },
+    async fetch({store, params}) {
       store.commit('landingPages/setRecord',{},{root: true})
       store.commit('landingPages/setEditMode',null,{root: true})
+      store.dispatch('brands/load', {}, {root: true})
       await store.dispatch('landingPages/load', {id: params.id}, {root: true})
-
     }
   }
 </script>
-
-<style>
-
-</style>

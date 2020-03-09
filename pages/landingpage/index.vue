@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import LandingPages from '../../components/LandingPages/LandingPageList'
+  import LandingPages from '../../components/LandingPages/LandingPagesList'
   const root = {root: true}
 
   export default {
@@ -11,6 +11,7 @@
         LandingPages
     },
     fetch ({store}) {
+      store.dispatch('brands/load', {}, root)
       store.dispatch('landingPages/load', {}, root)
     }
   }

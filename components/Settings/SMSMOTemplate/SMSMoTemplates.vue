@@ -24,6 +24,7 @@
                 slot="body-center"
         >
             <template slot="items" slot-scope="{item}">
+                <td>{{ item.sms_mo_template_id }}</td>
                 <td>{{ item.brand_name }}</td>
                 <td>{{ item.sms_template_text }}</td>
                 <td width="1" class="pa-0">
@@ -51,6 +52,7 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer},
         data () {
             const headers = [
+                { text: this.$vuetify.t('ID'), value: 'sms_mo_template_id' },
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('SMS MO Template'), value: 'sms_template_text' },
                 { text: 'Edit', value: 'action', sortable: false },

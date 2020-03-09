@@ -36,6 +36,14 @@
         </CardPanel>
 
 
+        <v-layout rows wrap>
+            <v-flex xs4>
+                Total Results: <b>{{list.length | numFormat('0,0') }} </b>
+            </v-flex>
+            <v-flex s4>
+
+            </v-flex>
+        </v-layout>
 
         <v-data-table
                 :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"

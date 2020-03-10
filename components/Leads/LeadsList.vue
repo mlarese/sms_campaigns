@@ -9,7 +9,10 @@
                         <div >
                             <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">SMS MO Date</span>&nbsp;
                         </div>
-                        <DatePicker :placeholder="$vuetify.t('SMS MO Date')" v-model="filter.sms_mo_date" range></DatePicker>
+                        <DatePicker
+                                value-type="YYYY-MM-DD"
+                                :placeholder="$vuetify.t('SMS MO Date')"
+                                v-model="filter.sms_mo_date" range></DatePicker>
                     </v-flex>
                     <v-flex sm3 xs4>
                         <div class="ml-2" style="margin-top: 21px !important;"></div>

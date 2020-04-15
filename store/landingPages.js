@@ -83,7 +83,7 @@ export const actions = {
           return r
         })
     } else {
-      let id = data.brand_id
+      let id = data.lp_id
       return dispatch('api/put', {url: `/campaigns/landing_pages/${id}`, data}, root)
         .then(r => {
           commit('addRecord', data)

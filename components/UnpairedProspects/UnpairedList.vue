@@ -7,11 +7,11 @@
 
                     <v-flex sm3 xs12>
                         <div >
-                            <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">SMS MO Date</span>&nbsp;
+                            <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">Lead Date</span>&nbsp;
                         </div>
                         <DatePicker
                                 value-type="YYYY-MM-DD"
-                                :placeholder="$vuetify.t('SMS MO Date')" v-model="filter.sms_mo_date" range></DatePicker>
+                                :placeholder="$vuetify.t('Lead Date')" v-model="filter.sms_mo_date" range></DatePicker>
                     </v-flex>
                     <v-flex sm3 xs4>
                         <div class="ml-2" style="margin-top: 21px !important;"></div>
@@ -90,7 +90,7 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer, DatePicker},
         data () {
             const headers = [
-                { text: this.$vuetify.t('SMS MO Date'), value: 'sms_mo_date' },
+                { text: this.$vuetify.t('Lead Date'), value: 'sms_mo_date' },
                 { text: this.$vuetify.t('Msisdn'), value: 'msisdn' },
                 { text: this.$vuetify.t('SMS MO Text'), value: 'sms_mo_final_text' },
                 { text: this.$vuetify.t('Status'), value: 'status_name' },

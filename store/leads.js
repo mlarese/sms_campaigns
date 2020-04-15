@@ -1,9 +1,13 @@
 import _cloneDeep from 'lodash/cloneDeep'
 import Vue from 'vue'
 import addDays from 'date-fns/addDays'
+import format from "date-fns/format";
 let today = new Date()
+const sToday = format(today,'yyyy-MM-dd')
+
+
 const newFilter = () => ({
-  click_date: [today, today],
+  sms_mo_date: [sToday, sToday],
   country: 'ITA'
 })
 
@@ -43,7 +47,7 @@ export const mutations = {
     setEditMode (state) { state.mode = 'edit' },
     setAddMode (state) { state.mode = 'add' },
     resetFilter (state) {
-      state.filter = {}
+      state.filter = newFilter()
     },
     setSortDefault(state) {
       state.grid.sort = {}

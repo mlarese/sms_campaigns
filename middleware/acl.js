@@ -16,8 +16,9 @@ export default async function ({route, store, redirect, app}) {
 
     console.log(route.name)
     if(role!=='Admin') {
-      //if(route.name!=='leads' && route.name!=='unpaired')
-      //return redirect('/leads')
+      if(route.name!=='leads' && route.name!=='unpaired')
+        return redirect('/leads')
     }
   }
 }
+

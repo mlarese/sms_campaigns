@@ -7,11 +7,11 @@
 
                     <v-flex sm3 xs12>
                         <div >
-                            <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">SMS MO Date</span>&nbsp;
+                            <span v-if="filter.sms_mo_date && filter.sms_mo_date[0]" class="active-label-size">Lead Date</span>&nbsp;
                         </div>
                         <DatePicker
                                 value-type="YYYY-MM-DD"
-                                :placeholder="$vuetify.t('SMS MO Date')"
+                                :placeholder="$vuetify.t('Lead Date')"
                                 v-model="filter.sms_mo_date" range></DatePicker>
                     </v-flex>
                     <v-flex sm3 xs4>
@@ -48,6 +48,7 @@
                     :must-sort="true"
                     :rows-per-page-items="[100,200,500,{'text':'All','value':-1}]"
                     :loading="isAjax" fixed
+                    :pagination.sync="pagination"
                     :headers="headers"
                     :items="list"  :hide-actions="false"
                     class="elevation-0 fixed-header" >
@@ -79,13 +80,14 @@
         components: {ButtonNew, CardPanel, GridButton, GridContainer, DatePicker},
         data () {
             const headers = [
-                { text: this.$vuetify.t('SMS MO Date'), value: 'sms_mo_date' },
+                { text: this.$vuetify.t('Lead Date'), value: 'sms_mo_date' },
                 { text: this.$vuetify.t('Brand'), value: 'brand_name' },
                 { text: this.$vuetify.t('Msisdn'), value: 'msisdns' },
                 { text: this.$vuetify.t('Status'), value: 'status_name' },
                 { text: 'Log', value: 'action', sortable: false }
             ]
             return {
+                pagination: {'sortBy': 'sms_mo_date', 'descending': true, 'rowsPerPage': -1},
                 sms_mo_date: null,
                 click_date: null,
                 gridFilter: '',
